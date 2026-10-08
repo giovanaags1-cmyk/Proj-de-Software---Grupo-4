@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar conta | Demos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/usuario.css">
+</head>
+<body>
+
+  <header class="topo">
+    <a href="../index.html" class="marca">Dem<span>o</span>s</a>
+    <nav>
+      <a href="../deputados.html">Deputados</a>
+      <a href="../comparar.html">Comparar</a>
+      <a href="../favoritos.html">Favoritos</a>
+      <a href="login.html">Entrar</a>
+    </nav>
+  </header>
+
+  <main class="pagina">
+    <a href="login.html" class="voltar">&larr; Voltar para o login</a>
+
+    <div class="perfil">
+      <div class="avatar" aria-hidden="true">+</div>
+      <div>
+        <h1 class="titulo">Criar conta</h1>
+        <p>É gratuito. A conta serve para salvar deputados favoritos e comparações.</p>
+      </div>
+    </div>
+
+    <form action="/usuarios" method="post">
+
+      <!-- Dados pessoais -->
+      <section class="secao">
+        <h2>Dados pessoais</h2>
+        <p>Como você quer aparecer no site.</p>
+
+        <div class="form">
+          <div class="campo">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome"
+                   placeholder="Seu nome completo" autocomplete="name"
+                   minlength="2" maxlength="100" required>
+            <span class="campo__erro">Informe seu nome.</span>
+          </div>
+
+          <div class="dupla">
+            <div class="campo">
+              <label for="username">Nome de usuário</label>
+              <input type="text" id="username" name="username"
+                     placeholder="seu.usuario" autocomplete="username"
+                     minlength="3" maxlength="30" pattern="[a-zA-Z0-9._]+" required>
+              <span class="campo__dica">Letras, números, ponto ou _ (sem espaços).</span>
+              <span class="campo__erro">Mínimo de 3 caracteres, sem espaços.</span>
+            </div>
+
+            <div class="campo">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email"
+                     placeholder="voce@email.com" autocomplete="email" required>
+              <span class="campo__erro">Digite um e-mail válido.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Senha -->
+      <section class="secao">
+        <h2>Senha</h2>
+        <p>Use pelo menos 8 caracteres.</p>
+
+        <div class="form">
+          <div class="dupla">
+            <div class="campo">
+              <label for="senha">Senha</label>
+              <input type="password" id="senha" name="senha"
+                     placeholder="Mín. 8 caracteres" autocomplete="new-password"
+                     minlength="8" required>
+              <span class="campo__erro">Mínimo de 8 caracteres.</span>
+            </div>
+
+            <div class="campo">
+              <label for="confirmar_senha">Confirmar senha</label>
+              <input type="password" id="confirmar_senha" name="confirmar_senha"
+                     placeholder="Repita a senha" autocomplete="new-password"
+                     minlength="8" required>
+              <span class="campo__erro">Repita a senha.</span>
+            </div>
+          </div>
+
+          <label class="checagem">
+            <input type="checkbox" name="aceite_termos" required>
+            <span>Li e aceito os <a href="../termos-de-uso.html">Termos de Uso</a> e a <a href="../politica-de-privacidade.html">Política de Privacidade</a>.</span>
+          </label>
+        </div>
+      </section>
+
+      <div class="acoes">
+        <a href="login.html" class="botao botao--secundario">Cancelar</a>
+        <button type="submit" class="botao botao--primario">Criar conta</button>
+      </div>
+    </form>
+  </main>
+
+</body>
+</html>

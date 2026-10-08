@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar | Demos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/usuario.css">
+</head>
+<body>
+
+  <header class="topo">
+    <a href="../index.html" class="marca">Dem<span>o</span>s</a>
+    <nav>
+      <a href="../deputados.html">Deputados</a>
+      <a href="../comparar.html">Comparar</a>
+      <a href="../favoritos.html">Favoritos</a>
+      <a href="login.html" class="ativo">Entrar</a>
+    </nav>
+  </header>
+
+  <main class="pagina pagina--estreita">
+
+    <div class="cabecalho">
+      <div class="avatar" aria-hidden="true">
+        <svg class="icone-cadeado" viewBox="0 0 24 24">
+          <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+          <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+        </svg>
+      </div>
+      <h1 class="titulo">Entrar</h1>
+      <p>Acesse sua conta para ver seus favoritos e comparações salvas.</p>
+    </div>
+
+    <form action="/login" method="post">
+      <section class="secao">
+        <h2>Seus dados de acesso</h2>
+        <p>Use o nome de usuário e a senha que você cadastrou.</p>
+
+        <div class="form">
+          <div class="campo">
+            <label for="username">Nome de usuário</label>
+            <input type="text" id="username" name="username"
+                   placeholder="seu.usuario" autocomplete="username"
+                   minlength="3" required>
+            <span class="campo__erro">Informe seu nome de usuário.</span>
+          </div>
+
+          <div class="campo">
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password"
+                   placeholder="Sua senha" autocomplete="current-password"
+                   minlength="8" required>
+            <span class="campo__erro">A senha tem pelo menos 8 caracteres.</span>
+          </div>
+
+          <div class="linha">
+            <label class="checagem">
+              <input type="checkbox" name="lembrar"> Manter conectado
+            </label>
+            <a href="recuperar-senha.html">Esqueci minha senha</a>
+          </div>
+        </div>
+
+        <button type="submit" class="botao botao--primario botao--cheio">Entrar</button>
+      </section>
+    </form>
+
+    <p class="alternativa">Ainda não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+
+  </main>
+
+</body>
+</html>
