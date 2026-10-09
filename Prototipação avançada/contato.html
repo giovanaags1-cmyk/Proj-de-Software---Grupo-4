@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contato - Demos</title>
+
+  <!-- AJUSTE O CAMINHO abaixo para o CSS do seu projeto.
+       Se este arquivo estiver na raiz, "css/estilo.css" funciona.
+       Se estiver dentro de uma pasta (ex.: pages/), use "../css/estilo.css". -->
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+  <!-- Cabeçalho e menu: copie o mesmo bloco das outras páginas do site.
+       Aqui vai só um exemplo simples. -->
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="contato.html">Contato</a>
+      <a href="termos-de-uso.html">Termos de Uso</a>
+      <a href="politica-de-privacidade.html">Política de Privacidade</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Contato</h1>
+
+    <p>
+      Tem dúvidas, sugestões ou encontrou algum problema no Demos? Fale com
+      a equipe responsável pelo projeto por um dos canais abaixo.
+    </p>
+
+    <section id="canais">
+      <h2>Canais de contato</h2>
+      <ul>
+        <li>
+          <strong>GitHub:</strong>
+          <!-- TROQUE o "#" pelo link do repositório de vocês. -->
+          <a href="https://github.com/giovanaags1-cmyk/Proj-de-Software---Grupo-4">repositório oficial do projeto</a>
+          (para relatar erros ou sugerir melhorias)
+        </li>
+      </ul>
+    </section>
+
+    <section id="formulario">
+      <h2>Envie uma mensagem</h2>
+
+      <!-- Neste momento o formulário é só visual: ainda não envia nada,
+           porque falta a parte de back-end (Django). -->
+      <form action="#" method="post">
+        <p>
+          <label for="nome">Nome</label><br>
+          <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+        </p>
+
+        <p>
+          <label for="email">E-mail</label><br>
+          <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+        </p>
+
+        <p>
+          <label for="assunto">Assunto</label><br>
+          <select id="assunto" name="assunto">
+            <option value="duvida">Dúvida</option>
+            <option value="sugestao">Sugestão</option>
+            <option value="problema">Relatar um problema</option>
+            <option value="dados">Solicitação sobre meus dados pessoais</option>
+          </select>
+        </p>
+
+        <p>
+          <label for="mensagem">Mensagem</label><br>
+          <textarea id="mensagem" name="mensagem" rows="6" placeholder="Escreva sua mensagem aqui" required></textarea>
+        </p>
+
+        <button type="submit">Enviar mensagem</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>Projeto Demos</p>
+  </footer>
+
+</body>
+</html>
