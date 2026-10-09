@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demos | Política verdadeira</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tela_inicial.css">
+</head>
+<body>
+  <header class="topo">
+    <nav class="topo-esquerda" aria-label="Atalhos">
+      <a class="icone-link" href="favoritos.html" aria-label="Favoritos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2h14v20l-7-6-7 6z"/></svg>
+      </a>
+      <a class="icone-link" href="index.html" aria-label="Página inicial">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3z"/></svg>
+      </a>
+    </nav>
+
+    <h1 class="titulo"><a href="index.html">Demos</a></h1>
+
+    <div class="topo-direita">
+      <details class="menu-usuario">
+        <summary aria-label="Menu do usuário">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4.4 0-8 2.2-8 5v3h16v-3c0-2.8-3.6-5-8-5z"/></svg>
+        </summary>
+        <div class="opcoes">
+          <a href="Prototipa%C3%A7%C3%A3o%20avan%C3%A7ada/login.html">Fazer login</a>
+          <a href="Prototipa%C3%A7%C3%A3o%20avan%C3%A7ada/cadastro.html">Criar conta</a>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <main class="destaque">
+    <!-- Substitua os fundos por fotos reais dos candidatos (veja o CSS) -->
+    <section class="metade esquerda" aria-label="Candidato 1"><span class="rotulo">Candidato 1</span></section>
+    <section class="metade direita" aria-label="Candidato 2"><span class="rotulo">Candidato 2</span></section>
+
+    <div class="busca-destaque">
+      <form role="search" action="#" method="get">
+        <input type="search" name="q" placeholder="Pesquisar candidato" aria-label="Pesquisar candidato">
+        <button type="submit">Buscar</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

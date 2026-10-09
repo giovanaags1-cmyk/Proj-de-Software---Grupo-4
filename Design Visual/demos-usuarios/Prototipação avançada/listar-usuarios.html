@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuários | Demos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="usuario.css">
+  <link rel="stylesheet" href="usuario-lista.css">
+</head>
+<body>
+
+  <header class="topo">
+    <a href="../index.html" class="marca">Dem<span>o</span>s</a>
+    <nav>
+      <a href="../deputados.html">Deputados</a>
+      <a href="../comparar.html">Comparar</a>
+      <a href="../favoritos.html">Favoritos</a>
+      <a href="editar-usuario.html" class="ativo">Minha conta</a>
+    </nav>
+  </header>
+
+  <main class="pagina pagina--larga">
+    <a href="../index.html" class="voltar">&larr; Voltar</a>
+
+    <div class="titulo-linha">
+      <div>
+        <h1 class="titulo">Usuários</h1>
+        <p>Gerencie as contas cadastradas no Demos.</p>
+      </div>
+      <a href="cadastro.html" class="botao botao--primario">+ Novo usuário</a>
+    </div>
+
+    <section class="secao">
+      <h2>Contas cadastradas</h2>
+      <p>Busque por nome, usuário ou e-mail.</p>
+
+      <form class="busca" role="search" action="/usuarios" method="get">
+        <input type="search" name="q" placeholder="Buscar usuário" aria-label="Buscar usuários">
+        <button type="submit" class="botao botao--secundario">Buscar</button>
+      </form>
+
+      <div class="tabela-wrapper">
+        <table>
+          <thead>
+            <tr><th>Nome</th><th>Usuário</th><th>E-mail</th><th>Ações</th></tr>
+          </thead>
+          <tbody>
+            <!-- Linhas de exemplo; o back-end repete uma linha por usuário -->
+            <tr>
+              <td><span class="usuario-nome"><span class="avatar avatar--mini" aria-hidden="true">L</span>Luísa Andrade</span></td>
+              <td>luisa.a</td>
+              <td>luisa@email.com</td>
+              <td class="celula-acoes">
+                <a href="editar-usuario.html" class="botao botao--secundario botao--pequeno">Editar</a>
+                <a href="remover-usuario.html" class="botao botao--perigo botao--pequeno">Remover</a>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="usuario-nome"><span class="avatar avatar--mini" aria-hidden="true">C</span>Carlos Souza</span></td>
+              <td>carlos.s</td>
+              <td>carlos@email.com</td>
+              <td class="celula-acoes">
+                <a href="editar-usuario.html" class="botao botao--secundario botao--pequeno">Editar</a>
+                <a href="remover-usuario.html" class="botao botao--perigo botao--pequeno">Remover</a>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="usuario-nome"><span class="avatar avatar--mini" aria-hidden="true">M</span>Marina Lopes</span></td>
+              <td>marina.l</td>
+              <td>marina@email.com</td>
+              <td class="celula-acoes">
+                <a href="editar-usuario.html" class="botao botao--secundario botao--pequeno">Editar</a>
+                <a href="remover-usuario.html" class="botao botao--perigo botao--pequeno">Remover</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
