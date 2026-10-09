@@ -34,10 +34,6 @@ if (formCadastro) {
 
 
 
-// ==============================
-// LOGIN
-// ==============================
-
 const formLogin = document.querySelector("#form-login");
 
 if (formLogin) {
@@ -57,12 +53,6 @@ if (formLogin) {
         window.location.href = "editar-usuario.html";
     });
 }
-
-
-
-// ==============================
-// EDITAR PERFIL
-// ==============================
 
 const formEditar = document.querySelector("#form-editar");
 
