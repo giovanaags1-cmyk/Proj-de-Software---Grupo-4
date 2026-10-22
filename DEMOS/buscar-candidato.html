@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Buscar candidato | Demos</title>
+
+    <link rel="stylesheet" href="./css/demos.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+</head>
+
+
+<body>
+
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <a href="#inicio" class="icone-menu">
+            <i class="fa-solid fa-bookmark"></i>
+        </a>
+
+        <a href="index.html" class="icone-menu">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+    </div>
+
+
+    <a href="index.html" class="logo">
+
+        <img src="./img/logo.png" alt="Logo Demos">
+
+        <span>DEMOS</span>
+
+    </a>
+
+
+    <a href="login.html" class="icone-menu">
+        <i class="fa-solid fa-circle-user"></i>
+    </a>
+
+</header>
+
+
+
+<main class="pagina-candidatos">
+
+
+    <h1>Encontre um candidato</h1>
+
+    <p class="subtitulo-busca">
+        Pesquise pelo nome, nome de urna ou partido.
+    </p>
+
+
+    <div class="busca-candidato">
+
+        <input
+            type="text"
+            id="campo-busca-candidato"
+            placeholder="Digite o nome do candidato..."
+        >
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+    </div>
+
+
+    <div
+        id="resultados-candidatos"
+        class="resultados-candidatos"
+    >
+    </div>
+
+
+</main>
+
+
+<script src="./js/busca-candidato.js"></script>
+
+
+</body>
+</html>

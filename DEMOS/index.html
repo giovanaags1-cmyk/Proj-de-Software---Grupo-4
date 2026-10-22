@@ -48,21 +48,74 @@
 
     <section class="hero">
 
-        <form class="barra-pesquisa">
+    <div class="area-busca-candidatos">
 
-            <input
-                type="text"
-                placeholder="Pesquise um candidato, ano..."
+        <div
+            class="barra-pesquisa barra-selecao"
+            onclick="abrirBusca()"
+        >
+
+            <button
+                type="button"
+                class="botao-mais"
+                onclick="event.stopPropagation(); abrirBusca();"
+                aria-label="Adicionar candidato"
             >
-
-            <button type="button">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                +
             </button>
 
-        </form>
+            <i class="fa-solid fa-magnifying-glass icone-busca"></i>
 
-    </section>
+            <div
+                id="candidatos-selecionados"
+                class="candidatos-selecionados"
+            >
+                <span class="placeholder-busca">
+                    Procure candidatos
+                </span>
+            </div>
 
+        </div>
+
+
+        <div
+            id="popup-busca-candidato"
+            class="dropdown-candidatos"
+        >
+
+            <div class="campo-pesquisa-dropdown">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="campo-busca-candidato"
+                    placeholder="Procure candidatos"
+                    autocomplete="off"
+                >
+
+                <button
+                    type="button"
+                    class="fechar-dropdown"
+                    onclick="event.stopPropagation(); fecharBusca();"
+                    aria-label="Fechar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div
+                id="resultados-candidatos"
+                class="resultados-candidatos"
+            >
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 
     <main>
@@ -1330,8 +1383,10 @@
         </p>
 
     </footer>
-    <script src="./js/usuario.js"></script>
 
+    <script src="./js/usuario.js"></script>
+    <script src="./js/candidatos.js"></script>
+    <script src="./js/buscar-candidato.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Candidato | Demos</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/demos.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <a
+            href="index.html"
+            class="icone-menu"
+            aria-label="Salvos"
+        >
+            <i class="fa-solid fa-bookmark"></i>
+        </a>
+
+
+        <a
+            href="index.html"
+            class="icone-menu"
+            aria-label="Início"
+        >
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+    </div>
+
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+
+        <img
+            src="./img/logo.png"
+            alt="Logo Demos"
+        >
+
+        <span>DEMOS</span>
+
+    </a>
+
+
+    <a
+        href="login.html"
+        class="icone-menu"
+        aria-label="Minha conta"
+    >
+
+        <i class="fa-solid fa-circle-user"></i>
+
+    </a>
+
+</header>
+
+
+<section class="barra-pagina-candidato">
+
+    <div class="area-busca-candidatos">
+
+        <div
+            class="barra-pesquisa barra-selecao"
+            id="barra-pesquisa-candidato"
+        >
+
+            <button
+                type="button"
+                class="botao-mais"
+                id="botao-comparar"
+                aria-label="Adicionar candidato para comparar"
+            >
+                +
+            </button>
+
+
+            <i
+                class="fa-solid fa-magnifying-glass icone-busca"
+            ></i>
+
+
+            <div
+                id="texto-busca-candidato"
+                class="candidatos-selecionados"
+            >
+
+                <span class="placeholder-busca">
+                    Procure candidatos
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="popup-busca-candidato"
+            class="dropdown-candidatos"
+        >
+
+            <div class="campo-pesquisa-dropdown">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="campo-busca-candidato"
+                    placeholder="Procure candidatos"
+                    autocomplete="off"
+                >
+
+                <button
+                    type="button"
+                    class="fechar-dropdown"
+                    id="fechar-busca"
+                    aria-label="Fechar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                id="resultados-candidatos"
+                class="resultados-candidatos"
+            >
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<main class="pagina-perfil-candidato">
+
+
+
+    <section class="perfil-candidato-principal">
+
+        <div
+            class="avatar-candidato-perfil"
+            id="avatar-candidato"
+        >
+            ?
+        </div>
+
+
+        <div class="dados-candidato-perfil">
+
+            <h1 id="nome-candidato">
+                Carregando...
+            </h1>
+
+            <p id="partido-candidato"></p>
+
+            <p id="cargo-candidato"></p>
+
+            <p id="uf-candidato"></p>
+
+        </div>
+
+    </section>
+
+
+    <section class="informacoes-candidato">
+
+        <h2>Informações do candidato</h2>
+
+
+        <div class="dados-candidato-grid">
+
+            <div class="dado-candidato">
+
+                <span>Nome completo</span>
+
+                <strong id="nome-completo-candidato">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="dado-candidato">
+
+                <span>Número</span>
+
+                <strong id="numero-candidato">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="dado-candidato">
+
+                <span>Partido</span>
+
+                <strong id="partido-completo-candidato">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="dado-candidato">
+
+                <span>Situação</span>
+
+                <strong id="situacao-candidato">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="dado-candidato">
+
+                <span>Ocupação</span>
+
+                <strong id="ocupacao-candidato">
+                    Informação não encontrada
+                </strong>
+
+            </div>
+
+
+            <div class="dado-candidato">
+
+                <span>Grau de instrução</span>
+
+                <strong id="instrucao-candidato">
+                    Informação não encontrada
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="./js/candidato.js"></script>
+
+
+</body>
+
+</html>

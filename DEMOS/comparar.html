@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Comparar candidatos | Demos</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/demos.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <a
+            href="index.html"
+            class="icone-menu"
+            aria-label="Salvos"
+        >
+            <i class="fa-solid fa-bookmark"></i>
+        </a>
+
+
+        <a
+            href="index.html"
+            class="icone-menu"
+            aria-label="Início"
+        >
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+    </div>
+
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+
+        <img
+            src="./img/logo.png"
+            alt="Logo Demos"
+        >
+
+        <span>DEMOS</span>
+
+    </a>
+
+
+    <a
+        href="login.html"
+        class="icone-menu"
+        aria-label="Minha conta"
+    >
+
+        <i class="fa-solid fa-circle-user"></i>
+
+    </a>
+
+</header>
+
+
+
+<section class="topo-comparacao">
+
+    <div class="barra-comparando">
+
+        <span class="rotulo-comparando">
+            Comparando
+        </span>
+
+
+        <div
+            class="chip-comparacao"
+            id="chip-candidato-a"
+        >
+            Candidato 1
+        </div>
+
+
+        <span class="versus-comparacao">
+            ×
+        </span>
+
+
+        <div
+            class="chip-comparacao"
+            id="chip-candidato-b"
+        >
+            Candidato 2
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<main class="pagina-comparar">
+
+
+
+
+
+    <div class="cabecalho-pagina-comparacao">
+
+        <div>
+
+            <h1>
+                Comparação lado a lado
+            </h1>
+
+            <p>
+                As informações são apresentadas com o
+                mesmo peso visual, sem notas ou indicação
+                de preferência.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div
+        id="comparacao-candidatos"
+        class="grid-comparar-candidatos"
+    >
+
+
+        <article class="card-candidato-comparar">
+
+            <div class="cabecalho-card-comparar">
+
+                <div
+                    class="avatar-comparacao"
+                    id="avatar-a"
+                >
+                    ?
+                </div>
+
+
+                <div class="identificacao-comparacao">
+
+                    <h2 id="nome-a">
+                        Carregando...
+                    </h2>
+
+                    <p id="partido-a">
+                    </p>
+
+                    <p id="cargo-a">
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="grupo-dados-comparar">
+
+                <h3>Identificação</h3>
+
+
+                <div class="linha-comparar">
+
+                    <span>Nome completo</span>
+
+                    <strong id="nome-completo-a">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="linha-comparar">
+
+                    <span>Número</span>
+
+                    <strong id="numero-a">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="linha-comparar">
+
+                    <span>Partido</span>
+
+                    <strong id="partido-completo-a">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="grupo-dados-comparar">
+
+                <h3>Dados eleitorais</h3>
+
+
+                <div class="linha-comparar">
+
+                    <span>Cargo</span>
+
+                    <strong id="cargo-dado-a">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="linha-comparar">
+
+                    <span>Estado / UF</span>
+
+                    <strong id="uf-a">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="linha-comparar">
+
+                    <span>Situação</span>
+
+                    <strong id="situacao-a">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="grupo-dados-comparar">
+
+                <h3>Perfil</h3>
+
+
+                <div class="linha-comparar">
+
+                    <span>Ocupação</span>
+
+                    <strong id="ocupacao-a">
+                        Informação não encontrada
+                    </strong>
+
+                </div>
+
+
+                <div class="linha-comparar">
+
+                    <span>Grau de instrução</span>
+
+                    <strong id="instrucao-a">
+                        Informação não encontrada
+                    </strong>
+
+                </div>
+
+
+                <div class="linha-comparar">
+
+                    <span>Data de nascimento</span>
+
+                    <strong id="nascimento-a">
+                        Informação não encontrada
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="#"
+                id="ver-perfil-a"
+                class="botao-ver-perfil"
+            >
+                Ver perfil completo
+            </a>
+
+        </article>
+
+
+
+        <article class="card-candidato-comparar">
+
+            <div class="cabecalho-card-comparar">
+
+                <div
+                    class="avatar-comparacao"
+                    id="avatar-b"
+                >
+                    ?
+                </div>
+
+
+                <div class="identificacao-comparacao">
+
+                    <h2 id="nome-b">
+                        Carregando...
+                    </h2>
+
+                    <p id="partido-b">
+                    </p>
+
+                    <p id="cargo-b">
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="grupo-dados-comparar">
+
+                <h3>Identificação</h3>
+
+
+                <div class="linha-comparar">
+
+                    <span>Nome completo</span>
+
+                    <strong id="nome-completo-b">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="linha-comparar">
+
+                    <span>Número</span>
+
+                    <strong id="numero-b">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="linha-comparar">
+
+                    <span>Partido</span>
+
+                    <strong id="partido-completo-b">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="grupo-dados-comparar">
+
+                <h3>Dados eleitorais</h3>
+
+
+                <div class="linha-comparar">
+
+                    <span>Cargo</span>
+
+                    <strong id="cargo-dado-b">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="linha-comparar">
+
+                    <span>Estado / UF</span>
+
+                    <strong id="uf-b">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="linha-comparar">
+
+                    <span>Situação</span>
+
+                    <strong id="situacao-b">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="grupo-dados-comparar">
+
+                <h3>Perfil</h3>
+
+
+                <div class="linha-comparar">
+
+                    <span>Ocupação</span>
+
+                    <strong id="ocupacao-b">
+                        Informação não encontrada
+                    </strong>
+
+                </div>
+
+
+                <div class="linha-comparar">
+
+                    <span>Grau de instrução</span>
+
+                    <strong id="instrucao-b">
+                        Informação não encontrada
+                    </strong>
+
+                </div>
+
+
+                <div class="linha-comparar">
+
+                    <span>Data de nascimento</span>
+
+                    <strong id="nascimento-b">
+                        Informação não encontrada
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <a
+                href="#"
+                id="ver-perfil-b"
+                class="botao-ver-perfil"
+            >
+                Ver perfil completo
+            </a>
+
+        </article>
+
+
+    </div>
+
+
+</main>
+
+
+<script src="./js/comparacao.js"></script>
+
+
+</body>
+
+</html>
