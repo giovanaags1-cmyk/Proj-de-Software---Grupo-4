@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparar Candidatos</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Comparador de Candidatos</h1>
+    <nav>
+      <a href="candidatos.html">Candidatos</a>
+      <a href="comparar.html">Comparar</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Comparar candidatos</h2>
+
+    <div class="filtros">
+      <select id="candidato1"></select>
+      x
+      <select id="candidato2"></select>
+      <button onclick="comparar()">Comparar</button>
+    </div>
+
+    <div class="graficos">
+      <div class="grafico">
+        <h3>Intenção de votos (%)</h3>
+        <canvas id="graficoVotos"></canvas>
+      </div>
+      <div class="grafico">
+        <h3>Notas por área</h3>
+        <canvas id="graficoAreas"></canvas>
+      </div>
+    </div>
+
+    <div class="tabela">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th id="nome1"></th>
+            <th id="nome2"></th>
+          </tr>
+        </thead>
+        <tbody id="tabelaComparacao"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="dados.js"></script>
+  <script src="comparar.js"></script>
+</body>
+</html>
