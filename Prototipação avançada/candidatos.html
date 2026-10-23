@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidatos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Comparador de Candidatos</h1>
+    <nav>
+      <a href="candidatos.html">Candidatos</a>
+      <a href="comparar.html">Comparar</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Lista de candidatos</h2>
+
+    <div class="filtros">
+      <input type="text" id="busca" placeholder="Buscar pelo nome...">
+      <select id="cargo">
+        <option value="">Todos os cargos</option>
+        <option value="Governador">Governador</option>
+        <option value="Senador">Senador</option>
+      </select>
+    </div>
+
+    <div class="tabela">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Partido</th>
+            <th>Número</th>
+            <th>Cargo</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="lista"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="dados.js"></script>
+  <script src="candidatos.js"></script>
+</body>
+</html>
