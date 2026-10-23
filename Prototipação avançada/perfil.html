@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do Candidato</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Comparador de Candidatos</h1>
+    <nav>
+      <a href="candidatos.html">Candidatos</a>
+      <a href="comparar.html">Comparar</a>
+    </nav>
+  </header>
+
+  <div class="container" id="perfil">
+    <a href="candidatos.html">&lt; Voltar</a>
+
+    <h2 id="nome"></h2>
+    <p class="numero" id="numero"></p>
+
+    <div class="info">
+      <p><b>Partido:</b> <span id="partido"></span></p>
+      <p><b>Cargo:</b> <span id="cargo"></span></p>
+      <p><b>Estado:</b> <span id="estado"></span></p>
+      <p><b>Idade:</b> <span id="idade"></span></p>
+      <p><b>Intenção de votos:</b> <span id="intencao"></span></p>
+      <p><b>Projetos aprovados:</b> <span id="projetos"></span></p>
+    </div>
+
+    <h3>Notas por área (0 a 10)</h3>
+    <table>
+      <tr><th>Saúde</th><th>Educação</th><th>Segurança</th></tr>
+      <tr><td id="saude"></td><td id="educacao"></td><td id="seguranca"></td></tr>
+    </table>
+
+    <h3>Propostas</h3>
+    <ul id="propostas"></ul>
+
+    <a href="comparar.html" id="link-comparar"><button>Comparar com outro candidato</button></a>
+  </div>
+
+  <script src="dados.js"></script>
+  <script src="perfil.js"></script>
+</body>
+</html>
