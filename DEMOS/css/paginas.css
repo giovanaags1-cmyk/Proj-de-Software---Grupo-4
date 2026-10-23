@@ -1,0 +1,225 @@
+body.pagina-interna {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.pagina-interna > .cabecalho,
+.pagina-interna > footer {
+    flex-shrink: 0;
+}
+
+
+.pagina-conteudo {
+    flex: 1 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+}
+
+.pagina-conteudo--texto {
+    max-width: 820px;
+}
+
+.pagina-conteudo > h1 {
+    margin-bottom: 16px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    line-height: 1.2;
+
+    color: var(--verde);
+}
+
+.pagina-conteudo p,
+.pagina-conteudo li {
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+.pagina-conteudo ul {
+    margin-top: 8px;
+    padding-left: 22px;
+}
+
+.pagina-conteudo li + li {
+    margin-top: 6px;
+}
+
+.pagina-conteudo a {
+    color: var(--verde);
+    font-weight: 600;
+}
+
+.pagina-conteudo a:hover {
+    color: var(--verde-escuro);
+}
+
+
+.pagina-conteudo .secao {
+    padding: 22px 0 0;
+}
+
+.pagina-conteudo .secao > h2 {
+    margin-bottom: 10px;
+    font-size: 21px;
+}
+
+.pagina-conteudo .nota {
+    font-size: 13px;
+    font-style: italic;
+    color: #6a6a6a;
+}
+
+
+.botao-verde {
+    display: inline-block;
+
+    padding: 12px 28px;
+
+    border: 0;
+    border-radius: 999px;
+
+    background-color: var(--verde);
+    color: var(--branco);
+
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s;
+}
+
+.botao-verde:hover {
+    background-color: var(--verde-escuro);
+}
+
+.pagina-conteudo a.botao-verde {
+    color: var(--branco);
+}
+
+
+.formulario {
+    margin-top: 16px;
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    background-color: var(--bege-claro);
+    border-radius: 12px;
+}
+
+.formulario .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.formulario label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--verde);
+}
+
+.formulario input,
+.formulario select,
+.formulario textarea {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #d4d0c6;
+    border-radius: 10px;
+
+    background-color: var(--branco);
+
+    font: inherit;
+    font-size: 15px;
+}
+
+.formulario textarea {
+    resize: vertical;
+}
+
+.formulario input:focus,
+.formulario select:focus,
+.formulario textarea:focus {
+    outline: 3px solid var(--dourado);
+    outline-offset: 1px;
+    border-color: var(--verde);
+}
+
+.formulario .botao-verde {
+    align-self: flex-start;
+}
+
+
+.pagina-erro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+
+    text-align: center;
+}
+
+.pagina-erro .codigo {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 96px;
+    font-weight: bold;
+    line-height: 1;
+
+    color: var(--verde);
+}
+
+.pagina-erro > h1 {
+    margin-bottom: 0;
+}
+
+
+.rodape-links {
+    margin-top: 14px;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+}
+
+.rodape-links a {
+    font-size: 12px;
+
+    color: var(--bege);
+    text-decoration: underline;
+}
+
+.rodape-links a:hover {
+    color: var(--branco);
+}
+
+@media (max-width: 600px) {
+
+    .pagina-conteudo {
+        padding: 28px 18px 48px;
+    }
+
+    .pagina-conteudo > h1 {
+        font-size: 26px;
+    }
+
+    .pagina-erro .codigo {
+        font-size: 72px;
+    }
+
+    .formulario {
+        padding: 18px;
+    }
+
+}

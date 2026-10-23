@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidatos | Demos</title>
+
+  
+    <link rel="stylesheet" href="./css/demos.css">
+    <link rel="stylesheet" href="./css/paginas.css">
+    <link rel="stylesheet" href="./css/favoritos.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+</head>
+
+<body class="pagina-interna">
+
+    <header class="cabecalho">
+
+        <div class="cabecalho-esquerda">
+
+            <a href="favoritos.html" class="icone-menu" aria-label="Favoritos">
+                <i class="fa-solid fa-bookmark"></i>
+            </a>
+
+            <a href="index.html" class="icone-menu" aria-label="Página inicial">
+                <i class="fa-solid fa-house"></i>
+            </a>
+
+        </div>
+
+        <a href="index.html" class="logo">
+            <img src="./img/logo.png" alt="Logo Demos">
+            <span>DEMOS</span>
+        </a>
+
+        <a href="login.html" class="icone-menu" aria-label="Minha conta">
+            <i class="fa-solid fa-circle-user"></i>
+        </a>
+
+    </header>
+
+    <main class="pagina-conteudo">
+
+        <h1>Candidatos</h1>
+
+        <p class="subtitulo">
+            Clique em "Favoritar" para salvar um candidato. Os salvos aparecem
+            na página de <a href="favoritos.html">Favoritos</a>.
+        </p>
+
+        <p class="aviso-dados">
+            Dados de exemplo (fictícios), usados apenas para testar o site.
+        </p>
+
+        <div id="lista-candidatos" class="grade-candidatos"></div>
+
+        <noscript>
+            <p>Ative o JavaScript do navegador para ver a lista de candidatos.</p>
+        </noscript>
+
+    </main>
+
+    <footer>
+
+        <strong>DEMOS</strong>
+
+        <p>
+            Política verdadeira.
+        </p>
+
+        <nav class="rodape-links" aria-label="Links do rodapé">
+            <a href="termos-de-uso.html">Termos de Uso</a>
+            <a href="politica-de-privacidade.html">Política de Privacidade</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+
+    </footer>
+
+    <script src="./js/candidatos-dados.js"></script>
+    <script src="./js/favoritos.js"></script>
+</body>
+
+</html>
