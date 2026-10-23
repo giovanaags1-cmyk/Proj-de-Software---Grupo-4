@@ -1,0 +1,186 @@
+:root {
+
+    --card-fundo: #82764f;
+}
+
+.pagina-conteudo > .subtitulo {
+    color: #555555;
+    margin-bottom: 8px;
+}
+
+.pagina-conteudo > .subtitulo:focus {
+    outline: none;
+}
+
+.pagina-conteudo .aviso-dados {
+    font-size: 13px;
+    font-style: italic;
+    color: #6a6a6a;
+}
+
+.grade-candidatos {
+    margin-top: 22px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 22px;
+}
+
+
+.card-candidato {
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    background-color: var(--card-fundo);
+    color: var(--branco);
+
+    border-radius: 28px;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.card-topo {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+.card-foto {
+    flex: 0 0 112px;
+    height: 112px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    background-color: #b3b3b3;
+    color: #1c1b1f;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+}
+
+.card-foto i {
+    font-size: 44px;
+}
+
+.card-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.card-candidato .card-nome {
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.2;
+
+    overflow-wrap: anywhere;
+}
+
+.card-candidato .card-linha {
+    font-size: 15px;
+    line-height: 1.35;
+}
+
+
+.card-acoes {
+    display: flex;
+    gap: 12px;
+}
+
+.botao-card {
+    flex: 1;
+
+    padding: 12px 10px;
+
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--branco);
+
+    font: inherit;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: background-color 0.15s;
+}
+
+.botao-card:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.32);
+}
+
+.botao-card:focus-visible {
+    outline: 3px solid var(--branco);
+    outline-offset: 2px;
+}
+
+.botao-card:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+.botao-card[aria-pressed="true"] {
+    background-color: var(--verde);
+    border-color: var(--dourado);
+}
+
+.botao-card[aria-pressed="true"]:hover {
+    background-color: var(--verde-escuro);
+}
+
+
+.estado-vazio {
+    margin-top: 28px;
+    padding: 36px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    text-align: center;
+
+    background-color: var(--bege-claro);
+    border-radius: 16px;
+}
+
+.estado-vazio[hidden] {
+    display: none;
+}
+
+@media (max-width: 400px) {
+
+    .card-candidato {
+        padding: 18px;
+    }
+
+    .card-foto {
+        flex-basis: 90px;
+        height: 90px;
+    }
+
+    .card-foto i {
+        font-size: 34px;
+    }
+
+    .card-foto span {
+        display: none;
+    }
+
+    .card-acoes {
+        flex-direction: column;
+    }
+
+}
