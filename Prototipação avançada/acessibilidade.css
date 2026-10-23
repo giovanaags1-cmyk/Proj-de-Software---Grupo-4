@@ -1,0 +1,84 @@
+/* Demos - Modo acessibilidade
+   Incluir em qualquer página junto com acessibilidade.js */
+
+:root {
+  --a11y-escala: 1;
+}
+
+html {
+  font-size: calc(16px * var(--a11y-escala));
+}
+
+/* Barra de controles */
+.a11y-barra {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: #ffffff;
+  border: 1px solid #d0d5dd;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+}
+
+.a11y-barra button {
+  min-width: 44px; /* área mínima de toque recomendada */
+  min-height: 44px;
+  padding: 0 10px;
+  font: 600 15px/1 system-ui, sans-serif;
+  color: #1d2939;
+  background: #f2f4f7;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.a11y-barra button:hover { background: #e4e7ec; }
+.a11y-barra button[aria-pressed="true"] {
+  background: #1d2939;
+  color: #ffffff;
+}
+
+/* Foco sempre visível para quem navega pelo teclado */
+:focus-visible {
+  outline: 3px solid #f79009 !important;
+  outline-offset: 2px;
+}
+
+/* ---------- Alto contraste ---------- */
+html.alto-contraste,
+html.alto-contraste body {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+html.alto-contraste *:not(img):not(svg):not(path) {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+html.alto-contraste a,
+html.alto-contraste a * {
+  color: #ffff00 !important;
+  text-decoration: underline !important;
+}
+
+html.alto-contraste button,
+html.alto-contraste input,
+html.alto-contraste [role="option"][aria-selected="true"] {
+  border: 2px solid #ffff00 !important;
+}
+
+html.alto-contraste .a11y-barra button[aria-pressed="true"] {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+}
+
+html.alto-contraste ::placeholder {
+  color: #cccccc !important;
+}

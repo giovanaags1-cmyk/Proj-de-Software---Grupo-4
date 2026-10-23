@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Demos · Buscar candidato</title>
+  <link rel="stylesheet" href="busca.css">
+  <link rel="stylesheet" href="acessibilidade.css">
+</head>
+<body>
+  <header class="topo">
+    <span class="logo">Demos</span>
+  </header>
+
+  <main class="conteudo">
+    <h1>Buscar candidato</h1>
+    <p class="subtitulo">Digite o nome, número ou partido</p>
+
+    <div class="busca">
+      <label for="campo-busca" class="sr-only">Buscar candidato</label>
+      <input
+        id="campo-busca"
+        type="search"
+        placeholder="Ex: Maria, 55 ou PSD"
+        autocomplete="off"
+        role="combobox"
+        aria-autocomplete="list"
+        aria-expanded="false"
+        aria-controls="lista-sugestoes">
+      <ul id="lista-sugestoes" class="sugestoes" role="listbox" hidden></ul>
+    </div>
+
+    <p id="status" class="status" aria-live="polite"></p>
+
+    <section id="selecionado" class="cartao" hidden></section>
+  </main>
+
+  <script src="busca.js" defer></script>
+  <script src="acessibilidade.js" defer></script>
+</body>
+</html>
