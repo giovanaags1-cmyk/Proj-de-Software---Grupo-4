@@ -131,9 +131,12 @@ function iniciarPaginaFavoritos(lista) {
     const contador = document.querySelector("#contador-favoritos");
     const estadoVazio = document.querySelector("#estado-vazio");
 
+    // Sprint 7: também procura os favoritos nos dados reais do TSE
+    let baseCandidatos = CANDIDATOS;
+
     function desenhar(moverFoco) {
         const ids = lerFavoritos();
-        const favoritos = CANDIDATOS.filter(function (candidato) {
+        const favoritos = baseCandidatos.filter(function (candidato) {
             return ids.includes(candidato.id);
         });
 
@@ -161,6 +164,31 @@ function iniciarPaginaFavoritos(lista) {
     }
 
     desenhar(false);
+
+    fetch("./dados/candidatos.json")
+        .then(function (resposta) {
+            return resposta.ok ? resposta.json() : [];
+        })
+        .then(function (dados) {
+            const vistos = new Set();
+            const reais = dados.filter(function (candidato) {
+                if (vistos.has(candidato.id)) {
+                    return false;
+                }
+                vistos.add(candidato.id);
+                return true;
+            }).map(function (candidato) {
+                return Object.assign({}, candidato, {
+                    nome: candidato.nomeUrna || candidato.nome,
+                    ano: 2026
+                });
+            });
+            baseCandidatos = CANDIDATOS.concat(reais);
+            desenhar(false);
+        })
+        .catch(function () {
+            // Sem os dados reais, continua mostrando só os de exemplo
+        });
 
 
     window.addEventListener("storage", function () {
