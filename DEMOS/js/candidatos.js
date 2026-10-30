@@ -1,6 +1,6 @@
 let candidatos = [];
 
-fetch("./dados/candidatos.json")
+fetch("./dados/candidatos_completos.json")
     .then(resposta => resposta.json())
 
     .then(dados => {

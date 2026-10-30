@@ -2,47 +2,43 @@
 from pathlib import Path
 import pandas as pd
 
-# Localiza a pasta DEMOS independentemente
-# do terminal em que o script for executado.
 pasta_projeto = Path(__file__).resolve().parent.parent
 pasta_dados = pasta_projeto / "dados"
+pasta_tse = pasta_dados / "tse"
 
-arquivos = sorted(pasta_dados.rglob("consulta_cand*.csv"))
 
-print("Arquivos encontrados:", len(arquivos))
+arquivos = sorted(pasta_tse.glob("consulta_cand_2022_*.csv"))
 
-if not arquivos:
-    raise FileNotFoundError("Nenhum CSV de candidaturas encontrado.")
 
-# Campo do site -> coluna original do TSE
-campos = {
-    "id": "SQ_CANDIDATO",
-    "nome": "NM_CANDIDATO",
-    "nomeUrna": "NM_URNA_CANDIDATO",
-    "numero": "NR_CANDIDATO",
-    "partido": "SG_PARTIDO",
-    "nomePartido": "NM_PARTIDO",
-    "cargo": "DS_CARGO",
-    "uf": "SG_UF",
-    "nascimento": "DT_NASCIMENTO",
-    "ocupacao": "DS_OCUPACAO",
-    "instrucao": "DS_GRAU_INSTRUCAO",
-    "genero": "DS_GENERO",
-    "racaCor": "DS_COR_RACA",
-    "anoEleicao": "ANO_ELEICAO",
-    "situacao": "DS_SITUACAO_CANDIDATURA"
-}
-
-obrigatorios = [
-    "SQ_CANDIDATO",
-    "NM_CANDIDATO",
-    "NM_URNA_CANDIDATO",
-    "NR_CANDIDATO",
-    "SG_PARTIDO",
-    "NM_PARTIDO",
-    "DS_CARGO",
-    "SG_UF"
+arquivos = [
+    arq for arq in arquivos
+    if arq.stem not in {
+        "consulta_cand_2022_BRASIL",
+        "consulta_cand_2022_BR"
+    }
 ]
+
+colunas = {
+    "SQ_CANDIDATO": "id",
+    "NM_CANDIDATO": "nome",
+    "NM_URNA_CANDIDATO": "nomeUrna",
+    "NR_CANDIDATO": "numero",
+    "SG_PARTIDO": "partido",
+    "NM_PARTIDO": "nomePartido",
+    "DS_CARGO": "cargo",
+    "SG_UF": "uf",
+    "DT_NASCIMENTO": "nascimento",
+    "DS_GRAU_INSTRUCAO": "instrucao",
+    "DS_OCUPACAO": "ocupacao",
+    "DS_ESTADO_CIVIL": "estadoCivil",
+    "DS_GENERO": "genero",
+    "DS_COR_RACA": "racaCor",
+    "DS_SITUACAO_CANDIDATURA": "situacao",
+    "DS_SIT_TOT_TURNO": "resultadoEleitoral",
+    "NM_FEDERACAO": "federacao",
+    "NM_COLIGACAO": "coligacao",
+    "ANO_ELEICAO": "anoEleicao"
+}
 
 tabelas = []
 
@@ -54,61 +50,91 @@ for arquivo in arquivos:
         sep=";",
         encoding="latin1",
         dtype=str,
-        low_memory=False
+        low_memory=False,
+        usecols=lambda c: c in colunas
     )
 
-    ausentes = [
-        coluna for coluna in obrigatorios
-        if coluna not in df.columns
-    ]
-
-    if ausentes:
-        print("Ignorado. Faltam:", ausentes)
-        continue
-
-    # Garante campos opcionais ausentes
-    for coluna in campos.values():
-        if coluna not in df.columns:
-            df[coluna] = None
-
-    df = df[list(campos.values())].copy()
-
-    df = df.rename(
-        columns={
-            original: novo
-            for novo, original in campos.items()
-        }
-    )
+    df = df.rename(columns=colunas)
 
     tabelas.append(df)
 
 if not tabelas:
-    raise ValueError("Nenhum arquivo válido encontrado.")
+    raise FileNotFoundError("Nenhum CSV de 2022 encontrado.")
 
 candidatos = pd.concat(tabelas, ignore_index=True)
 
-# Evita duplicar a mesma candidatura
+
 candidatos = candidatos.drop_duplicates(
-    subset=["id", "anoEleicao"]
+    subset=["id"]
 )
 
-# Converte valores ausentes para null no JSON
+
 candidatos = candidatos.replace({
-    "": None,
     "#NULO#": None,
     "#NE#": None,
-    "NÃO DIVULGÁVEL": None
+    "": None
 })
 
-caminho_saida = pasta_dados / "candidatos.json"
+
+arquivos_bens = sorted(
+    pasta_tse.glob("bem_candidato_2022_*.csv")
+)
+
+
+arquivos_bens = [
+    arq for arq in arquivos_bens
+    if arq.stem not in {
+        "bem_candidato_2022_BR",
+        "bem_candidato_2022_BRASIL"
+    }
+]
+
+tabelas_bens = []
+
+for arquivo in arquivos_bens:
+    print("Lendo bens:", arquivo.name)
+
+    df = pd.read_csv(
+        arquivo,
+        sep=";",
+        encoding="latin1",
+        dtype=str,
+        low_memory=False,
+        usecols=["SQ_CANDIDATO", "VR_BEM_CANDIDATO"]
+    )
+
+    tabelas_bens.append(df)
+
+if tabelas_bens:
+    bens = pd.concat(tabelas_bens, ignore_index=True)
+
+    bens["valor"] = pd.to_numeric(
+        bens["VR_BEM_CANDIDATO"]
+            .str.replace(".", "", regex=False)
+            .str.replace(",", ".", regex=False),
+        errors="coerce"
+    )
+
+    patrimonio = (
+        bens.groupby("SQ_CANDIDATO")["valor"]
+        .sum(min_count=1)
+    )
+
+    candidatos["patrimonio"] = (
+        candidatos["id"].map(patrimonio)
+    )
+
+print("Patrimônio acrescentado.")
+
+saida = pasta_dados / "candidatos_2022_enriquecidos.json"
 
 candidatos.to_json(
-    caminho_saida,
+    saida,
     orient="records",
     force_ascii=False,
     indent=2
 )
 
-print("Candidatos exportados:", len(candidatos))
-print("Campos:", candidatos.columns.tolist())
-print("Arquivo criado:", caminho_saida)
+print("\nCandidatos encontrados:", len(candidatos))
+print("Arquivo criado:", saida)
+print("Colunas:", candidatos.columns.tolist())

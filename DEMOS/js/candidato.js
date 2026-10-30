@@ -51,7 +51,7 @@ const fecharBusca =
     );
 
 
-fetch("./dados/candidatos.json")
+fetch("./dados/candidatos_completos.json")
 
     .then(resposta => resposta.json())
 
@@ -524,8 +524,10 @@ function mostrarCandidato(
 
 
     preencher(
-        "situacao-candidato",
-        candidato.situacao
+    "situacao-candidato",
+    ["#NE", "#NULO#", ""].includes(candidato.situacao)
+        ? null
+        : candidato.situacao
     );
 
 
@@ -539,6 +541,21 @@ function mostrarCandidato(
         "instrucao-candidato",
         candidato.instrucao
     );
+    preencher("ano-candidato", candidato.anoEleicao);
+    preencher("nascimento-candidato", candidato.nascimento);
+    preencher("resultado-candidato", candidato.resultadoEleitoral);
+
+    const patrimonio = candidato.patrimonio;
+
+    preencher(
+        "patrimonio-candidato",
+        patrimonio == null
+            ? null
+            : Number(patrimonio).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        })
+);
 
 }
 

@@ -46,7 +46,7 @@ window.fecharBusca = function () {
 };
 
 
-fetch("./dados/candidatos.json")
+fetch("./dados/candidatos_completos.json")
 
     .then(function (resposta) {
 
