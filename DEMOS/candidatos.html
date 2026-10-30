@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./css/demos.css">
     <link rel="stylesheet" href="./css/paginas.css">
     <link rel="stylesheet" href="./css/favoritos.css">
+    <link rel="stylesheet" href="./css/listagem.css">
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -52,10 +53,63 @@
         </p>
 
         <p class="aviso-dados">
-            Dados de exemplo (fictícios), usados apenas para testar o site.
+            Dados das candidaturas de 2026 divulgados pelo TSE.
         </p>
 
-        <div id="lista-candidatos" class="grade-candidatos"></div>
+        <form id="form-filtros" class="barra-filtros" aria-label="Filtrar e ordenar candidatos">
+
+            <div class="filtro">
+                <label for="filtro-cargo">Cargo</label>
+                <select id="filtro-cargo" name="cargo">
+                    <option value="">Todos os cargos</option>
+                </select>
+            </div>
+
+            <div class="filtro">
+                <label for="filtro-uf">Estado</label>
+                <select id="filtro-uf" name="uf">
+                    <option value="">Todos os estados</option>
+                </select>
+            </div>
+
+            <div class="filtro">
+                <label for="filtro-partido">Partido</label>
+                <select id="filtro-partido" name="partido">
+                    <option value="">Todos os partidos</option>
+                </select>
+            </div>
+
+            <div class="filtro">
+                <label for="filtro-ordem">Ordenar por</label>
+                <select id="filtro-ordem" name="ordem">
+                    <option value="nome-az">Nome (A–Z)</option>
+                    <option value="nome-za">Nome (Z–A)</option>
+                    <option value="partido">Partido (A–Z)</option>
+                    <option value="numero">Número de urna</option>
+                    <option value="estado">Estado (A–Z)</option>
+                </select>
+            </div>
+
+            <button type="button" id="botao-limpar-filtros" class="botao-limpar" hidden>
+                Limpar filtros
+            </button>
+
+        </form>
+
+        <p id="status-listagem" class="status-listagem" role="status" aria-live="polite"></p>
+
+        <div id="listagem-vazia" class="estado-vazio" hidden>
+            <p>Nenhum candidato encontrado com esses filtros. Tente outra combinação.</p>
+            <button type="button" id="botao-limpar-vazio" class="botao-verde">Limpar filtros</button>
+        </div>
+
+        <div id="listagem-candidatos" class="grade-candidatos"></div>
+
+        <div class="area-mostrar-mais">
+            <button type="button" id="botao-mostrar-mais" class="botao-verde" hidden>
+                Mostrar mais candidatos
+            </button>
+        </div>
 
         <noscript>
             <p>Ative o JavaScript do navegador para ver a lista de candidatos.</p>
@@ -81,6 +135,7 @@
 
     <script src="./js/candidatos-dados.js"></script>
     <script src="./js/favoritos.js"></script>
+    <script src="./js/listagem-candidatos.js"></script>
 </body>
 
 </html>
