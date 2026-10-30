@@ -1,44 +1,39 @@
+
 from pathlib import Path
 import pandas as pd
 
-pasta_dados = Path("../dados")
+# Localiza a pasta DEMOS independentemente
+# do terminal em que o script for executado.
+pasta_projeto = Path(__file__).resolve().parent.parent
+pasta_dados = pasta_projeto / "dados"
 
-arquivos = list(
-    pasta_dados.rglob("consulta_cand*.csv")
-)
+arquivos = sorted(pasta_dados.rglob("consulta_cand*.csv"))
 
 print("Arquivos encontrados:", len(arquivos))
 
-tabelas = []
+if not arquivos:
+    raise FileNotFoundError("Nenhum CSV de candidaturas encontrado.")
 
-for arquivo in arquivos:
+# Campo do site -> coluna original do TSE
+campos = {
+    "id": "SQ_CANDIDATO",
+    "nome": "NM_CANDIDATO",
+    "nomeUrna": "NM_URNA_CANDIDATO",
+    "numero": "NR_CANDIDATO",
+    "partido": "SG_PARTIDO",
+    "nomePartido": "NM_PARTIDO",
+    "cargo": "DS_CARGO",
+    "uf": "SG_UF",
+    "nascimento": "DT_NASCIMENTO",
+    "ocupacao": "DS_OCUPACAO",
+    "instrucao": "DS_GRAU_INSTRUCAO",
+    "genero": "DS_GENERO",
+    "racaCor": "DS_COR_RACA",
+    "anoEleicao": "ANO_ELEICAO",
+    "situacao": "DS_SITUACAO_CANDIDATURA"
+}
 
-    print("Lendo:", arquivo)
-
-    df = pd.read_csv(
-        arquivo,
-        sep=";",
-        encoding="latin1",
-        low_memory=False
-    )
-
-    tabelas.append(df)
-
-
-candidatos = pd.concat(
-    tabelas,
-    ignore_index=True
-)
-
-print("\nTotal de registros:", len(candidatos))
-
-print("\nCOLUNAS DISPONÍVEIS:")
-print(candidatos.columns.tolist())
-
-print("\nPRIMEIROS REGISTROS:")
-print(candidatos.head())
-
-colunas = [
+obrigatorios = [
     "SQ_CANDIDATO",
     "NM_CANDIDATO",
     "NM_URNA_CANDIDATO",
@@ -49,28 +44,71 @@ colunas = [
     "SG_UF"
 ]
 
-candidatos_filtrados = candidatos[colunas].copy()
+tabelas = []
 
+for arquivo in arquivos:
+    print("Lendo:", arquivo.name)
 
-candidatos_filtrados = candidatos_filtrados.rename(
-    columns={
-        "SQ_CANDIDATO": "id",
-        "NM_CANDIDATO": "nome",
-        "NM_URNA_CANDIDATO": "nomeUrna",
-        "NR_CANDIDATO": "numero",
-        "SG_PARTIDO": "partido",
-        "NM_PARTIDO": "nomePartido",
-        "DS_CARGO": "cargo",
-        "SG_UF": "uf"
-    }
+    df = pd.read_csv(
+        arquivo,
+        sep=";",
+        encoding="latin1",
+        dtype=str,
+        low_memory=False
+    )
+
+    ausentes = [
+        coluna for coluna in obrigatorios
+        if coluna not in df.columns
+    ]
+
+    if ausentes:
+        print("Ignorado. Faltam:", ausentes)
+        continue
+
+    # Garante campos opcionais ausentes
+    for coluna in campos.values():
+        if coluna not in df.columns:
+            df[coluna] = None
+
+    df = df[list(campos.values())].copy()
+
+    df = df.rename(
+        columns={
+            original: novo
+            for novo, original in campos.items()
+        }
+    )
+
+    tabelas.append(df)
+
+if not tabelas:
+    raise ValueError("Nenhum arquivo válido encontrado.")
+
+candidatos = pd.concat(tabelas, ignore_index=True)
+
+# Evita duplicar a mesma candidatura
+candidatos = candidatos.drop_duplicates(
+    subset=["id", "anoEleicao"]
 )
 
+# Converte valores ausentes para null no JSON
+candidatos = candidatos.replace({
+    "": None,
+    "#NULO#": None,
+    "#NE#": None,
+    "NÃO DIVULGÁVEL": None
+})
 
-candidatos_filtrados.to_json(
-    "../dados/candidatos.json",
+caminho_saida = pasta_dados / "candidatos.json"
+
+candidatos.to_json(
+    caminho_saida,
     orient="records",
     force_ascii=False,
     indent=2
 )
 
-print("\ncandidatos.json criado com sucesso!")
+print("Candidatos exportados:", len(candidatos))
+print("Campos:", candidatos.columns.tolist())
+print("Arquivo criado:", caminho_saida)
