@@ -1,0 +1,175 @@
+/* ==========================================================
+   contato.css
+   Estilos exclusivos da página contato.html.
+
+   Carregar DEPOIS do demos.css, que fornece a base do site:
+   reset, cores (:root), .cabecalho, .logo, .icone-menu e footer.
+   Os valores aqui seguem os mesmos de paginas.css (formulário,
+   botão, títulos) para manter o visual igual ao das demais páginas.
+   ========================================================== */
+
+
+/* ---------- Estrutura da página (rodapé sempre embaixo) ---------- */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body > .cabecalho,
+body > footer {
+    flex-shrink: 0;
+}
+
+/* sobrescreve o "main { margin: auto }" do demos.css */
+main {
+    flex: 1 0 auto;
+    width: 100%;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+}
+
+
+/* ---------- Textos ---------- */
+
+main > h1 {
+    margin-bottom: 16px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    line-height: 1.2;
+
+    color: var(--verde);
+}
+
+main p,
+main li {
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+main a {
+    color: var(--verde);
+    font-weight: 600;
+}
+
+main a:hover {
+    color: var(--verde-escuro);
+}
+
+main > section {
+    padding-top: 22px;
+}
+
+main > section > h2 {
+    margin-bottom: 10px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 21px;
+
+    color: var(--verde);
+}
+
+
+/* ---------- Canais de contato ---------- */
+
+#canais ul {
+    margin-top: 8px;
+    padding-left: 22px;
+}
+
+#canais li + li {
+    margin-top: 6px;
+}
+
+
+/* ---------- Formulário ---------- */
+
+form {
+    margin-top: 16px;
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    background-color: var(--bege-claro);
+    border-radius: 12px;
+}
+
+/* cada <p> do formulário vira um campo (rótulo em cima, campo embaixo) */
+form p {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* o espaçamento agora vem do "gap"; o <br> do HTML não é mais necessário */
+form br {
+    display: none;
+}
+
+form label {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: var(--verde);
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #d4d0c6;
+    border-radius: 10px;
+
+    background-color: var(--branco);
+
+    font: inherit;
+    font-size: 15px;
+}
+
+form textarea {
+    resize: vertical;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    outline: 3px solid var(--dourado);
+    outline-offset: 1px;
+
+    border-color: var(--verde);
+}
+
+
+/* ---------- Botão de envio (mesmo visual do .botao-verde) ---------- */
+
+form button {
+    align-self: flex-start;
+
+    padding: 12px 28px;
+
+    border: 0;
+    border-radius: 999px;
+
+    background-color: var(--verde);
+    color: var(--branco);
+
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s;
+}
+
+form button:hover {
+    background-color: var(--verde-escuro);
+}
