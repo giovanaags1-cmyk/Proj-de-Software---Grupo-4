@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estatísticas | Demos</title>
+
+    <link rel="stylesheet" href="./css/demos.css">
+    <link rel="stylesheet" href="./css/paginas.css">
+    <link rel="stylesheet" href="./css/listagem.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+
+    <style>
+        .barra-filtros {
+            grid-template-columns: repeat(2, minmax(0, 260px));
+        }
+
+        .resumo {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .resumo div {
+            background-color: var(--bege-claro);
+            border-radius: 12px;
+            padding: 16px 18px;
+        }
+
+        .resumo span {
+            display: block;
+            font-size: 13px;
+            color: #6a6a6a;
+        }
+
+        .resumo strong {
+            font-size: 28px;
+            color: var(--verde);
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .graficos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .grafico {
+            background-color: white;
+            border: 1px solid #dfdbcf;
+            border-radius: 12px;
+            padding: 18px;
+            min-width: 0;
+        }
+
+        .grafico h2 {
+            font-size: 18px;
+            color: var(--verde);
+            margin-bottom: 12px;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .grafico-largo {
+            grid-column: 1 / -1;
+        }
+
+        .area {
+            position: relative;
+            height: 260px;
+        }
+
+        @media (max-width: 800px) {
+            .graficos {
+                grid-template-columns: 1fr;
+            }
+
+            .resumo {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            html:root .grafico {
+                background-color: #1d2320;
+                border-color: #39423d;
+            }
+
+            html:root .resumo span {
+                color: #a7b1ac;
+            }
+
+            html:root .resumo strong {
+                color: #8fcab4;
+            }
+        }
+    </style>
+</head>
+
+<body class="pagina-interna">
+
+    <header class="cabecalho">
+
+        <div class="cabecalho-esquerda">
+            <a href="favoritos.html" class="icone-menu" aria-label="Favoritos">
+                <i class="fa-solid fa-bookmark"></i>
+            </a>
+            <a href="index.html" class="icone-menu" aria-label="Página inicial">
+                <i class="fa-solid fa-house"></i>
+            </a>
+        </div>
+
+        <a href="index.html" class="logo">
+            <img src="./img/logo.png" alt="Logo Demos">
+            <span>DEMOS</span>
+        </a>
+
+        <a href="login.html" class="icone-menu" aria-label="Minha conta">
+            <i class="fa-solid fa-circle-user"></i>
+        </a>
+
+    </header>
+
+    <main class="pagina-conteudo">
+
+        <h1>Estatísticas das candidaturas</h1>
+
+        <p class="subtitulo">
+            Perfil dos candidatos de 2026 por gênero, raça/cor, escolaridade e partido.
+        </p>
+
+        <p class="aviso-dados">
+            Dados do TSE. Os gráficos mostram só a quantidade de candidatos e não indicam preferência por nenhum partido.
+        </p>
+
+        <form class="barra-filtros">
+            <div class="filtro">
+                <label for="filtro-cargo">Cargo</label>
+                <select id="filtro-cargo">
+                    <option value="">Todos os cargos</option>
+                </select>
+            </div>
+
+            <div class="filtro">
+                <label for="filtro-uf">Estado</label>
+                <select id="filtro-uf">
+                    <option value="">Todos os estados</option>
+                </select>
+            </div>
+        </form>
+
+        <p id="mensagem" class="status-listagem">Carregando dados...</p>
+
+        <section class="resumo">
+            <div><span>Candidatos</span><strong id="total">-</strong></div>
+            <div><span>Mulheres</span><strong id="mulheres">-</strong></div>
+            <div><span>Idade média</span><strong id="idade">-</strong></div>
+        </section>
+
+        <section class="graficos">
+            <div class="grafico">
+                <h2>Gênero</h2>
+                <div class="area"><canvas id="grafico-genero"></canvas></div>
+            </div>
+
+            <div class="grafico">
+                <h2>Raça/cor</h2>
+                <div class="area"><canvas id="grafico-raca"></canvas></div>
+            </div>
+
+            <div class="grafico grafico-largo">
+                <h2>Escolaridade</h2>
+                <div class="area"><canvas id="grafico-instrucao"></canvas></div>
+            </div>
+
+            <div class="grafico grafico-largo">
+                <h2>Partidos com mais candidatos</h2>
+                <div class="area"><canvas id="grafico-partidos"></canvas></div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <strong>DEMOS</strong>
+        <p>Política verdadeira.</p>
+        <nav class="rodape-links" aria-label="Links do rodapé">
+            <a href="termos-de-uso.html">Termos de Uso</a>
+            <a href="politica-de-privacidade.html">Política de Privacidade</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+    <script>
+        let candidatos = [];
+        let graficos = {};
+
+        // usei so as cores do site, pra nenhum partido ficar com a "cor dele"
+        let escuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        let verde = escuro ? "#3f9a7c" : "#064c3c";
+        let dourado = "#b8ac83";
+        Chart.defaults.color = escuro ? "#e6e3da" : "#161616";
+        Chart.defaults.borderColor = escuro ? "#39423d" : "#e5e1d7";
+        Chart.defaults.locale = "pt-BR";
+
+        fetch("./dados/candidatos.json")
+            .then(resposta => resposta.json())
+            .then(dados => {
+                candidatos = dados;
+                preencherFiltros();
+                document.getElementById("mensagem").innerText = "";
+                atualizar();
+            })
+            .catch(erro => {
+                console.error(erro);
+                document.getElementById("mensagem").innerText = "Não foi possível carregar os dados.";
+            });
+
+        function preencherFiltros() {
+            let cargos = [...new Set(candidatos.map(c => c.cargo))].sort();
+            let ufs = [...new Set(candidatos.map(c => c.uf))].sort();
+
+            for (let cargo of cargos) {
+                document.getElementById("filtro-cargo").innerHTML += "<option>" + cargo + "</option>";
+            }
+            for (let uf of ufs) {
+                document.getElementById("filtro-uf").innerHTML += "<option>" + uf + "</option>";
+            }
+        }
+
+        // conta quantas vezes cada valor aparece. ex: { "FEMININO": 10, "MASCULINO": 20 }
+        function contar(lista, campo) {
+            let contagem = {};
+            for (let c of lista) {
+                let valor = c[campo] || "NÃO INFORMADO";
+                contagem[valor] = (contagem[valor] || 0) + 1;
+            }
+            return contagem;
+        }
+
+        function desenhar(id, tipo, contagem, cor, horizontal) {
+            // tem que apagar o grafico antigo antes de desenhar outro no mesmo canvas
+            if (graficos[id]) {
+                graficos[id].destroy();
+            }
+
+            graficos[id] = new Chart(document.getElementById(id), {
+                type: tipo,
+                data: {
+                    labels: Object.keys(contagem),
+                    datasets: [{ label: "Candidatos", data: Object.values(contagem), backgroundColor: cor }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    indexAxis: horizontal ? "y" : "x",
+                    plugins: { legend: { display: tipo == "doughnut", position: "bottom" } }
+                }
+            });
+        }
+
+        function atualizar() {
+            let cargo = document.getElementById("filtro-cargo").value;
+            let uf = document.getElementById("filtro-uf").value;
+
+            let lista = candidatos.filter(c => (cargo == "" || c.cargo == cargo) && (uf == "" || c.uf == uf));
+
+            if (lista.length == 0) {
+                document.getElementById("mensagem").innerText = "Nenhum candidato para esse cargo nesse estado.";
+            } else {
+                document.getElementById("mensagem").innerText = "";
+            }
+
+            // numeros do resumo
+            let generos = contar(lista, "genero");
+            let somaIdades = 0;
+            let comData = 0;
+            for (let c of lista) {
+                if (c.nascimento) {
+                    somaIdades += 2026 - parseInt(c.nascimento.split("/")[2]);
+                    comData++;
+                }
+            }
+
+            document.getElementById("total").innerText = lista.length.toLocaleString("pt-BR");
+            document.getElementById("mulheres").innerText =
+                lista.length ? Math.round((generos["FEMININO"] || 0) / lista.length * 100) + "%" : "-";
+            document.getElementById("idade").innerText = comData ? Math.round(somaIdades / comData) + " anos" : "-";
+
+            // escolaridade na ordem certa, do menor pro maior
+            let ordem = ["LÊ E ESCREVE", "ENSINO FUNDAMENTAL INCOMPLETO", "ENSINO FUNDAMENTAL COMPLETO",
+                "ENSINO MÉDIO INCOMPLETO", "ENSINO MÉDIO COMPLETO", "SUPERIOR INCOMPLETO", "SUPERIOR COMPLETO"];
+            let instrucao = contar(lista, "instrucao");
+            let instrucaoOrdenada = {};
+            for (let nivel of ordem) {
+                instrucaoOrdenada[nivel] = instrucao[nivel] || 0;
+            }
+
+            // 10 partidos com mais candidatos
+            let partidos = Object.entries(contar(lista, "partido")).sort((a, b) => b[1] - a[1]).slice(0, 10);
+
+            desenhar("grafico-genero", "doughnut", generos, [verde, dourado, "#82968f"]);
+            desenhar("grafico-raca", "bar", contar(lista, "racaCor"), verde);
+            desenhar("grafico-instrucao", "bar", instrucaoOrdenada, dourado, true);
+            desenhar("grafico-partidos", "bar", Object.fromEntries(partidos), verde, true);
+        }
+
+        document.getElementById("filtro-cargo").addEventListener("change", atualizar);
+        document.getElementById("filtro-uf").addEventListener("change", atualizar);
+    </script>
+</body>
+</html>

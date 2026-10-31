@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre | Demos</title>
+
+    <link rel="stylesheet" href="./css/demos.css">
+    <link rel="stylesheet" href="./css/paginas.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+
+    <style>
+        .sobre-topo {
+            background-color: var(--bege);
+            border-radius: 14px;
+            padding: 28px;
+            margin: 20px 0 36px;
+        }
+
+        .sobre-topo p {
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 720px;
+        }
+
+        .sobre-secao {
+            margin-bottom: 40px;
+        }
+
+        .sobre-secao h2 {
+            color: var(--verde);
+            font-family: Georgia, "Times New Roman", serif;
+            margin-bottom: 14px;
+        }
+
+        .sobre-secao p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .funcoes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .funcao {
+            background-color: white;
+            border: 1px solid #dfdbcf;
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .funcao i {
+            font-size: 22px;
+            color: var(--verde);
+            margin-bottom: 10px;
+        }
+
+        .funcao h3 {
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .funcao p {
+            font-size: 14px;
+            color: #555555;
+            margin: 0;
+        }
+
+        .compromissos {
+            list-style: none;
+            padding: 0;
+        }
+
+        .compromissos li {
+            padding: 12px 0 12px 32px;
+            border-bottom: 1px solid #e4dfd2;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .compromissos li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--verde);
+            position: absolute;
+            left: 4px;
+            top: 12px;
+        }
+
+        .perguntas details {
+            background-color: var(--bege-claro);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+        }
+
+        .perguntas summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--verde);
+        }
+
+        .perguntas details p {
+            margin: 10px 0 0;
+        }
+
+        .chamada {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--bege-claro);
+            border-radius: 14px;
+            margin-bottom: 40px;
+        }
+
+        .chamada p {
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 800px) {
+            .funcoes {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            html:root .funcao {
+                background-color: #1d2320;
+                border-color: #39423d;
+            }
+
+            html:root .funcao p {
+                color: #a7b1ac;
+            }
+
+            html:root .funcao i,
+            html:root .compromissos li::before,
+            html:root .perguntas summary {
+                color: #8fcab4;
+            }
+
+            html:root .compromissos li {
+                border-color: #39423d;
+            }
+        }
+    </style>
+</head>
+
+<body class="pagina-interna">
+
+    <header class="cabecalho">
+
+        <div class="cabecalho-esquerda">
+            <a href="favoritos.html" class="icone-menu" aria-label="Favoritos">
+                <i class="fa-solid fa-bookmark"></i>
+            </a>
+            <a href="index.html" class="icone-menu" aria-label="Página inicial">
+                <i class="fa-solid fa-house"></i>
+            </a>
+        </div>
+
+        <a href="index.html" class="logo">
+            <img src="./img/logo.png" alt="Logo Demos">
+            <span>DEMOS</span>
+        </a>
+
+        <a href="login.html" class="icone-menu" aria-label="Minha conta">
+            <i class="fa-solid fa-circle-user"></i>
+        </a>
+
+    </header>
+
+    <main class="pagina-conteudo">
+
+        <h1>Sobre o Demos</h1>
+
+        <div class="sobre-topo">
+            <p>
+                O Demos junta informações oficiais sobre candidatos e política em um só lugar,
+                com linguagem simples, para que qualquer pessoa consiga comparar candidatos
+                e tirar suas próprias conclusões antes de votar.
+            </p>
+        </div>
+
+        <section class="sobre-secao">
+            <h2>O que dá pra fazer no site</h2>
+
+            <div class="funcoes">
+                <div class="funcao">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <h3>Buscar candidatos</h3>
+                    <p>Encontre qualquer candidato pelo nome, número ou partido e filtre por cargo e estado.</p>
+                </div>
+
+                <div class="funcao">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <h3>Comparar</h3>
+                    <p>Veja dois candidatos lado a lado, com as mesmas informações e o mesmo destaque.</p>
+                </div>
+
+                <div class="funcao">
+                    <i class="fa-solid fa-bookmark"></i>
+                    <h3>Salvar</h3>
+                    <p>Guarde os candidatos que te interessam para ver ou comparar depois.</p>
+                </div>
+
+                <div class="funcao">
+                    <i class="fa-solid fa-book"></i>
+                    <h3>Dicionário político</h3>
+                    <p>Entenda termos como quociente eleitoral, coligação e federação partidária.</p>
+                </div>
+
+                <div class="funcao">
+                    <i class="fa-solid fa-newspaper"></i>
+                    <h3>Notícias</h3>
+                    <p>Acompanhe notícias de política de vários veículos, atualizadas automaticamente.</p>
+                </div>
+
+                <div class="funcao">
+                    <i class="fa-solid fa-user"></i>
+                    <h3>Conta</h3>
+                    <p>Crie uma conta gratuita para manter seus favoritos e comparações.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="sobre-secao">
+            <h2>De onde vêm os dados</h2>
+            <p>
+                As informações dos candidatos vêm do <b>Portal de Dados Abertos do Tribunal Superior
+                Eleitoral (TSE)</b>: nome, número, partido, cargo, escolaridade, ocupação, bens declarados
+                e o histórico da eleição de 2022.
+            </p>
+            <p>
+                O Demos não altera o conteúdo dos dados oficiais. Quando alguma informação não foi
+                divulgada pelo TSE, o site mostra isso em vez de esconder o campo.
+            </p>
+        </section>
+
+        <section class="sobre-secao">
+            <h2>Nosso compromisso com a neutralidade</h2>
+            <p>O Demos não apoia, recomenda nem critica nenhum candidato, partido ou posição política.</p>
+
+            <ul class="compromissos">
+                <li><b>Independência:</b> o site não tem vínculo com partidos, candidatos, campanhas ou governos.</li>
+                <li><b>Mesmas regras para todos:</b> todos os candidatos aparecem com os mesmos campos e o mesmo formato.</li>
+                <li><b>Sem cores partidárias:</b> o site usa uma paleta neutra, que não muda por causa do partido.</li>
+                <li><b>Sem notas nem rankings:</b> não existe "melhor" ou "pior" candidato no Demos.</li>
+                <li><b>Ordem sem favorecimento:</b> as listas seguem critérios objetivos, como a ordem alfabética.</li>
+            </ul>
+        </section>
+
+        <section class="sobre-secao perguntas">
+            <h2>Perguntas frequentes</h2>
+
+            <details>
+                <summary>O Demos diz em quem eu devo votar?</summary>
+                <p>Não. O site só mostra os dados oficiais de forma organizada. A decisão é sempre sua.</p>
+            </details>
+
+            <details>
+                <summary>Preciso criar uma conta para usar?</summary>
+                <p>Não. A busca, a comparação e o dicionário funcionam sem cadastro. A conta só serve para salvar candidatos.</p>
+            </details>
+
+            <details>
+                <summary>Os dados estão atualizados?</summary>
+                <p>Os dados são atualizados conforme o TSE publica novas versões. Pode existir um pequeno atraso entre a publicação oficial e o site.</p>
+            </details>
+
+            <details>
+                <summary>Encontrei um erro ou algo que parece parcial. O que faço?</summary>
+                <p>Avise pela página de <a href="contato.html">contato</a>. Se houver um problema, a correção vale para todos os candidatos do mesmo jeito.</p>
+            </details>
+
+            <details>
+                <summary>Quem faz o Demos?</summary>
+                <p>O Demos é um projeto acadêmico do Grupo 4 da disciplina de Projeto de Software.</p>
+            </details>
+        </section>
+
+        <div class="chamada">
+            <p>Pronto para conhecer os candidatos?</p>
+            <a href="candidatos.html" class="botao-verde">Ver candidatos</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <strong>DEMOS</strong>
+        <p>Política verdadeira.</p>
+        <nav class="rodape-links" aria-label="Links do rodapé">
+            <a href="termos-de-uso.html">Termos de Uso</a>
+            <a href="politica-de-privacidade.html">Política de Privacidade</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+    </footer>
+
+</body>
+</html>
