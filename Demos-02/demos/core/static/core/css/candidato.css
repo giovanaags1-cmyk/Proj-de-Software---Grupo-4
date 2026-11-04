@@ -1,0 +1,367 @@
+.pagina-candidato {
+    width: 100%;
+
+    min-height: calc(100vh - 64px);
+
+    padding: 38px 20px 60px;
+
+    background-color: var(--bege-claro);
+}
+
+
+/* =====================================
+   PESQUISA
+===================================== */
+
+.area-pesquisa-candidato {
+    width: min(1100px, 100%);
+
+    margin: 0 auto 28px auto;
+}
+
+
+.barra-pesquisa-candidato {
+    width: 100%;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+
+    background-color: white;
+
+    border: 1px solid #d9d3c5;
+    border-radius: 40px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+.barra-pesquisa-candidato input {
+    flex: 1;
+
+    min-width: 0;
+    height: 100%;
+
+    padding: 0 30px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    font-size: 18px;
+
+    color: #222;
+}
+
+
+.barra-pesquisa-candidato input::placeholder {
+    color: #777;
+}
+
+
+/* LUPA */
+
+.botao-pesquisa {
+    width: 72px;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    background-color: transparent;
+
+    color: var(--verde);
+
+    font-size: 23px;
+
+    cursor: pointer;
+}
+
+
+.botao-pesquisa:hover {
+    background-color: #f6f3ea;
+}
+
+
+/* MAIS */
+
+.botao-adicionar {
+    width: 72px;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-left: 1px solid #e2ded3;
+
+    background-color: transparent;
+
+    color: var(--verde);
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+
+.botao-adicionar:hover {
+    background-color: var(--verde);
+
+    color: white;
+}
+
+
+
+/* =====================================
+   CARD
+===================================== */
+
+.card-candidato {
+    width: min(950px, 100%);
+
+    min-height: 500px;
+
+    margin: 0 auto;
+
+    padding: 38px;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: white;
+
+    border: 1px solid #ddd7ca;
+    border-radius: 20px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+}
+
+
+
+/* CABEÇALHO */
+
+.cabecalho-candidato {
+    display: flex;
+    align-items: center;
+
+    gap: 22px;
+
+    margin-bottom: 32px;
+}
+
+
+.avatar-candidato {
+    width: 80px;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background-color: var(--verde);
+
+    color: white;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+
+.nome-candidato h1 {
+    margin: 0;
+
+    color: var(--verde);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 34px;
+}
+
+
+.nome-candidato p {
+    margin-top: 4px;
+
+    color: #71837c;
+
+    font-size: 16px;
+}
+
+
+
+/* DADOS */
+
+.dados-candidato {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 32px;
+}
+
+
+.dado-candidato {
+    padding: 17px 18px;
+
+    background-color: var(--bege-claro);
+
+    border-radius: 12px;
+}
+
+
+.dado-candidato span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #71837c;
+
+    font-size: 12px;
+}
+
+
+.dado-candidato strong {
+    color: var(--verde);
+
+    font-size: 15px;
+}
+
+
+
+/* PERFIL */
+
+.perfil-candidato {
+    flex: 1;
+}
+
+
+.perfil-candidato h2 {
+    margin-bottom: 12px;
+
+    color: var(--verde);
+
+    font-size: 24px;
+}
+
+
+.perfil-candidato p {
+    max-width: 750px;
+
+    color: #4f5d58;
+
+    line-height: 1.7;
+}
+
+
+
+/* SALVAR */
+
+.acoes-candidato {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 35px;
+}
+
+
+.botao-salvar {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px 25px;
+
+    border: 1px solid var(--verde);
+    border-radius: 25px;
+
+    background-color: white;
+
+    color: var(--verde);
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.botao-salvar:hover {
+    background-color: var(--verde);
+
+    color: white;
+}
+
+
+
+/* =====================================
+   RESPONSIVO
+===================================== */
+
+@media (max-width: 700px) {
+
+    .pagina-candidato {
+        padding: 25px 15px 40px;
+    }
+
+
+    .barra-pesquisa-candidato {
+        height: 60px;
+    }
+
+
+    .barra-pesquisa-candidato input {
+        padding: 0 18px;
+
+        font-size: 15px;
+    }
+
+
+    .botao-pesquisa,
+    .botao-adicionar {
+        width: 58px;
+        height: 60px;
+    }
+
+
+    .card-candidato {
+        padding: 25px;
+
+        min-height: 450px;
+    }
+
+
+    .cabecalho-candidato {
+        align-items: flex-start;
+    }
+
+
+    .avatar-candidato {
+        width: 65px;
+        height: 65px;
+    }
+
+
+    .nome-candidato h1 {
+        font-size: 27px;
+    }
+
+
+    .dados-candidato {
+        grid-template-columns: 1fr;
+    }
+
+}

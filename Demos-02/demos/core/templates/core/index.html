@@ -57,24 +57,28 @@
             action="{% url 'index' %}"
             class="busca-django"
         >
+
             <input
                 type="text"
-                name="nome"
-                placeholder="Procure candidatos"
-                value="{{ request.GET.nome }}"
+                name="q"
+                placeholder="Pesquise um candidato..."
+                value="{{ pesquisa }}"
                 autocomplete="off"
             >
-
             <button
                 type="submit"
                 class="botao-buscar"
                 aria-label="Pesquisar"
             >
+
                 <i class="fa-solid fa-magnifying-glass"></i>
+
             </button>
+
         </form>
 
-        {% if request.GET.nome %}
+
+        {% if pesquisa %}
 
             <div class="resultados-busca-django">
 
@@ -86,29 +90,49 @@
                     ×
                 </a>
 
+
                 {% for candidato in candidatos %}
 
-                    <div class="resultado-busca-django">
+                    <a
+                        href="{% url 'candidato' candidato.id %}"
+                        class="resultado-busca-django"
+                    >
 
                         <div class="avatar-resultado">
                             {{ candidato.nome|slice:":2"|upper }}
                         </div>
 
-                        <div class="resultado-candidato-info">
 
-                            <strong>
+                        <div class="resultado-candidato">
+
+                            <h3>
                                 {{ candidato.nome }}
-                            </strong>
+                            </h3>
 
-                            <span>
-                                {{ candidato.partido }} ·
-                                {{ candidato.cargo }} ·
+
+                            {% if candidato.apelido %}
+
+                                <p class="apelido-resultado">
+                                    {{ candidato.apelido }}
+                                </p>
+
+                            {% endif %}
+
+
+                            <p class="dados-resultado">
+                                {{ candidato.partido }}
+                                ·
+                                {{ candidato.cargo }}
+                                ·
                                 {{ candidato.uf }}
-                            </span>
+                            </p>
 
                         </div>
 
-                    </div>
+                        <i class="fa-solid fa-chevron-right seta-resultado"></i>
+
+                    </a>
+
 
                 {% empty %}
 

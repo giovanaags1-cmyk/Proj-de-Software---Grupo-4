@@ -78,7 +78,7 @@
 
     <div class="topo-salvos">
 
-        <span>3 candidatos salvos</span>
+        <span>{{ favoritos|length }} candidatos salvos</span>
 
         <button
             class="botao-comparar-salvos"
@@ -93,122 +93,69 @@
 
 
     <div class="grid-salvos">
+        {% for favorito in favoritos %}
+
+    <article class="card-salvo">
+
+        <div class="conteudo-salvo">
+
+            <div class="avatar-salvo">
+                {{ favorito.candidato.nome|slice:":2"|upper }}
+            </div>
 
 
-        <article class="card-salvo">
+            <div>
 
-            <div class="conteudo-salvo">
+                <h2>
+                    {{ favorito.candidato.nome }}
+                </h2>
 
-                <div class="avatar-salvo">
-                    CA
-                </div>
+                <p>
+                    {{ favorito.candidato.partido }}
+                </p>
 
-                <div>
-
-                    <h2>Candidato A</h2>
-
-                    <p>Partido A</p>
-
-                    <span>
-                        Deputado federal · RJ
-                    </span>
-
-                </div>
-
-                <i
-                    class="fa-solid fa-bookmark marcador-salvo"
-                ></i>
+                <span>
+                    {{ favorito.candidato.cargo }}
+                    ·
+                    {{ favorito.candidato.uf }}
+                </span>
 
             </div>
 
 
-            <div class="acoes-salvo">
+            <i
+                class="fa-solid fa-bookmark marcador-salvo"
+            ></i>
 
-                <span>Ver perfil completo</span>
-
-                <span>Remover dos salvos</span>
-
-            </div>
-
-        </article>
+        </div>
 
 
+        <div class="acoes-salvo">
 
-        <article class="card-salvo">
+            <a
+                href="{% url 'candidato' favorito.candidato.id %}"
+            >
+                Ver perfil completo
+            </a>
 
-            <div class="conteudo-salvo">
+            <span>
+                Remover dos salvos
+            </span>
 
-                <div class="avatar-salvo">
-                    CB
-                </div>
+        </div>
 
-                <div>
-
-                    <h2>Candidato B</h2>
-
-                    <p>Partido B</p>
-
-                    <span>
-                        Governador · SP
-                    </span>
-
-                </div>
-
-                <i
-                    class="fa-solid fa-bookmark marcador-salvo"
-                ></i>
-
-            </div>
+    </article>
 
 
-            <div class="acoes-salvo">
+{% empty %}
 
-                <span>Ver perfil completo</span>
+    <p>
+        Você ainda não salvou nenhum candidato.
+    </p>
 
-                <span>Remover dos salvos</span>
+{% endfor %}
 
-            </div>
-
-        </article>
-
-
-
-        <article class="card-salvo">
-
-            <div class="conteudo-salvo">
-
-                <div class="avatar-salvo">
-                    CC
-                </div>
-
-                <div>
-
-                    <h2>Candidato C</h2>
-
-                    <p>Partido C</p>
-
-                    <span>
-                        Senador · ES
-                    </span>
-
-                </div>
-
-                <i
-                    class="fa-solid fa-bookmark marcador-salvo"
-                ></i>
-
-            </div>
-
-
-            <div class="acoes-salvo">
-
-                <span>Ver perfil completo</span>
-
-                <span>Remover dos salvos</span>
-
-            </div>
-
-        </article>
+        
 
 
     </div>

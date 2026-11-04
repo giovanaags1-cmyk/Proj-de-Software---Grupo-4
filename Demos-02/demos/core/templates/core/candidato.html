@@ -1,0 +1,261 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>{{ candidato.nome }} | DEMOS</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'core/css/demos.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'core/css/candidato.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+</head>
+
+
+<body>
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <form
+    method="post"
+    action="{% url 'salvar_candidato' candidato.id %}"
+>
+    {% csrf_token %}
+
+    <button
+        type="submit"
+        class="botao-salvar"
+    >
+        <i class="fa-regular fa-bookmark"></i>
+
+        Salvar
+    </button>
+</form>
+
+
+        <a
+            href="{% url 'index' %}"
+            class="icone-menu"
+            aria-label="Início"
+        >
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+    </div>
+
+
+    <a
+        href="{% url 'index' %}"
+        class="logo"
+    >
+        <img
+            src="{% static 'core/img/logo.png' %}"
+            alt="Logo Demos"
+        >
+
+        <span>DEMOS</span>
+    </a>
+
+
+    <a
+        href="{% url 'login' %}"
+        class="icone-menu"
+        aria-label="Minha conta"
+    >
+        <i class="fa-solid fa-circle-user"></i>
+    </a>
+
+</header>
+
+
+<main class="pagina-candidato">
+
+
+    <!-- BARRA DE PESQUISA -->
+
+    <div class="area-pesquisa-candidato">
+
+        <form
+            method="get"
+            action="{% url 'index' %}"
+            class="barra-pesquisa-candidato"
+        >
+
+            <input
+                type="text"
+                name="q"
+                placeholder="Pesquise um candidato..."
+            >
+
+
+            <!-- PESQUISA NORMAL -->
+
+            <button
+                type="submit"
+                class="botao-pesquisa"
+                aria-label="Pesquisar candidato"
+            >
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+
+
+            <!-- ADICIONAR PARA COMPARAÇÃO -->
+
+            <button
+                type="submit"
+                formaction="{% url 'comparar' %}"
+                class="botao-adicionar"
+                name="candidato1"
+                value="{{ candidato.id }}"
+                aria-label="Adicionar candidato para comparação"
+            >
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
+        </form>
+
+    </div>
+
+
+
+    <!-- CARD DO CANDIDATO -->
+
+    <section class="card-candidato">
+
+
+        <div class="cabecalho-candidato">
+
+            <div class="avatar-candidato">
+
+                {{ candidato.nome|slice:":2"|upper }}
+
+            </div>
+
+
+            <div class="nome-candidato">
+
+                <h1>
+                    {{ candidato.nome }}
+                </h1>
+
+
+                {% if candidato.apelido %}
+
+                    <p>
+                        {{ candidato.apelido }}
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+
+        <div class="dados-candidato">
+
+
+            <div class="dado-candidato">
+
+                <span>
+                    Partido
+                </span>
+
+                <strong>
+                    {{ candidato.partido }}
+                </strong>
+
+            </div>
+
+
+
+            <div class="dado-candidato">
+
+                <span>
+                    Cargo
+                </span>
+
+                <strong>
+                    {{ candidato.cargo }}
+                </strong>
+
+            </div>
+
+
+
+            <div class="dado-candidato">
+
+                <span>
+                    UF
+                </span>
+
+                <strong>
+                    {{ candidato.uf }}
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="perfil-candidato">
+
+            <h2>
+                Perfil político
+            </h2>
+
+            <p>
+                {{ candidato.descricao }}
+            </p>
+
+        </div>
+
+
+
+        <div class="acoes-candidato">
+
+            <a
+                href="{% url 'salvos' %}"
+                class="botao-salvar"
+            >
+
+                <i class="fa-regular fa-bookmark"></i>
+
+                Salvar
+
+            </a>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+</html>

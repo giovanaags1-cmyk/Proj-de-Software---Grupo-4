@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Candidato(models.Model):
     nome = models.CharField(max_length=200)
@@ -11,3 +11,16 @@ class Candidato(models.Model):
 
     def __str__(self):
         return self.nome
+class Favorito(models.Model):
+    usuario = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    candidato = models.ForeignKey(
+        Candidato,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return f"{self.usuario.username} - {self.candidato.nome}"
