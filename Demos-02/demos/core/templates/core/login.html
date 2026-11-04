@@ -1,0 +1,120 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | DEMOS</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/demos.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/login.css' %}">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <a
+            href="{% url 'salvos' %}"
+            class="icone-menu"
+            aria-label="Candidatos salvos"
+        >
+            <i class="fa-solid fa-bookmark"></i>
+        </a>
+
+        <a
+            href="{% url 'index' %}"
+            class="icone-menu"
+            aria-label="Início"
+        >
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+    </div>
+
+    <a href="{% url 'index' %}" class="logo">
+
+        <img
+            src="{% static 'core/img/logo.png' %}"
+            alt="Logo Demos"
+        >
+
+        <span>DEMOS</span>
+
+    </a>
+
+    <a href="{% url 'login' %}" class="icone-menu" aria-label="Minha conta">
+        <i class="fa-solid fa-circle-user"></i>
+    </a>
+
+</header>
+
+
+<main class="pagina-login">
+
+    <section class="caixa-login">
+
+        <h1>Entrar</h1>
+
+        <p class="descricao-login">
+            Acesse sua conta para salvar e acompanhar candidatos.
+        </p>
+
+        {% if form.errors %}
+            <p class="erro-login">
+                Usuário ou senha inválidos.
+            </p>
+        {% endif %}
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <div class="campo-login">
+
+                <label for="{{ form.username.id_for_label }}">
+                    Usuário
+                </label>
+
+                {{ form.username }}
+
+            </div>
+
+            <div class="campo-login">
+
+                <label for="{{ form.password.id_for_label }}">
+                    Senha
+                </label>
+
+                {{ form.password }}
+
+            </div>
+
+            <button type="submit" class="botao-login">
+                Entrar
+            </button>
+            <p class="link-cadastro">
+                Não tem uma conta?
+                <a href="{% url 'cadastro' %}">
+                    Crie sua conta
+                </a>
+            </p>
+
+        </form>
+
+    </section>
+
+</main>
+
+</body>
+</html>

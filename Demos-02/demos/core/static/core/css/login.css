@@ -1,0 +1,151 @@
+.pagina-login {
+    min-height: calc(100vh - 64px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 32px 20px;
+
+    background-color: #f8f7f3;
+}
+
+.caixa-login {
+    width: min(420px, 100%);
+
+    margin: 0 auto;
+
+    background-color: white;
+
+    border: 1px solid #dfdbcf;
+    border-radius: 20px;
+
+    padding: 34px 32px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.caixa-login h1 {
+    color: var(--verde);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px;
+
+    margin-bottom: 8px;
+}
+
+.descricao-login {
+    color: #71837c;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    margin-bottom: 25px;
+}
+
+.campo-login {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-bottom: 18px;
+}
+
+.campo-login label {
+    color: var(--verde);
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.campo-login input {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 14px;
+
+    border: 1px solid #d9d4c7;
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+.campo-login input:focus {
+    border-color: var(--verde);
+}
+
+.botao-login {
+    width: 100%;
+    height: 46px;
+
+    margin-top: 5px;
+
+    border: none;
+    border-radius: 24px;
+
+    background-color: var(--verde);
+    color: white;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.botao-login:hover {
+    background-color: var(--verde-escuro);
+}
+
+.erro-login {
+    margin-bottom: 18px;
+
+    padding: 11px 13px;
+
+    background-color: #f7e7e5;
+
+    border-radius: 8px;
+
+    color: #8a3f38;
+
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+
+    .pagina-login {
+        min-height: calc(100vh - 55px);
+        padding: 25px 16px;
+    }
+
+    .caixa-login {
+        padding: 25px 20px;
+    }
+
+    .caixa-login h1 {
+        font-size: 26px;
+    }
+}
+.link-cadastro {
+    margin-top: 20px;
+
+    text-align: center;
+
+    color: #71837c;
+
+    font-size: 13px;
+}
+
+.link-cadastro a {
+    color: var(--verde);
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.link-cadastro a:hover {
+    text-decoration: underline;
+}
