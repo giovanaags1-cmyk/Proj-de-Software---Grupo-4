@@ -25,7 +25,7 @@
 
         <div class="cabecalho-esquerda">
 
-            <a href="salvos.html" class="icone-menu" aria-label="Candidatos salvos">
+            <a href="{% url 'salvos' %}" class="icone-menu" aria-label="Candidatos salvos">
                 <i class="fa-solid fa-bookmark"></i>
             </a>
 
@@ -52,68 +52,75 @@
 
     <div class="area-busca-candidatos">
 
-        <div
-            class="barra-pesquisa barra-selecao"
-            onclick="abrirBusca()"
+        <form
+            method="get"
+            action="{% url 'index' %}"
+            class="busca-django"
         >
+            <input
+                type="text"
+                name="nome"
+                placeholder="Procure candidatos"
+                value="{{ request.GET.nome }}"
+                autocomplete="off"
+            >
 
             <button
-                type="button"
-                class="botao-mais"
-                onclick="event.stopPropagation(); abrirBusca();"
-                aria-label="Adicionar candidato"
+                type="submit"
+                class="botao-buscar"
+                aria-label="Pesquisar"
             >
-                +
-            </button>
-
-            <i class="fa-solid fa-magnifying-glass icone-busca"></i>
-
-            <div
-                id="candidatos-selecionados"
-                class="candidatos-selecionados"
-            >
-                <span class="placeholder-busca">
-                    Procure candidatos
-                </span>
-            </div>
-
-        </div>
-
-
-        <div
-            id="popup-busca-candidato"
-            class="dropdown-candidatos"
-        >
-
-            <div class="campo-pesquisa-dropdown">
-
                 <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
 
-                <input
-                    type="text"
-                    id="campo-busca-candidato"
-                    placeholder="Procure candidatos"
-                    autocomplete="off"
-                >
+        {% if request.GET.nome %}
 
-                <button
-                    type="button"
-                    class="fechar-dropdown"
-                    onclick="event.stopPropagation(); fecharBusca();"
-                    aria-label="Fechar"
+            <div class="resultados-busca-django">
+
+                <a
+                    href="{% url 'index' %}"
+                    class="fechar-resultados"
+                    aria-label="Fechar resultados"
                 >
                     ×
-                </button>
+                </a>
+
+                {% for candidato in candidatos %}
+
+                    <div class="resultado-busca-django">
+
+                        <div class="avatar-resultado">
+                            {{ candidato.nome|slice:":2"|upper }}
+                        </div>
+
+                        <div class="resultado-candidato-info">
+
+                            <strong>
+                                {{ candidato.nome }}
+                            </strong>
+
+                            <span>
+                                {{ candidato.partido }} ·
+                                {{ candidato.cargo }} ·
+                                {{ candidato.uf }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                {% empty %}
+
+                    <p class="mensagem-sem-resultado">
+                        Nenhum candidato encontrado.
+                    </p>
+
+                {% endfor %}
 
             </div>
 
-            <div
-                id="resultados-candidatos"
-                class="resultados-candidatos"
-            >
-            </div>
-
-        </div>
+        {% endif %}
 
     </div>
 
