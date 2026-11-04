@@ -1,16 +1,3 @@
-/* ==========================================================
-   contato.css
-   Estilos exclusivos da página contato.html.
-
-   Carregar DEPOIS do demos.css, que fornece a base do site:
-   reset, cores (:root), .cabecalho, .logo, .icone-menu e footer.
-   Os valores aqui seguem os mesmos de paginas.css (formulário,
-   botão, títulos) para manter o visual igual ao das demais páginas.
-   ========================================================== */
-
-
-/* ---------- Estrutura da página (rodapé sempre embaixo) ---------- */
-
 body {
     min-height: 100vh;
     display: flex;
@@ -22,7 +9,7 @@ body > footer {
     flex-shrink: 0;
 }
 
-/* sobrescreve o "main { margin: auto }" do demos.css */
+
 main {
     flex: 1 0 auto;
     width: 100%;
@@ -32,7 +19,6 @@ main {
 }
 
 
-/* ---------- Textos ---------- */
 
 main > h1 {
     margin-bottom: 16px;
@@ -73,7 +59,6 @@ main > section > h2 {
 }
 
 
-/* ---------- Canais de contato ---------- */
 
 #canais ul {
     margin-top: 8px;
@@ -85,7 +70,6 @@ main > section > h2 {
 }
 
 
-/* ---------- Formulário ---------- */
 
 form {
     margin-top: 16px;
@@ -99,14 +83,13 @@ form {
     border-radius: 12px;
 }
 
-/* cada <p> do formulário vira um campo (rótulo em cima, campo embaixo) */
 form p {
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
-/* o espaçamento agora vem do "gap"; o <br> do HTML não é mais necessário */
+
 form br {
     display: none;
 }
@@ -147,8 +130,6 @@ form textarea:focus {
     border-color: var(--verde);
 }
 
-
-/* ---------- Botão de envio (mesmo visual do .botao-verde) ---------- */
 
 form button {
     align-self: flex-start;
