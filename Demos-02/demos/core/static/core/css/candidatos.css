@@ -1,0 +1,298 @@
+/* =====================================================
+   LISTAGEM DE CANDIDATOS COM FILTROS - Sprint 8
+   Giovana - 2610790
+===================================================== */
+
+.pagina-candidatos {
+    width: 100%;
+    min-height: calc(100vh - 64px);
+    padding: 38px 20px 60px;
+    background-color: var(--bege-claro);
+}
+
+.titulo-candidatos {
+    width: min(1200px, 100%);
+    margin: 0 auto 28px;
+}
+
+.titulo-candidatos h1 {
+    color: var(--verde);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.titulo-candidatos p {
+    color: #5f6f69;
+    font-size: 15px;
+}
+
+.layout-candidatos {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+
+/* ---------- PAINEL DE FILTROS ---------- */
+
+.painel-filtros {
+    position: sticky;
+    top: 20px;
+
+    padding: 24px;
+    background-color: var(--branco);
+    border: 1px solid #ddd7ca;
+    border-radius: 20px;
+}
+
+.painel-filtros form {
+    display: flex;
+    flex-direction: column;
+}
+
+.painel-filtros h2 {
+    color: var(--verde);
+    font-size: 18px;
+    margin-bottom: 18px;
+}
+
+.painel-filtros label {
+    margin: 14px 0 6px;
+    color: #71837c;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.painel-filtros input,
+.painel-filtros select {
+    width: 100%;
+    height: 42px;
+    padding: 0 12px;
+
+    border: 1px solid #d9d3c5;
+    border-radius: 10px;
+    background-color: #fcfbf8;
+
+    color: #222;
+    font-size: 14px;
+}
+
+.painel-filtros input:focus,
+.painel-filtros select:focus {
+    outline: 2px solid var(--verde-claro);
+    border-color: var(--verde);
+}
+
+.botao-filtrar {
+    margin-top: 22px;
+    height: 44px;
+
+    border: none;
+    border-radius: 30px;
+    background-color: var(--verde);
+    color: var(--branco);
+
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-filtrar:hover {
+    background-color: var(--verde-escuro);
+}
+
+.limpar-filtros {
+    margin-top: 12px;
+    color: var(--verde);
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+}
+
+
+/* ---------- RESULTADOS ---------- */
+
+.contador-candidatos {
+    margin-bottom: 16px;
+    color: #71837c;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.grid-candidatos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+.card-lista {
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--branco);
+    border: 1px solid #ddd7ca;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: 0.2s;
+}
+
+.card-lista:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+.link-card-lista {
+    flex: 1;
+    display: flex;
+    gap: 14px;
+    padding: 20px;
+
+    color: inherit;
+    text-decoration: none;
+}
+
+.avatar-lista {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background-color: var(--verde);
+    color: var(--bege);
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 700;
+}
+
+.info-lista h2 {
+    color: var(--verde);
+    font-size: 17px;
+    margin-bottom: 3px;
+}
+
+.info-lista p {
+    color: #71837c;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.etiqueta {
+    display: inline-block;
+    margin: 4px 4px 0 0;
+    padding: 4px 10px;
+
+    border-radius: 20px;
+    background-color: var(--verde);
+    color: var(--branco);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.etiqueta-clara {
+    background-color: var(--bege);
+    color: var(--verde);
+}
+
+.acoes-lista {
+    display: flex;
+    border-top: 1px solid #ece6d8;
+}
+
+.acoes-lista a {
+    flex: 1;
+    padding: 12px;
+
+    color: var(--verde);
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.acoes-lista a + a {
+    border-left: 1px solid #ece6d8;
+}
+
+.acoes-lista a:hover {
+    background-color: var(--bege-claro);
+}
+
+.sem-candidatos {
+    grid-column: 1 / -1;
+    padding: 50px 20px;
+
+    background-color: var(--branco);
+    border: 1px dashed #d9d3c5;
+    border-radius: 18px;
+
+    color: #71837c;
+    text-align: center;
+}
+
+.sem-candidatos i {
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.sem-candidatos a {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--verde);
+    font-weight: 700;
+}
+
+
+/* ---------- PAGINAÇÃO ---------- */
+
+.paginacao {
+    margin-top: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+
+    color: #71837c;
+    font-size: 14px;
+}
+
+.paginacao a {
+    padding: 9px 16px;
+    border: 1px solid var(--verde);
+    border-radius: 30px;
+
+    color: var(--verde);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.paginacao a:hover {
+    background-color: var(--verde);
+    color: var(--branco);
+}
+
+
+/* ---------- CELULAR ---------- */
+
+@media (max-width: 800px) {
+
+    .layout-candidatos {
+        grid-template-columns: 1fr;
+    }
+
+    .painel-filtros {
+        position: static;
+    }
+}

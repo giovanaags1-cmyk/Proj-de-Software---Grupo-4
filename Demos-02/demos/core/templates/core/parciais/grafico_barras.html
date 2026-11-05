@@ -1,0 +1,23 @@
+<!-- Gráfico de barras horizontal feito só com HTML + CSS.
+     A largura de cada barra vem da view (porcentagem em relação ao maior valor). -->
+<section class="card-grafico">
+
+    <h2>{{ titulo }}</h2>
+
+    <ul class="lista-barras">
+
+        {% for barra in barras %}
+            <li>
+                <a href="{% url 'candidatos' %}?{{ parametro }}={{ barra.nome|urlencode }}" class="nome-barra">{{ barra.nome }}</a>
+
+                <div class="trilho-barra">
+                    <div class="barra-preenchida" style="width: {{ barra.largura }}%;"></div>
+                </div>
+
+                <span class="valor-barra">{{ barra.total }}</span>
+            </li>
+        {% endfor %}
+
+    </ul>
+
+</section>

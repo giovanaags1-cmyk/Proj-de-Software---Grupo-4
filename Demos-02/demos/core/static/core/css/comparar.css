@@ -1,0 +1,486 @@
+/* =====================================================
+   COMPARAR CANDIDATOS - Sprint 8
+   Giovana - 2610790
+   Só CSS, usando as cores do demos.css (variáveis :root)
+===================================================== */
+
+.tela-comparar {
+    width: 100%;
+    min-height: calc(100vh - 64px);
+    padding: 0 20px 60px;
+    background-color: var(--bege-claro);
+}
+
+
+/* ---------- FAIXA "COMPARANDO A x B" ---------- */
+
+.faixa-comparando {
+    width: calc(100% + 40px);
+    margin: 0 -20px 32px;
+    padding: 14px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    background-color: var(--verde-escuro);
+}
+
+.rotulo-faixa {
+    color: var(--dourado);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.chip-comparar {
+    padding: 8px 18px;
+
+    border: 1px dashed var(--verde-claro);
+    border-radius: 30px;
+
+    color: var(--verde-claro);
+    font-size: 14px;
+}
+
+.chip-comparar.chip-preenchido {
+    border-style: solid;
+    border-color: var(--bege);
+    background-color: var(--bege);
+    color: var(--verde);
+    font-weight: 700;
+}
+
+.versus {
+    color: var(--dourado);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+
+/* ---------- TÍTULO ---------- */
+
+.titulo-comparar {
+    width: min(1100px, 100%);
+    margin: 0 auto 28px;
+}
+
+.titulo-comparar h1 {
+    color: var(--verde);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.titulo-comparar p {
+    color: #5f6f69;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+
+/* ---------- CARDS LADO A LADO ---------- */
+
+.grid-comparar {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.card-comparar {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+
+    padding: 28px;
+
+    background-color: var(--branco);
+    border: 1px solid #ddd7ca;
+    border-radius: 22px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+}
+
+.topo-card-comparar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.avatar-comparar {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background-color: var(--verde);
+    color: var(--bege);
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.topo-card-comparar h2 {
+    color: var(--verde);
+    font-size: 21px;
+}
+
+.apelido {
+    margin-top: 4px;
+    color: #71837c;
+    font-size: 14px;
+}
+
+.dados-comparar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.dados-comparar div {
+    padding: 12px;
+    border-radius: 14px;
+    background-color: var(--bege-claro);
+}
+
+.dados-comparar dt {
+    color: #71837c;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.dados-comparar dd {
+    color: var(--verde);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.perfil-comparar {
+    flex: 1;
+}
+
+.perfil-comparar h3 {
+    color: var(--verde);
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.perfil-comparar p {
+    color: #3c4743;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.botoes-card-comparar {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* ---------- BOTÕES (usados na página toda) ---------- */
+
+.botao-principal,
+.botao-secundario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 11px 20px;
+    border-radius: 30px;
+
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.botao-principal {
+    flex: 1;
+    background-color: var(--verde);
+    color: var(--branco);
+}
+
+.botao-principal:hover {
+    background-color: var(--verde-escuro);
+}
+
+.botao-secundario {
+    border: 1px solid var(--verde);
+    color: var(--verde);
+}
+
+.botao-secundario:hover {
+    background-color: var(--verde);
+    color: var(--branco);
+}
+
+
+/* ---------- TABELA RESUMO ---------- */
+
+.tabela-comparar {
+    width: min(1100px, 100%);
+    margin: 32px auto 0;
+    padding: 28px;
+
+    background-color: var(--branco);
+    border: 1px solid #ddd7ca;
+    border-radius: 22px;
+}
+
+.tabela-comparar h2 {
+    color: var(--verde);
+    font-size: 20px;
+    margin-bottom: 18px;
+}
+
+.tabela-comparar table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.tabela-comparar th,
+.tabela-comparar td {
+    padding: 13px 10px;
+    border-bottom: 1px solid #ece6d8;
+    text-align: left;
+    font-size: 14px;
+}
+
+.tabela-comparar th {
+    color: var(--verde);
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.tabela-comparar td:first-child {
+    color: #71837c;
+    font-weight: 600;
+}
+
+/* linhas zebradas */
+.tabela-comparar tbody tr:nth-child(even) {
+    background-color: #faf8f2;
+}
+
+.celula-centro {
+    text-align: center !important;
+    font-weight: 700;
+    color: var(--verde);
+}
+
+.acoes-comparar {
+    width: min(1100px, 100%);
+    margin: 24px auto 0;
+    text-align: center;
+}
+
+
+/* ---------- ESCOLHA DOS CANDIDATOS ---------- */
+
+.escolha-comparar {
+    width: min(700px, 100%);
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.passo {
+    color: var(--verde);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-escolhido {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    padding: 20px;
+    background-color: var(--branco);
+    border: 2px solid var(--verde);
+    border-radius: 20px;
+}
+
+.card-escolhido > div:nth-child(2) {
+    flex: 1;
+}
+
+.card-escolhido h2 {
+    color: var(--verde);
+    font-size: 19px;
+    margin: 4px 0;
+}
+
+.card-escolhido p {
+    color: #71837c;
+    font-size: 14px;
+}
+
+.link-trocar {
+    color: var(--verde);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.busca-comparar {
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+
+    background-color: var(--branco);
+    border: 1px solid #d9d3c5;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+}
+
+.busca-comparar input[type="text"] {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0 26px;
+
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+}
+
+.busca-comparar button {
+    width: 64px;
+    height: 100%;
+
+    border: none;
+    background-color: var(--verde);
+    color: var(--branco);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.busca-comparar:focus-within {
+    border-color: var(--verde);
+}
+
+.resultados-comparar {
+    list-style: none;
+
+    background-color: var(--branco);
+    border: 1px solid #ddd7ca;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.resultados-comparar li + li {
+    border-top: 1px solid #ece6d8;
+}
+
+.resultados-comparar a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+
+    color: inherit;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.resultados-comparar a:hover {
+    background-color: var(--bege-claro);
+}
+
+.avatar-pequeno {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background-color: var(--bege);
+    color: var(--verde);
+    font-weight: 700;
+}
+
+.info-resultado {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.info-resultado strong {
+    color: var(--verde);
+}
+
+.info-resultado span {
+    color: #71837c;
+    font-size: 13px;
+}
+
+.resultados-comparar .fa-chevron-right {
+    color: var(--dourado);
+}
+
+.sem-resultado {
+    padding: 18px 20px;
+    color: #71837c;
+    font-size: 14px;
+}
+
+.dica-comparar {
+    color: #71837c;
+    font-size: 14px;
+    text-align: center;
+}
+
+.dica-comparar a {
+    color: var(--verde);
+    font-weight: 700;
+}
+
+
+/* ---------- CELULAR ---------- */
+
+@media (max-width: 760px) {
+
+    .grid-comparar {
+        grid-template-columns: 1fr;
+    }
+
+    .titulo-comparar h1 {
+        font-size: 26px;
+    }
+
+    .card-comparar,
+    .tabela-comparar {
+        padding: 20px;
+    }
+
+    .tabela-comparar th,
+    .tabela-comparar td {
+        font-size: 13px;
+        padding: 10px 6px;
+    }
+}

@@ -1,8 +1,8 @@
-from django.views.generic import TemplateView, DetailView, FormView
+from django.views.generic import TemplateView, DetailView, FormView, ListView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy, reverse
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.shortcuts import redirect
 from .models import Candidato
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -152,33 +152,149 @@ class CandidatoView(DetailView):
     context_object_name = "candidato"
 
 class CompararView(TemplateView):
+    # Sprint 8 (Giovana): comparacao lado a lado, sem JavaScript.
+    # Fluxo: escolhe o candidato 1 -> pesquisa o candidato 2 -> mostra os dois.
     template_name = "core/comparar.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         candidato1_id = self.request.GET.get("candidato1")
-        pesquisa = self.request.GET.get("q", "")
+        candidato2_id = self.request.GET.get("candidato2")
+        pesquisa = self.request.GET.get("q", "").strip()
 
-        candidato1 = Candidato.objects.filter(
-            id=candidato1_id
-        ).first()
+        candidato1 = Candidato.objects.filter(id=candidato1_id).first() if candidato1_id else None
+        candidato2 = Candidato.objects.filter(id=candidato2_id).first() if candidato2_id else None
 
-        candidatos2 = Candidato.objects.none()
+        resultados = Candidato.objects.none()
 
         if pesquisa:
-            candidatos2 = Candidato.objects.filter(
+            resultados = Candidato.objects.filter(
+                Q(nome__icontains=pesquisa) |
+                Q(apelido__icontains=pesquisa) |
+                Q(partido__icontains=pesquisa)
+            ).order_by("nome")
+
+            if candidato1:
+                resultados = resultados.exclude(id=candidato1.id)
+
+        context["candidato1"] = candidato1
+        context["candidato2"] = candidato2
+        context["candidatos2"] = resultados
+        context["pesquisa"] = pesquisa
+
+        return context
+
+
+class CandidatosView(ListView):
+    # Sprint 8 (Giovana): listagem de candidatos com filtros e ordenacao.
+    # Os filtros funcionam por formulario GET, sem JavaScript.
+    model = Candidato
+    template_name = "core/candidatos.html"
+    context_object_name = "candidatos"
+    paginate_by = 12
+
+    ORDENACOES = {
+        "nome": "nome",
+        "-nome": "-nome",
+        "partido": "partido",
+        "uf": "uf",
+    }
+
+    def get_queryset(self):
+        candidatos = Candidato.objects.all()
+
+        pesquisa = self.request.GET.get("q", "").strip()
+        partido = self.request.GET.get("partido", "")
+        cargo = self.request.GET.get("cargo", "")
+        uf = self.request.GET.get("uf", "")
+        ordem = self.request.GET.get("ordem", "nome")
+
+        if pesquisa:
+            candidatos = candidatos.filter(
                 Q(nome__icontains=pesquisa) |
                 Q(apelido__icontains=pesquisa)
             )
 
-            if candidato1:
-                candidatos2 = candidatos2.exclude(
-                    id=candidato1.id
-                )
+        if partido:
+            candidatos = candidatos.filter(partido=partido)
 
-        context["candidato1"] = candidato1
-        context["candidatos2"] = candidatos2
-        context["pesquisa"] = pesquisa
+        if cargo:
+            candidatos = candidatos.filter(cargo=cargo)
+
+        if uf:
+            candidatos = candidatos.filter(uf=uf)
+
+        return candidatos.order_by(self.ORDENACOES.get(ordem, "nome"))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        filtros = {
+            "q": self.request.GET.get("q", "").strip(),
+            "partido": self.request.GET.get("partido", ""),
+            "cargo": self.request.GET.get("cargo", ""),
+            "uf": self.request.GET.get("uf", ""),
+            "ordem": self.request.GET.get("ordem", "nome"),
+        }
+
+        # Opcoes dos selects vem do proprio banco de dados
+        context["partidos"] = Candidato.objects.order_by("partido").values_list("partido", flat=True).distinct()
+        context["cargos"] = Candidato.objects.order_by("cargo").values_list("cargo", flat=True).distinct()
+        context["ufs"] = Candidato.objects.order_by("uf").values_list("uf", flat=True).distinct()
+
+        context["filtros"] = filtros
+        context["tem_filtro"] = any([filtros["q"], filtros["partido"], filtros["cargo"], filtros["uf"]])
+
+        # Mantem os filtros ao trocar de pagina
+        parametros = self.request.GET.copy()
+        parametros.pop("page", None)
+        context["parametros"] = parametros.urlencode()
+
+        return context
+
+
+class EstatisticasView(TemplateView):
+    # Sprint 8 (Giovana): estatisticas do banco de dados.
+    # As barras sao feitas so com CSS (largura em %), sem JavaScript.
+    template_name = "core/estatisticas.html"
+
+    def montar_barras(self, campo, limite=10):
+        grupos = (
+            Candidato.objects
+            .values(campo)
+            .annotate(total=Count("id"))
+            .order_by("-total", campo)[:limite]
+        )
+
+        maior = grupos[0]["total"] if grupos else 1
+
+        return [
+            {
+                "nome": grupo[campo] or "Não informado",
+                "total": grupo["total"],
+                "largura": round(grupo["total"] * 100 / maior),
+            }
+            for grupo in grupos
+        ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["total_candidatos"] = Candidato.objects.count()
+        context["total_partidos"] = Candidato.objects.values("partido").distinct().count()
+        context["total_ufs"] = Candidato.objects.values("uf").distinct().count()
+        context["total_salvos"] = Favorito.objects.count()
+
+        context["por_partido"] = self.montar_barras("partido")
+        context["por_cargo"] = self.montar_barras("cargo")
+        context["por_uf"] = self.montar_barras("uf")
+
+        context["mais_salvos"] = (
+            Candidato.objects
+            .annotate(total_salvos=Count("favorito"))
+            .filter(total_salvos__gt=0)
+            .order_by("-total_salvos", "nome")[:5]
+        )
 
         return context

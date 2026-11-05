@@ -1,0 +1,57 @@
+<!-- Card de um candidato na comparação (usado 2 vezes, um para cada lado) -->
+<article class="card-comparar">
+
+    <div class="topo-card-comparar">
+
+        <div class="avatar-comparar">{{ candidato.nome|slice:":2"|upper }}</div>
+
+        <div>
+            <h2>{{ candidato.nome }}</h2>
+            {% if candidato.apelido %}
+                <p class="apelido">{{ candidato.apelido }}</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+
+    <dl class="dados-comparar">
+
+        <div>
+            <dt>Partido</dt>
+            <dd>{{ candidato.partido }}</dd>
+        </div>
+
+        <div>
+            <dt>Cargo</dt>
+            <dd>{{ candidato.cargo }}</dd>
+        </div>
+
+        <div>
+            <dt>UF</dt>
+            <dd>{{ candidato.uf }}</dd>
+        </div>
+
+    </dl>
+
+
+    <div class="perfil-comparar">
+        <h3>Perfil político</h3>
+        <p>{{ candidato.descricao|default:"Descrição ainda não cadastrada." }}</p>
+    </div>
+
+
+    <div class="botoes-card-comparar">
+
+        <a href="{% url 'candidato' candidato.id %}" class="botao-principal">
+            Ver perfil completo
+        </a>
+
+        <!-- Troca só este candidato, mantendo o outro -->
+        <a href="{% url 'comparar' %}?candidato1={{ outro.id }}" class="botao-secundario">
+            Trocar
+        </a>
+
+    </div>
+
+</article>

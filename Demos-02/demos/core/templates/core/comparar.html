@@ -1,0 +1,271 @@
+{% load static %}
+<!-- Sprint 8 - Giovana (2610790): tela de comparação lado a lado, só HTML + CSS -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Comparar candidatos | DEMOS</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/demos.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/comparar.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+
+<body>
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <a href="{% url 'salvos' %}" class="icone-menu" aria-label="Candidatos salvos">
+            <i class="fa-solid fa-bookmark"></i>
+        </a>
+
+        <a href="{% url 'index' %}" class="icone-menu" aria-label="Início">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+        <a href="{% url 'candidatos' %}" class="icone-menu" aria-label="Lista de candidatos">
+            <i class="fa-solid fa-list"></i>
+        </a>
+
+        <a href="{% url 'estatisticas' %}" class="icone-menu" aria-label="Estatísticas">
+            <i class="fa-solid fa-chart-simple"></i>
+        </a>
+
+    </div>
+
+
+    <a href="{% url 'index' %}" class="logo">
+        <img src="{% static 'core/img/logo.png' %}" alt="Logo DEMOS">
+        <span>DEMOS</span>
+    </a>
+
+
+    {% if user.is_authenticated %}
+
+        <div class="usuario-logado">
+
+            <span class="nome-usuario">{{ user.username }}</span>
+
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="botao-logout">Sair</button>
+            </form>
+
+        </div>
+
+    {% else %}
+
+        <a href="{% url 'login' %}" class="icone-menu" aria-label="Entrar na conta">
+            <i class="fa-solid fa-circle-user"></i>
+        </a>
+
+    {% endif %}
+
+</header>
+
+
+{% if messages %}
+    <div class="mensagens">
+        {% for message in messages %}
+            <div class="mensagem {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<main class="tela-comparar">
+
+
+    <!-- BARRA "COMPARANDO A x B" -->
+    <section class="faixa-comparando">
+
+        <span class="rotulo-faixa">Comparando</span>
+
+        <div class="chip-comparar {% if candidato1 %}chip-preenchido{% endif %}">
+            {% if candidato1 %}{{ candidato1.nome }}{% else %}Candidato 1{% endif %}
+        </div>
+
+        <span class="versus">×</span>
+
+        <div class="chip-comparar {% if candidato2 %}chip-preenchido{% endif %}">
+            {% if candidato2 %}{{ candidato2.nome }}{% else %}Candidato 2{% endif %}
+        </div>
+
+    </section>
+
+
+    <div class="titulo-comparar">
+        <h1>Comparação lado a lado</h1>
+        <p>
+            As informações aparecem com o mesmo peso visual,
+            sem notas e sem indicar preferência por nenhum candidato.
+        </p>
+    </div>
+
+
+    {% if candidato1 and candidato2 %}
+
+        <!-- COMPARAÇÃO PRONTA -->
+        <section class="grid-comparar">
+
+
+            {% include "core/parciais/card_comparar.html" with candidato=candidato1 outro=candidato2 lado="1" %}
+            {% include "core/parciais/card_comparar.html" with candidato=candidato2 outro=candidato1 lado="2" %}
+
+        </section>
+
+
+        <!-- TABELA DE DIFERENÇAS -->
+        <section class="tabela-comparar">
+
+            <h2>Resumo da comparação</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Informação</th>
+                        <th>{{ candidato1.nome }}</th>
+                        <th>{{ candidato2.nome }}</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Partido</td>
+                        <td>{{ candidato1.partido }}</td>
+                        <td>{{ candidato2.partido }}</td>
+                    </tr>
+                    <tr>
+                        <td>Cargo</td>
+                        <td>{{ candidato1.cargo }}</td>
+                        <td>{{ candidato2.cargo }}</td>
+                    </tr>
+                    <tr>
+                        <td>UF</td>
+                        <td>{{ candidato1.uf }}</td>
+                        <td>{{ candidato2.uf }}</td>
+                    </tr>
+                    <tr>
+                        <td>Mesmo partido?</td>
+                        <td colspan="2" class="celula-centro">
+                            {% if candidato1.partido == candidato2.partido %}Sim{% else %}Não{% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Disputam o mesmo cargo?</td>
+                        <td colspan="2" class="celula-centro">
+                            {% if candidato1.cargo == candidato2.cargo %}Sim{% else %}Não{% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+
+        <div class="acoes-comparar">
+            <a href="{% url 'comparar' %}" class="botao-secundario">
+                <i class="fa-solid fa-rotate-left"></i>
+                Nova comparação
+            </a>
+        </div>
+
+
+    {% else %}
+
+        <!-- ESCOLHA DOS CANDIDATOS -->
+        <section class="escolha-comparar">
+
+            {% if candidato1 %}
+
+                <div class="card-escolhido">
+                    <div class="avatar-comparar">{{ candidato1.nome|slice:":2"|upper }}</div>
+                    <div>
+                        <span class="passo">Candidato 1 escolhido</span>
+                        <h2>{{ candidato1.nome }}</h2>
+                        <p>{{ candidato1.partido }} · {{ candidato1.cargo }} · {{ candidato1.uf }}</p>
+                    </div>
+                    <a href="{% url 'comparar' %}" class="link-trocar">Trocar</a>
+                </div>
+
+                <span class="passo">Passo 2: pesquise o candidato 2</span>
+
+            {% else %}
+
+                <span class="passo">Passo 1: pesquise o candidato 1</span>
+
+            {% endif %}
+
+
+            <form method="get" action="{% url 'comparar' %}" class="busca-comparar">
+
+                {% if candidato1 %}
+                    <input type="hidden" name="candidato1" value="{{ candidato1.id }}">
+                {% endif %}
+
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ pesquisa }}"
+                    placeholder="Digite o nome, apelido ou partido..."
+                    aria-label="Pesquisar candidato"
+                >
+
+                <button type="submit" aria-label="Pesquisar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+
+            </form>
+
+
+            {% if pesquisa %}
+
+                <ul class="resultados-comparar">
+
+                    {% for c in candidatos2 %}
+
+                        <li>
+                            <a href="{% url 'comparar' %}?{% if candidato1 %}candidato1={{ candidato1.id }}&candidato2={{ c.id }}{% else %}candidato1={{ c.id }}{% endif %}">
+
+                                <div class="avatar-pequeno">{{ c.nome|slice:":2"|upper }}</div>
+
+                                <div class="info-resultado">
+                                    <strong>{{ c.nome }}</strong>
+                                    <span>{{ c.partido }} · {{ c.cargo }} · {{ c.uf }}</span>
+                                </div>
+
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </li>
+
+                    {% empty %}
+
+                        <li class="sem-resultado">
+                            Nenhum candidato encontrado para "{{ pesquisa }}".
+                        </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            {% endif %}
+
+
+            <p class="dica-comparar">
+                Não sabe quem procurar?
+                <a href="{% url 'candidatos' %}">Veja a lista completa de candidatos</a>.
+            </p>
+
+        </section>
+
+    {% endif %}
+
+</main>
+
+</body>
+</html>

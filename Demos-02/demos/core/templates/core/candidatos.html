@@ -1,0 +1,222 @@
+{% load static %}
+<!-- Sprint 8 - Giovana (2610790): listagem de candidatos com filtros, só HTML + CSS -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Candidatos | DEMOS</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/demos.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/candidatos.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+
+<body>
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <a href="{% url 'salvos' %}" class="icone-menu" aria-label="Candidatos salvos">
+            <i class="fa-solid fa-bookmark"></i>
+        </a>
+
+        <a href="{% url 'index' %}" class="icone-menu" aria-label="Início">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+        <a href="{% url 'candidatos' %}" class="icone-menu" aria-label="Lista de candidatos">
+            <i class="fa-solid fa-list"></i>
+        </a>
+
+        <a href="{% url 'estatisticas' %}" class="icone-menu" aria-label="Estatísticas">
+            <i class="fa-solid fa-chart-simple"></i>
+        </a>
+
+    </div>
+
+
+    <a href="{% url 'index' %}" class="logo">
+        <img src="{% static 'core/img/logo.png' %}" alt="Logo DEMOS">
+        <span>DEMOS</span>
+    </a>
+
+
+    {% if user.is_authenticated %}
+
+        <div class="usuario-logado">
+
+            <span class="nome-usuario">{{ user.username }}</span>
+
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="botao-logout">Sair</button>
+            </form>
+
+        </div>
+
+    {% else %}
+
+        <a href="{% url 'login' %}" class="icone-menu" aria-label="Entrar na conta">
+            <i class="fa-solid fa-circle-user"></i>
+        </a>
+
+    {% endif %}
+
+</header>
+
+
+{% if messages %}
+    <div class="mensagens">
+        {% for message in messages %}
+            <div class="mensagem {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<main class="pagina-candidatos">
+
+    <div class="titulo-candidatos">
+        <h1>Candidatos</h1>
+        <p>Filtre por partido, cargo ou estado e compare quem você quiser.</p>
+    </div>
+
+
+    <div class="layout-candidatos">
+
+
+        <!-- FILTROS (formulário GET, sem JavaScript) -->
+        <aside class="painel-filtros">
+
+            <form method="get" action="{% url 'candidatos' %}">
+
+                <h2><i class="fa-solid fa-filter"></i> Filtros</h2>
+
+                <label for="filtro-q">Nome ou apelido</label>
+                <input type="text" id="filtro-q" name="q" value="{{ filtros.q }}" placeholder="Ex.: Maria">
+
+                <label for="filtro-partido">Partido</label>
+                <select id="filtro-partido" name="partido">
+                    <option value="">Todos</option>
+                    {% for partido in partidos %}
+                        <option value="{{ partido }}" {% if partido == filtros.partido %}selected{% endif %}>{{ partido }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="filtro-cargo">Cargo</label>
+                <select id="filtro-cargo" name="cargo">
+                    <option value="">Todos</option>
+                    {% for cargo in cargos %}
+                        <option value="{{ cargo }}" {% if cargo == filtros.cargo %}selected{% endif %}>{{ cargo }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="filtro-uf">Estado (UF)</label>
+                <select id="filtro-uf" name="uf">
+                    <option value="">Todos</option>
+                    {% for uf in ufs %}
+                        <option value="{{ uf }}" {% if uf == filtros.uf %}selected{% endif %}>{{ uf }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="filtro-ordem">Ordenar por</label>
+                <select id="filtro-ordem" name="ordem">
+                    <option value="nome" {% if filtros.ordem == "nome" %}selected{% endif %}>Nome (A-Z)</option>
+                    <option value="-nome" {% if filtros.ordem == "-nome" %}selected{% endif %}>Nome (Z-A)</option>
+                    <option value="partido" {% if filtros.ordem == "partido" %}selected{% endif %}>Partido</option>
+                    <option value="uf" {% if filtros.ordem == "uf" %}selected{% endif %}>Estado</option>
+                </select>
+
+                <button type="submit" class="botao-filtrar">Aplicar filtros</button>
+
+                {% if tem_filtro %}
+                    <a href="{% url 'candidatos' %}" class="limpar-filtros">Limpar filtros</a>
+                {% endif %}
+
+            </form>
+
+        </aside>
+
+
+        <!-- RESULTADOS -->
+        <section class="resultados-candidatos">
+
+            <p class="contador-candidatos">
+                {{ paginator.count }} candidato{{ paginator.count|pluralize }} encontrado{{ paginator.count|pluralize }}
+            </p>
+
+
+            <div class="grid-candidatos">
+
+                {% for candidato in candidatos %}
+
+                    <article class="card-lista">
+
+                        <a href="{% url 'candidato' candidato.id %}" class="link-card-lista">
+
+                            <div class="avatar-lista">{{ candidato.nome|slice:":2"|upper }}</div>
+
+                            <div class="info-lista">
+                                <h2>{{ candidato.nome }}</h2>
+                                {% if candidato.apelido %}<p>{{ candidato.apelido }}</p>{% endif %}
+                                <span class="etiqueta">{{ candidato.partido }}</span>
+                                <span class="etiqueta etiqueta-clara">{{ candidato.cargo }} · {{ candidato.uf }}</span>
+                            </div>
+
+                        </a>
+
+                        <div class="acoes-lista">
+                            <a href="{% url 'candidato' candidato.id %}">Ver perfil</a>
+                            <a href="{% url 'comparar' %}?candidato1={{ candidato.id }}">
+                                <i class="fa-solid fa-scale-balanced"></i> Comparar
+                            </a>
+                        </div>
+
+                    </article>
+
+                {% empty %}
+
+                    <div class="sem-candidatos">
+                        <i class="fa-regular fa-face-meh"></i>
+                        <p>Nenhum candidato encontrado com esses filtros.</p>
+                        <a href="{% url 'candidatos' %}">Limpar filtros</a>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- PAGINAÇÃO (mantém os filtros na URL) -->
+            {% if is_paginated %}
+                <nav class="paginacao" aria-label="Páginas">
+
+                    {% if page_obj.has_previous %}
+                        <a href="?{% if parametros %}{{ parametros }}&{% endif %}page={{ page_obj.previous_page_number }}">
+                            <i class="fa-solid fa-chevron-left"></i> Anterior
+                        </a>
+                    {% endif %}
+
+                    <span>Página {{ page_obj.number }} de {{ paginator.num_pages }}</span>
+
+                    {% if page_obj.has_next %}
+                        <a href="?{% if parametros %}{{ parametros }}&{% endif %}page={{ page_obj.next_page_number }}">
+                            Próxima <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    {% endif %}
+
+                </nav>
+            {% endif %}
+
+        </section>
+
+    </div>
+
+</main>
+
+</body>
+</html>
