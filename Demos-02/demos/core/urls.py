@@ -8,6 +8,8 @@ from .views import (
     CandidatoView,
     CompararView,
     SalvarCandidatoView,
+    CandidatosView,
+    EstatisticasView,
 )
 
 
@@ -55,5 +57,18 @@ urlpatterns = [
     "comparar/",
     CompararView.as_view(),
     name="comparar"
+    ),
+
+    # Sprint 8 (Giovana)
+    path(
+        "candidatos/",
+        CandidatosView.as_view(),
+        name="candidatos"
+    ),
+
+    path(
+        "estatisticas/",
+        EstatisticasView.as_view(),
+        name="estatisticas"
     ),
 ]

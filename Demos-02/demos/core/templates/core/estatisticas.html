@@ -1,0 +1,165 @@
+{% load static %}
+<!-- Sprint 8 - Giovana (2610790): página de estatísticas, barras feitas só com CSS -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Estatísticas | DEMOS</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/demos.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/estatisticas.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+
+<body>
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <a href="{% url 'salvos' %}" class="icone-menu" aria-label="Candidatos salvos">
+            <i class="fa-solid fa-bookmark"></i>
+        </a>
+
+        <a href="{% url 'index' %}" class="icone-menu" aria-label="Início">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+        <a href="{% url 'candidatos' %}" class="icone-menu" aria-label="Lista de candidatos">
+            <i class="fa-solid fa-list"></i>
+        </a>
+
+        <a href="{% url 'estatisticas' %}" class="icone-menu" aria-label="Estatísticas">
+            <i class="fa-solid fa-chart-simple"></i>
+        </a>
+
+    </div>
+
+
+    <a href="{% url 'index' %}" class="logo">
+        <img src="{% static 'core/img/logo.png' %}" alt="Logo DEMOS">
+        <span>DEMOS</span>
+    </a>
+
+
+    {% if user.is_authenticated %}
+
+        <div class="usuario-logado">
+
+            <span class="nome-usuario">{{ user.username }}</span>
+
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="botao-logout">Sair</button>
+            </form>
+
+        </div>
+
+    {% else %}
+
+        <a href="{% url 'login' %}" class="icone-menu" aria-label="Entrar na conta">
+            <i class="fa-solid fa-circle-user"></i>
+        </a>
+
+    {% endif %}
+
+</header>
+
+
+{% if messages %}
+    <div class="mensagens">
+        {% for message in messages %}
+            <div class="mensagem {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<main class="pagina-estatisticas">
+
+    <div class="titulo-estatisticas">
+        <h1>Estatísticas</h1>
+        <p>Números gerados a partir dos candidatos cadastrados no DEMOS.</p>
+    </div>
+
+
+    <!-- NÚMEROS GERAIS -->
+    <section class="numeros-gerais">
+
+        <div class="card-numero">
+            <i class="fa-solid fa-users"></i>
+            <strong>{{ total_candidatos }}</strong>
+            <span>candidatos</span>
+        </div>
+
+        <div class="card-numero">
+            <i class="fa-solid fa-flag"></i>
+            <strong>{{ total_partidos }}</strong>
+            <span>partidos</span>
+        </div>
+
+        <div class="card-numero">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <strong>{{ total_ufs }}</strong>
+            <span>estados</span>
+        </div>
+
+        <div class="card-numero">
+            <i class="fa-solid fa-bookmark"></i>
+            <strong>{{ total_salvos }}</strong>
+            <span>vezes salvos</span>
+        </div>
+
+    </section>
+
+
+    {% if total_candidatos %}
+
+        <div class="grid-graficos">
+
+            {% include "core/parciais/grafico_barras.html" with titulo="Candidatos por partido" barras=por_partido parametro="partido" %}
+            {% include "core/parciais/grafico_barras.html" with titulo="Candidatos por cargo" barras=por_cargo parametro="cargo" %}
+            {% include "core/parciais/grafico_barras.html" with titulo="Candidatos por estado" barras=por_uf parametro="uf" %}
+
+
+            <!-- RANKING DE SALVOS -->
+            <section class="card-grafico">
+
+                <h2>Mais salvos pelos usuários</h2>
+
+                {% if mais_salvos %}
+                    <ol class="ranking-salvos">
+                        {% for candidato in mais_salvos %}
+                            <li>
+                                <a href="{% url 'candidato' candidato.id %}">{{ candidato.nome }}</a>
+                                <span>{{ candidato.total_salvos }} salvo{{ candidato.total_salvos|pluralize }}</span>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                {% else %}
+                    <p class="sem-dados">Nenhum candidato foi salvo ainda.</p>
+                {% endif %}
+
+            </section>
+
+        </div>
+
+        <p class="aviso-neutralidade">
+            <i class="fa-solid fa-circle-info"></i>
+            Esses números mostram apenas quantos candidatos estão cadastrados.
+            Eles não indicam chance de vitória nem preferência do DEMOS.
+        </p>
+
+    {% else %}
+
+        <p class="sem-dados">Ainda não há candidatos cadastrados. Cadastre pelo Django Admin.</p>
+
+    {% endif %}
+
+</main>
+
+</body>
+</html>
