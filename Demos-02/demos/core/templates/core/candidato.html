@@ -36,21 +36,13 @@
 
     <div class="cabecalho-esquerda">
 
-        <form
-    method="post"
-    action="{% url 'salvar_candidato' candidato.id %}"
+        <a
+    href="{% url 'salvos' %}"
+    class="icone-menu"
+    aria-label="Candidatos salvos"
 >
-    {% csrf_token %}
-
-    <button
-        type="submit"
-        class="botao-salvar"
-    >
-        <i class="fa-regular fa-bookmark"></i>
-
-        Salvar
-    </button>
-</form>
+    <i class="fa-solid fa-bookmark"></i>
+</a>
 
 
         <a
@@ -77,21 +69,63 @@
     </a>
 
 
+    {% if user.is_authenticated %}
+
+    <div class="usuario-logado">
+
+        <span class="nome-usuario">
+            {{ user.username }}
+        </span>
+
+        <form
+            method="post"
+            action="{% url 'logout' %}"
+        >
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="botao-logout"
+            >
+                Sair
+            </button>
+
+        </form>
+
+    </div>
+
+{% else %}
+
     <a
         href="{% url 'login' %}"
         class="icone-menu"
-        aria-label="Minha conta"
+        aria-label="Entrar na conta"
     >
         <i class="fa-solid fa-circle-user"></i>
     </a>
 
-</header>
+{% endif %}
 
+</header>
+{% if messages %}
+
+    <div class="mensagens">
+
+        {% for message in messages %}
+
+            <div class="mensagem {{ message.tags }}">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+{% endif %}
 
 <main class="pagina-candidato">
 
 
-    <!-- BARRA DE PESQUISA -->
 
     <div class="area-pesquisa-candidato">
 
@@ -108,7 +142,6 @@
             >
 
 
-            <!-- PESQUISA NORMAL -->
 
             <button
                 type="submit"
@@ -117,9 +150,6 @@
             >
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-
-
-            <!-- ADICIONAR PARA COMPARAÇÃO -->
 
             <button
                 type="submit"
@@ -138,7 +168,7 @@
 
 
 
-    <!-- CARD DO CANDIDATO -->
+
 
     <section class="card-candidato">
 
@@ -237,16 +267,21 @@
 
         <div class="acoes-candidato">
 
-            <a
-                href="{% url 'salvos' %}"
-                class="botao-salvar"
-            >
+            <form
+    method="post"
+    action="{% url 'salvar_candidato' candidato.id %}"
+>
+    {% csrf_token %}
 
-                <i class="fa-regular fa-bookmark"></i>
+    <button
+        type="submit"
+        class="botao-salvar"
+    >
+        <i class="fa-regular fa-bookmark"></i>
+        Salvar
+    </button>
 
-                Salvar
-
-            </a>
+</form>
 
         </div>
 

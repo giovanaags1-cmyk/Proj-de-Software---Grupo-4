@@ -58,7 +58,21 @@
     </a>
 
 </header>
+{% if messages %}
 
+    <div class="mensagens">
+
+        {% for message in messages %}
+
+            <div class="mensagem {{ message.tags }}">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+{% endif %}
 
 <main class="pagina-login">
 

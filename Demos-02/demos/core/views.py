@@ -1,31 +1,44 @@
 from django.views.generic import TemplateView, DetailView, FormView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.db.models import Q
 from django.shortcuts import redirect
 from .models import Candidato
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from .models import Candidato, Favorito
+from django.contrib import messages
 
-class SalvarCandidatoView(LoginRequiredMixin, View):
-
-    login_url = "login"
+class SalvarCandidatoView(View):
 
     def post(self, request, pk):
 
         candidato = Candidato.objects.get(pk=pk)
+
+        if not request.user.is_authenticated:
+
+            request.session["candidato_para_salvar"] = candidato.id
+
+            messages.info(
+                request,
+                "Faça login para salvar o candidato."
+            )
+
+            return redirect("login")
+
 
         Favorito.objects.get_or_create(
             usuario=request.user,
             candidato=candidato
         )
 
-        return redirect(
-            "candidato",
-            pk=candidato.id
+        messages.success(
+            request,
+            "Candidato salvo!"
         )
+
+        return redirect("salvos")
 
 class IndexView(TemplateView):
     template_name = "core/index.html"
@@ -79,11 +92,9 @@ class SalvosView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        favoritos = Favorito.objects.filter(
+        context["favoritos"] = Favorito.objects.filter(
             usuario=self.request.user
         )
-
-        context["favoritos"] = favoritos
 
         return context
 
@@ -91,6 +102,38 @@ class SalvosView(LoginRequiredMixin, TemplateView):
 class LoginUsuarioView(LoginView):
     template_name = "core/login.html"
     next_page = "/"
+
+    def form_valid(self, form):
+
+        resposta = super().form_valid(form)
+
+        candidato_id = self.request.session.pop(
+            "candidato_para_salvar",
+            None
+        )
+
+        if candidato_id:
+
+            candidato = Candidato.objects.get(
+                id=candidato_id
+            )
+
+            Favorito.objects.get_or_create(
+                usuario=self.request.user,
+                candidato=candidato
+            )
+
+            messages.success(
+                self.request,
+                "Candidato salvo!"
+            )
+
+            return redirect(
+                "candidato",
+                pk=candidato.id
+            )
+
+        return resposta
 
 
 class CadastroUsuarioView(FormView):

@@ -1,5 +1,5 @@
 from django.urls import path
-
+from django.contrib.auth.views import LogoutView
 from .views import (
     IndexView,
     SalvosView,
@@ -12,6 +12,11 @@ from .views import (
 
 
 urlpatterns = [
+    path(
+    "logout/",
+    LogoutView.as_view(next_page="/"),
+    name="logout"
+),
     path(
     "candidato/<int:pk>/salvar/",
     SalvarCandidatoView.as_view(),

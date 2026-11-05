@@ -149,3 +149,41 @@
 .link-cadastro a:hover {
     text-decoration: underline;
 }
+.mensagens {
+    width: min(500px, calc(100% - 30px));
+
+    margin: 20px auto;
+
+    position: relative;
+    z-index: 10;
+}
+
+
+.mensagem {
+    padding: 15px 20px;
+
+    border-radius: 12px;
+
+    background: white;
+
+    color: var(--verde);
+
+    border: 1px solid #ddd7ca;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-align: center;
+}
+
+
+.mensagem.success {
+    border-color: var(--verde);
+}
+
+
+.mensagem.info {
+    background: var(--bege-claro);
+}

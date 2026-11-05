@@ -1455,7 +1455,38 @@ footer p {
 
     font-size: 14px;
 }
+.usuario-logado {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
+.nome-usuario {
+    color: var(--bege);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.botao-logout {
+    padding: 8px 14px;
+
+    border: 1px solid var(--bege);
+    border-radius: 20px;
+
+    background: transparent;
+
+    color: var(--bege);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.botao-logout:hover {
+    background: var(--bege);
+    color: var(--verde);
+}
 
 .mensagem-sem-resultado {
     margin: 0;
@@ -1465,4 +1496,40 @@ footer p {
     color: #71837c;
 
     font-size: 13px;
+}
+.mensagens {
+    width: min(500px, calc(100% - 30px));
+
+    margin: 20px auto;
+
+    position: relative;
+
+    z-index: 10;
+}
+
+.mensagem {
+    padding: 15px 20px;
+
+    border-radius: 12px;
+
+    background: white;
+
+    color: var(--verde);
+
+    border: 1px solid #ddd7ca;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-align: center;
+}
+
+.mensagem.success {
+    border-color: var(--verde);
+}
+
+.mensagem.info {
+    background: var(--bege-claro);
 }

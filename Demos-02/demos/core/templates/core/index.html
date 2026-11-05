@@ -42,9 +42,42 @@
         </a>
 
 
-        <a href="{% url 'login' %}" class="icone-menu" aria-label="Minha conta">
-            <i class="fa-solid fa-circle-user"></i>
-        </a>
+        {% if user.is_authenticated %}
+
+    <div class="usuario-logado">
+
+        <span class="nome-usuario">
+            {{ user.username }}
+        </span>
+
+        <form
+            method="post"
+            action="{% url 'logout' %}"
+        >
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="botao-logout"
+            >
+                Sair
+            </button>
+
+        </form>
+
+    </div>
+
+{% else %}
+
+    <a
+        href="{% url 'login' %}"
+        class="icone-menu"
+        aria-label="Entrar na conta"
+    >
+        <i class="fa-solid fa-circle-user"></i>
+    </a>
+
+{% endif %}
 
     </header>
 

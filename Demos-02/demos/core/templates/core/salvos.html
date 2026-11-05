@@ -55,12 +55,59 @@
     </a>
 
 
-    <a href="{% url 'login' %}" class="icone-menu" aria-label="Minha conta">
+    {% if user.is_authenticated %}
+
+    <div class="usuario-logado">
+
+        <span class="nome-usuario">
+            {{ user.username }}
+        </span>
+
+        <form
+            method="post"
+            action="{% url 'logout' %}"
+        >
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="botao-logout"
+            >
+                Sair
+            </button>
+
+        </form>
+
+    </div>
+
+{% else %}
+
+    <a
+        href="{% url 'login' %}"
+        class="icone-menu"
+        aria-label="Entrar na conta"
+    >
         <i class="fa-solid fa-circle-user"></i>
     </a>
 
-</header>
+{% endif %}
 
+</header>
+{% if messages %}
+
+    <div class="mensagens">
+
+        {% for message in messages %}
+
+            <div class="mensagem {{ message.tags }}">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+{% endif %}
 
 <main class="pagina-salvos">
 
@@ -78,24 +125,22 @@
 
     <div class="topo-salvos">
 
-        <span>{{ favoritos|length }} candidatos salvos</span>
+    <span>
+        {{ favoritos|length }} candidatos salvos
+    </span>
 
-        <button
-            class="botao-comparar-salvos"
-            disabled
-        >
-            <i class="fa-solid fa-code-compare"></i>
-
-            Comparar selecionados
-        </button>
-
-    </div>
+</div>
 
 
     <div class="grid-salvos">
         {% for favorito in favoritos %}
 
     <article class="card-salvo">
+
+    <a
+        href="{% url 'candidato' favorito.candidato.id %}"
+        class="link-card-salvo"
+    >
 
         <div class="conteudo-salvo">
 
@@ -129,22 +174,24 @@
 
         </div>
 
+    </a>
 
-        <div class="acoes-salvo">
 
-            <a
-                href="{% url 'candidato' favorito.candidato.id %}"
-            >
-                Ver perfil completo
-            </a>
+    <div class="acoes-salvo">
 
-            <span>
-                Remover dos salvos
-            </span>
+        <a
+            href="{% url 'candidato' favorito.candidato.id %}"
+        >
+            Ver perfil completo
+        </a>
 
-        </div>
+        <span>
+            Remover dos salvos
+        </span>
 
-    </article>
+    </div>
+
+</article>
 
 
 {% empty %}
