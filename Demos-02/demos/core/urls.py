@@ -8,6 +8,7 @@ from .views import (
     CandidatoView,
     CompararView,
     SalvarCandidatoView,
+    ExcluirContaView,
 )
 
 
@@ -55,5 +56,11 @@ urlpatterns = [
     "comparar/",
     CompararView.as_view(),
     name="comparar"
+    ),
+    
+    path(
+        "conta/excluir/",
+        ExcluirContaView.as_view(),
+        name="excluir_conta"
     ),
 ]
