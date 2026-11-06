@@ -9,6 +9,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from .models import Candidato, Favorito
 from django.contrib import messages
+from django.contrib.auth import logout
+from .forms import ExcluirContaForm
 
 class SalvarCandidatoView(View):
 
@@ -182,3 +184,28 @@ class CompararView(TemplateView):
         context["pesquisa"] = pesquisa
 
         return context
+        
+class ExcluirContaView(LoginRequiredMixin, FormView):
+    template_name = "core/excluir_conta.html"
+    form_class = ExcluirContaForm
+    success_url = reverse_lazy("login")   # o login mostra a mensagem de sucesso
+    login_url = "login"
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["usuario"] = self.request.user
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_salvos"] = Favorito.objects.filter(
+            usuario=self.request.user
+        ).count()
+        return context
+
+    def form_valid(self, form):
+        usuario = self.request.user
+        logout(self.request)      # encerra a sessão
+        usuario.delete()          # apaga a conta e os favoritos (CASCADE)
+        messages.success(self.request, "Sua conta foi excluída.")
+        return super().form_valid(form)
