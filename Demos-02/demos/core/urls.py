@@ -1,5 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
+from django.contrib.auth import views as auth_views
+from django.urls import reverse_lazy
 from .views import (
     IndexView,
     SalvosView,
@@ -62,5 +64,21 @@ urlpatterns = [
         "conta/excluir/",
         ExcluirContaView.as_view(),
         name="excluir_conta"
+    ),
+
+     path(
+        "conta/senha/",
+        auth_views.PasswordChangeView.as_view(
+            template_name="core/alterar_senha.html",
+            success_url=reverse_lazy("alterar_senha_concluida"),
+        ),
+        name="alterar_senha"
+    ),
+    path(
+        "conta/senha/concluida/",
+        auth_views.PasswordChangeDoneView.as_view(
+            template_name="core/alterar_senha_concluida.html",
+        ),
+        name="alterar_senha_concluida"
     ),
 ]
