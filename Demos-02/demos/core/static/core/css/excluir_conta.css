@@ -1,0 +1,102 @@
+/*
+    Excluir conta
+    Reaproveita .pagina-login, .caixa-login, .campo-login e .botao-login do login.css
+*/
+
+.caixa-exclusao h1 {
+    color: #8a3f38;
+}
+
+.aviso-exclusao {
+    margin-bottom: 22px;
+    padding: 16px 18px;
+
+    background-color: #f7e7e5;
+    border-left: 4px solid #b4483f;
+    border-radius: 10px;
+
+    color: #5e2a25;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.aviso-exclusao strong {
+    display: block;
+    margin-bottom: 6px;
+
+    font-size: 14px;
+}
+
+.aviso-exclusao ul {
+    margin: 8px 0 0 18px;
+}
+
+.aviso-exclusao li {
+    margin-bottom: 4px;
+}
+
+.campo-confirmar {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+.campo-confirmar input {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+
+    accent-color: #b4483f;
+}
+
+.campo-confirmar label {
+    color: #40514b;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.erro-campo {
+    margin-top: 2px;
+
+    color: #8a3f38;
+    font-size: 12px;
+}
+
+.botao-excluir {
+    width: 100%;
+    height: 46px;
+
+    border: none;
+    border-radius: 24px;
+
+    background-color: #b4483f;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.botao-excluir:hover {
+    background-color: #8a3f38;
+}
+
+.link-cancelar {
+    margin-top: 16px;
+
+    text-align: center;
+    font-size: 13px;
+}
+
+.link-cancelar a {
+    color: var(--verde);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.link-cancelar a:hover {
+    text-decoration: underline;
+}
