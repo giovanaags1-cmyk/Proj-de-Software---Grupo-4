@@ -1,0 +1,576 @@
+{% load static %}
+{# Página estática: o conteúdo e as situações (Concluído etc.) estão escritos à mão, valem para 5/11/2026. #}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calendário eleitoral 2026 | DEMOS</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/demos.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/calendario.css' %}">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <a
+            href="{% url 'salvos' %}"
+            class="icone-menu"
+            aria-label="Candidatos salvos"
+        >
+            <i class="fa-solid fa-bookmark"></i>
+        </a>
+
+        <a
+            href="{% url 'index' %}"
+            class="icone-menu"
+            aria-label="Início"
+        >
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+    </div>
+
+    <a href="{% url 'index' %}" class="logo">
+
+        <img
+            src="{% static 'core/img/logo.png' %}"
+            alt="Logo DEMOS"
+        >
+
+        <span>DEMOS</span>
+
+    </a>
+
+    {% if user.is_authenticated %}
+
+    <div class="usuario-logado">
+
+        <span class="nome-usuario">
+            {{ user.username }}
+        </span>
+
+        <form
+            method="post"
+            action="{% url 'logout' %}"
+        >
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="botao-logout"
+            >
+                Sair
+            </button>
+
+        </form>
+
+    </div>
+
+    {% else %}
+
+    <a
+        href="{% url 'login' %}"
+        class="icone-menu"
+        aria-label="Entrar na conta"
+    >
+        <i class="fa-solid fa-circle-user"></i>
+    </a>
+
+    {% endif %}
+
+</header>
+
+<main class="pagina-calendario">
+
+    <div class="titulo-calendario">
+
+        <h1>Calendário eleitoral 2026</h1>
+
+        <p>
+            As principais datas da eleição, da preparação das candidaturas
+            até a posse dos eleitos.
+        </p>
+
+        <p class="nota-fonte">
+            Fonte:
+            <a
+                href="https://www.tse.jus.br/comunicacao/noticias/2026/Marco/eleicoes-2026-confira-as-principais-datas-do-calendario-eleitoral"
+                target="_blank"
+                rel="noopener"
+            >Tribunal Superior Eleitoral (TSE)</a>.
+            Conferido em 5 de novembro de 2026.
+        </p>
+
+    </div>
+
+    <section class="destaques" aria-label="Datas principais">
+
+        <div class="destaque">
+            <span>1º turno</span>
+            <strong>4 de outubro</strong>
+        </div>
+
+        <div class="destaque">
+            <span>2º turno</span>
+            <strong>25 de outubro</strong>
+        </div>
+
+        <div class="destaque">
+            <span>Diplomação</span>
+            <strong>até 18 de dezembro</strong>
+        </div>
+
+        <div class="destaque">
+            <span>Posse do presidente</span>
+            <strong>5 de janeiro de 2027</strong>
+        </div>
+
+    </section>
+
+    <p class="legenda">
+        <span class="status status--concluido">Concluído</span>
+        <span class="status status--agora">Em andamento</span>
+        <span class="status status--proximo">Próxima data</span>
+        <span class="legenda-texto">Situação em 5 de novembro de 2026.</span>
+    </p>
+
+    <section class="fase">
+
+        <h2>Preparação</h2>
+        <p class="fase-desc">De janeiro a julho: regras, filiações e prazos para quem pretende se candidatar.</p>
+
+        <ol class="linha-tempo">
+
+            <li class="evento evento--passado">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-01-01">
+                        1º de janeiro
+                    </time>
+
+                        <span class="status status--concluido">
+                            Concluído
+                        </span>
+
+                </div>
+
+                <h3>Pesquisas de opinião eleitoral</h3>
+
+                <p>Passa a ser obrigatório registrar na Justiça Eleitoral as pesquisas sobre a eleição.</p>
+
+            </li>
+
+            <li class="evento evento--passado">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-03-05">
+                        5 de março a 3 de abril
+                    </time>
+
+                        <span class="status status--concluido">
+                            Concluído
+                        </span>
+
+                </div>
+
+                <h3>Janela partidária</h3>
+
+                <p>Deputados federais, estaduais e distritais podem trocar de partido sem perder o mandato por infidelidade.</p>
+
+            </li>
+
+            <li class="evento evento--passado">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-04-04">
+                        4 de abril
+                    </time>
+
+                        <span class="status status--concluido">
+                            Concluído
+                        </span>
+
+                </div>
+
+                <h3>Filiação, domicílio e desincompatibilização</h3>
+
+                <p>Último dia para fixar domicílio eleitoral e ter a filiação partidária aprovada. Presidente, governadores e prefeitos que queiram disputar outro cargo precisam renunciar até esta data.</p>
+
+            </li>
+
+            <li class="evento evento--passado">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-05-07">
+                        7 de maio
+                    </time>
+
+                        <span class="status status--concluido">
+                            Concluído
+                        </span>
+
+                </div>
+
+                <h3>Fechamento do cadastro eleitoral</h3>
+
+                <p>Último dia para pedir primeiro título, transferência ou revisão de dados antes da eleição.</p>
+
+            </li>
+
+            <li class="evento evento--passado">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-07-04">
+                        4 de julho
+                    </time>
+
+                        <span class="status status--concluido">
+                            Concluído
+                        </span>
+
+                </div>
+
+                <h3>Restrições a agentes públicos</h3>
+
+                <p>Começam limites a nomeações, demissões sem justa causa, contratações e participação em inaugurações de obras.</p>
+
+            </li>
+
+        </ol>
+
+    </section>
+
+    <section class="fase">
+
+        <h2>Candidaturas e campanha</h2>
+        <p class="fase-desc">De julho a setembro: partidos escolhem candidatos, a Justiça Eleitoral recebe os registros e a campanha começa.</p>
+
+        <ol class="linha-tempo">
+
+            <li class="evento evento--passado">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-07-20">
+                        20 de julho a 5 de agosto
+                    </time>
+
+                        <span class="status status--concluido">
+                            Concluído
+                        </span>
+
+                </div>
+
+                <h3>Convenções partidárias</h3>
+
+                <p>Os partidos decidem coligações e escolhem quem será candidato.</p>
+
+            </li>
+
+            <li class="evento evento--destaque evento--passado">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-08-15">
+                        15 de agosto
+                    </time>
+
+                        <span class="status status--concluido">
+                            Concluído
+                        </span>
+
+                </div>
+
+                <h3>Registro de candidaturas</h3>
+
+                <p>Último dia para partidos, federações e coligações pedirem o registro das candidaturas na Justiça Eleitoral.</p>
+
+            </li>
+
+            <li class="evento evento--passado">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-08-16">
+                        16 de agosto
+                    </time>
+
+                        <span class="status status--concluido">
+                            Concluído
+                        </span>
+
+                </div>
+
+                <h3>Início da propaganda eleitoral</h3>
+
+                <p>A campanha pode começar nas ruas e na internet.</p>
+
+            </li>
+
+            <li class="evento evento--passado">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-08-28">
+                        28 de agosto a 1º de outubro
+                    </time>
+
+                        <span class="status status--concluido">
+                            Concluído
+                        </span>
+
+                </div>
+
+                <h3>Horário eleitoral gratuito (1º turno)</h3>
+
+                <p>Propaganda dos candidatos no rádio e na TV.</p>
+
+            </li>
+
+        </ol>
+
+    </section>
+
+    <section class="fase">
+
+        <h2>Votação</h2>
+        <p class="fase-desc">Os dois dias de voto de 2026.</p>
+
+        <ol class="linha-tempo">
+
+            <li class="evento evento--destaque evento--passado">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-10-04">
+                        4 de outubro
+                    </time>
+
+                        <span class="status status--concluido">
+                            Concluído
+                        </span>
+
+                </div>
+
+                <h3>Votação do 1º turno</h3>
+
+                <p>Das 8h às 17h (horário de Brasília). Cargos em disputa: presidente, governadores, senadores, deputados federais, estaduais e distritais.</p>
+
+            </li>
+
+            <li class="evento evento--passado">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-10-09">
+                        9 a 23 de outubro
+                    </time>
+
+                        <span class="status status--concluido">
+                            Concluído
+                        </span>
+
+                </div>
+
+                <h3>Horário eleitoral gratuito (2º turno)</h3>
+
+                <p>Propaganda no rádio e na TV para os cargos que tiveram segundo turno.</p>
+
+            </li>
+
+            <li class="evento evento--destaque evento--passado">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-10-25">
+                        25 de outubro
+                    </time>
+
+                        <span class="status status--concluido">
+                            Concluído
+                        </span>
+
+                </div>
+
+                <h3>Votação do 2º turno</h3>
+
+                <p>Realizado onde nenhum candidato alcançou a maioria necessária no 1º turno.</p>
+
+            </li>
+
+        </ol>
+
+    </section>
+
+    <section class="fase">
+
+        <h2>Depois da eleição</h2>
+        <p class="fase-desc">Resultados oficiais, justificativas e posse dos eleitos.</p>
+
+        <ol class="linha-tempo">
+
+            <li class="evento evento--passado">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-11-03">
+                        3 de novembro
+                    </time>
+
+                        <span class="status status--concluido">
+                            Concluído
+                        </span>
+
+                </div>
+
+                <h3>Reabertura do cadastro eleitoral</h3>
+
+                <p>Voltam os atendimentos presenciais e os serviços online, incluindo a certidão de quitação eleitoral.</p>
+
+            </li>
+
+            <li class="evento">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-12-03">
+                        3 de dezembro
+                    </time>
+
+                        <span class="status status--proximo">
+                            Próxima data
+                        </span>
+
+                </div>
+
+                <h3>Justificativa do 1º turno</h3>
+
+                <p>Prazo para justificar a ausência no 1º turno sem penalidade.</p>
+
+            </li>
+
+            <li class="evento evento--destaque">
+
+                <div class="evento-topo">
+
+                    <time datetime="2026-12-18">
+                        Até 18 de dezembro
+                    </time>
+
+                </div>
+
+                <h3>Diplomação dos eleitos</h3>
+
+                <p>Data-limite para a Justiça Eleitoral entregar o diploma aos eleitos. Os tribunais regionais podem marcar datas anteriores.</p>
+
+            </li>
+
+            <li class="evento evento--destaque">
+
+                <div class="evento-topo">
+
+                    <time datetime="2027-01-05">
+                        5 de janeiro de 2027
+                    </time>
+
+                </div>
+
+                <h3>Posse do presidente e vice-presidente</h3>
+
+                <p>Cerimônia no Congresso Nacional.</p>
+
+            </li>
+
+            <li class="evento evento--destaque">
+
+                <div class="evento-topo">
+
+                    <time datetime="2027-01-06">
+                        6 de janeiro de 2027
+                    </time>
+
+                </div>
+
+                <h3>Posse dos governadores e vices</h3>
+
+                <p>Cerimônias nas Assembleias Legislativas.</p>
+
+            </li>
+
+            <li class="evento">
+
+                <div class="evento-topo">
+
+                    <time datetime="2027-01-08">
+                        8 de janeiro de 2027
+                    </time>
+
+                </div>
+
+                <h3>Justificativa do 2º turno</h3>
+
+                <p>Prazo final para justificar a ausência no 2º turno.</p>
+
+            </li>
+
+            <li class="evento">
+
+                <div class="evento-topo">
+
+                    <time datetime="2027-02-01">
+                        1º de fevereiro de 2027
+                    </time>
+
+                </div>
+
+                <h3>Posse de senadores e deputados</h3>
+
+                <p>Senadores e deputados federais tomam posse no Congresso Nacional; deputados estaduais e distritais, em geral na mesma data, conforme a Constituição estadual. (Fonte secundária, ver nota no fim da página.)</p>
+
+            </li>
+
+        </ol>
+
+    </section>
+
+    <p class="nota-rodape">
+        As datas podem ser alteradas por decisão da Justiça Eleitoral.
+        Confirme sempre no site do TSE ou no do seu Tribunal Regional Eleitoral.
+        A posse de senadores e deputados em 1º de fevereiro de 2027 não consta
+        na página do TSE usada como fonte principal; vem de reportagem e deve
+        ser conferida na Constituição e na Resolução do TSE antes de ser
+        citada como oficial.
+    </p>
+
+</main>
+
+<footer>
+
+    <strong>DEMOS</strong>
+
+    <p>
+        Política verdadeira.
+    </p>
+
+</footer>
+
+</body>
+</html>
