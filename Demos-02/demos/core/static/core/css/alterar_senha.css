@@ -1,0 +1,41 @@
+/*
+    Alterar senha
+    Reaproveita .pagina-login, .caixa-login, .campo-login e .botao-login do login.css
+*/
+
+.erro-campo {
+    color: #8a3f38;
+    font-size: 12px;
+}
+
+.regras-senha {
+    margin: 4px 0 0 18px;
+
+    color: #71837c;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.botao-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+}
+
+.selo-ok {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--verde);
+    border-radius: 50%;
+
+    color: white;
+    font-size: 26px;
+}
