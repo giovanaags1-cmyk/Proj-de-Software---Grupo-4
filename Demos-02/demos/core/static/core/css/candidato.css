@@ -9,10 +9,6 @@
 }
 
 
-/* =====================================
-   PESQUISA
-===================================== */
-
 .area-pesquisa-candidato {
     width: min(1100px, 100%);
 
@@ -62,7 +58,6 @@
 }
 
 
-/* LUPA */
 
 .botao-pesquisa {
     width: 72px;
@@ -89,7 +84,6 @@
 }
 
 
-/* MAIS */
 
 .botao-adicionar {
     width: 72px;
@@ -119,11 +113,6 @@
 }
 
 
-
-/* =====================================
-   CARD
-===================================== */
-
 .card-candidato {
     width: min(950px, 100%);
 
@@ -144,9 +133,6 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
 }
 
-
-
-/* CABEÇALHO */
 
 .cabecalho-candidato {
     display: flex;
@@ -198,9 +184,6 @@
 }
 
 
-
-/* DADOS */
-
 .dados-candidato {
     display: grid;
 
@@ -239,9 +222,6 @@
 }
 
 
-
-/* PERFIL */
-
 .perfil-candidato {
     flex: 1;
 }
@@ -264,9 +244,6 @@
     line-height: 1.7;
 }
 
-
-
-/* SALVAR */
 
 .acoes-candidato {
     display: flex;
@@ -305,11 +282,6 @@
     color: white;
 }
 
-
-
-/* =====================================
-   RESPONSIVO
-===================================== */
 
 @media (max-width: 700px) {
 
