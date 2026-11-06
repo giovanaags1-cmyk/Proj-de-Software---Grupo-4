@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Senha alterada | DEMOS</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/demos.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/alterar_senha.css' %}">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <a
+            href="{% url 'salvos' %}"
+            class="icone-menu"
+            aria-label="Candidatos salvos"
+        >
+            <i class="fa-solid fa-bookmark"></i>
+        </a>
+
+        <a
+            href="{% url 'index' %}"
+            class="icone-menu"
+            aria-label="Início"
+        >
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+    </div>
+
+    <a href="{% url 'index' %}" class="logo">
+
+        <img
+            src="{% static 'core/img/logo.png' %}"
+            alt="Logo Demos"
+        >
+
+        <span>DEMOS</span>
+
+    </a>
+
+    <div class="usuario-logado">
+
+        <span class="nome-usuario">
+            {{ user.username }}
+        </span>
+
+        <form
+            method="post"
+            action="{% url 'logout' %}"
+        >
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="botao-logout"
+            >
+                Sair
+            </button>
+
+        </form>
+
+    </div>
+
+</header>
+
+<main class="pagina-login">
+
+    <section class="caixa-login">
+
+        <div class="selo-ok" aria-hidden="true">✓</div>
+
+        <h1>Senha alterada</h1>
+
+        <p class="descricao-login">
+            Sua nova senha já está valendo. Use-a no próximo login.
+        </p>
+
+        <a href="{% url 'salvos' %}" class="botao-login botao-link">
+            Voltar aos meus salvos
+        </a>
+
+    </section>
+
+</main>
+
+</body>
+</html>
