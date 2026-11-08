@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .models import Candidato
 
 
@@ -6,7 +7,6 @@ from .models import Candidato
 class CandidatoAdmin(admin.ModelAdmin):
     list_display = (
         "nome",
-        "apelido",
         "partido",
         "cargo",
         "uf",
@@ -14,12 +14,5 @@ class CandidatoAdmin(admin.ModelAdmin):
 
     search_fields = (
         "nome",
-        "apelido",
         "partido",
-    )
-
-    list_filter = (
-        "partido",
-        "cargo",
-        "uf",
     )

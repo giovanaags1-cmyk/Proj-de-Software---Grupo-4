@@ -20,7 +20,7 @@
 
     <link
         rel="stylesheet"
-        href="{% static 'core/css/candidato.css' %}"
+    href="{% static 'core/css/candidato.css' %}?v=3"
     >
 
     <link
@@ -108,63 +108,52 @@
 
 </header>
 {% if messages %}
-
     <div class="mensagens">
-
         {% for message in messages %}
-
-            <div class="mensagem {{ message.tags }}">
+            <div class="mensagem">
                 {{ message }}
             </div>
-
         {% endfor %}
-
     </div>
-
 {% endif %}
-
 <main class="pagina-candidato">
 
 
 
     <div class="area-pesquisa-candidato">
 
-        <form
-            method="get"
-            action="{% url 'index' %}"
-            class="barra-pesquisa-candidato"
+    <form
+        method="get"
+        action="{% url 'index' %}"
+        class="barra-pesquisa-candidato"
+    >
+
+        <input
+            type="text"
+            name="q"
+            placeholder="Pesquise um candidato..."
         >
 
-            <input
-                type="text"
-                name="q"
-                placeholder="Pesquise um candidato..."
-            >
+        <button
+            type="submit"
+            class="botao-pesquisa"
+            aria-label="Pesquisar candidato"
+        >
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+    </form>
 
 
+    <a
+        href="{% url 'comparar' %}?candidato1={{ candidato.id }}"
+        class="botao-mais-candidato"
+        aria-label="Comparar candidato"
+    >
+        +
+    </a>
 
-            <button
-                type="submit"
-                class="botao-pesquisa"
-                aria-label="Pesquisar candidato"
-            >
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-
-            <button
-                type="submit"
-                formaction="{% url 'comparar' %}"
-                class="botao-adicionar"
-                name="candidato1"
-                value="{{ candidato.id }}"
-                aria-label="Adicionar candidato para comparação"
-            >
-                <i class="fa-solid fa-plus"></i>
-            </button>
-
-        </form>
-
-    </div>
+</div>
 
 
 
@@ -266,24 +255,23 @@
 
 
         <div class="acoes-candidato">
+    {% if esta_salvo %}
+        <form method="post" action="{% url 'remover_candidato' candidato.id %}">
+            {% csrf_token %}
+            <button type="submit" class="botao-salvar botao-salvo">
+                ★ Salvo
+            </button>
+        </form>
 
-            <form
-    method="post"
-    action="{% url 'salvar_candidato' candidato.id %}"
->
-    {% csrf_token %}
-
-    <button
-        type="submit"
-        class="botao-salvar"
-    >
-        <i class="fa-regular fa-bookmark"></i>
-        Salvar
-    </button>
-
-</form>
-
-        </div>
+    {% else %}
+        <form method="post" action="{% url 'salvar_candidato' candidato.id %}">
+            {% csrf_token %}
+            <button type="submit" class="botao-salvar">
+                ☆ Salvar
+            </button>
+        </form>
+    {% endif %}
+</div>
 
 
     </section>

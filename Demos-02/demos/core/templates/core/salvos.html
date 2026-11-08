@@ -5,12 +5,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Candidatos salvos | DEMOS</title>
 
-    <link rel="stylesheet" href="{% static 'core/css/demos.css' %}">
-    <link rel="stylesheet" href="{% static 'core/css/salvos.css' %}">
+    <link
+        rel="stylesheet"
+        href="{% static 'core/css/demos.css' %}"
+    >
+
+    <link
+    rel="stylesheet"
+    href="{% static 'core/css/salvos.css' %}?v=2"
+>
 
     <link
         rel="stylesheet"
@@ -18,7 +29,9 @@
     >
 </head>
 
+
 <body>
+
 
 <header class="cabecalho">
 
@@ -32,6 +45,7 @@
             <i class="fa-solid fa-bookmark"></i>
         </a>
 
+
         <a
             href="{% url 'index' %}"
             class="icone-menu"
@@ -43,56 +57,68 @@
     </div>
 
 
-    <a href="{% url 'index' %}" class="logo">
+    <a
+        href="{% url 'index' %}"
+        class="logo"
+    >
 
         <img
             src="{% static 'core/img/logo.png' %}"
             alt="Logo DEMOS"
         >
 
-        <span>DEMOS</span>
+        <span>
+            DEMOS
+        </span>
 
     </a>
 
 
     {% if user.is_authenticated %}
 
-    <div class="usuario-logado">
+        <div class="usuario-logado">
 
-        <span class="nome-usuario">
-            {{ user.username }}
-        </span>
+            <span class="nome-usuario">
+                {{ user.username }}
+            </span>
 
-        <form
-            method="post"
-            action="{% url 'logout' %}"
-        >
-            {% csrf_token %}
 
-            <button
-                type="submit"
-                class="botao-logout"
+            <form
+                method="post"
+                action="{% url 'logout' %}"
             >
-                Sair
-            </button>
 
-        </form>
+                {% csrf_token %}
 
-    </div>
+                <button
+                    type="submit"
+                    class="botao-logout"
+                >
+                    Sair
+                </button>
 
-{% else %}
+            </form>
 
-    <a
-        href="{% url 'login' %}"
-        class="icone-menu"
-        aria-label="Entrar na conta"
-    >
-        <i class="fa-solid fa-circle-user"></i>
-    </a>
+        </div>
 
-{% endif %}
+
+    {% else %}
+
+        <a
+            href="{% url 'login' %}"
+            class="icone-menu"
+            aria-label="Entrar na conta"
+        >
+
+            <i class="fa-solid fa-circle-user"></i>
+
+        </a>
+
+    {% endif %}
 
 </header>
+
+
 {% if messages %}
 
     <div class="mensagens">
@@ -109,11 +135,15 @@
 
 {% endif %}
 
+
 <main class="pagina-salvos">
+
 
     <div class="titulo-salvos">
 
-        <h1>Meus candidatos salvos</h1>
+        <h1>
+            Meus candidatos salvos
+        </h1>
 
         <p>
             Acompanhe e compare os candidatos
@@ -125,89 +155,134 @@
 
     <div class="topo-salvos">
 
-    <span>
-        {{ favoritos|length }} candidatos salvos
-    </span>
-
-</div>
-
-
-    <div class="grid-salvos">
-        {% for favorito in favoritos %}
-
-    <article class="card-salvo">
-
-    <a
-        href="{% url 'candidato' favorito.candidato.id %}"
-        class="link-card-salvo"
-    >
-
-        <div class="conteudo-salvo">
-
-            <div class="avatar-salvo">
-                {{ favorito.candidato.nome|slice:":2"|upper }}
-            </div>
-
-
-            <div>
-
-                <h2>
-                    {{ favorito.candidato.nome }}
-                </h2>
-
-                <p>
-                    {{ favorito.candidato.partido }}
-                </p>
-
-                <span>
-                    {{ favorito.candidato.cargo }}
-                    ·
-                    {{ favorito.candidato.uf }}
-                </span>
-
-            </div>
-
-
-            <i
-                class="fa-solid fa-bookmark marcador-salvo"
-            ></i>
-
-        </div>
-
-    </a>
-
-
-    <div class="acoes-salvo">
-
-        <a
-            href="{% url 'candidato' favorito.candidato.id %}"
-        >
-            Ver perfil completo
-        </a>
-
         <span>
-            Remover dos salvos
+
+            {{ favoritos|length }}
+
+            {% if favoritos|length == 1 %}
+                candidato salvo
+            {% else %}
+                candidatos salvos
+            {% endif %}
+
         </span>
 
     </div>
 
-</article>
+
+    <div class="grid-salvos">
 
 
-{% empty %}
+        {% for favorito in favoritos %}
 
-    <p>
-        Você ainda não salvou nenhum candidato.
-    </p>
 
-{% endfor %}
+            <article class="card-salvo">
 
-        
+
+                <a
+                    href="{% url 'candidato' favorito.candidato.id %}"
+                    class="link-card-salvo"
+                >
+
+
+                    <div class="conteudo-salvo">
+
+
+                        <div class="avatar-salvo">
+
+                            {{ favorito.candidato.nome|slice:":2"|upper }}
+
+                        </div>
+
+
+                        <div>
+
+                            <h2>
+                                {{ favorito.candidato.nome }}
+                            </h2>
+
+                            <p>
+                                {{ favorito.candidato.partido }}
+                            </p>
+
+                            <span>
+
+                                {{ favorito.candidato.cargo }}
+
+                                ·
+
+                                {{ favorito.candidato.uf }}
+
+                            </span>
+
+                        </div>
+
+
+                        <i
+                            class="fa-solid fa-bookmark marcador-salvo"
+                        ></i>
+
+
+                    </div>
+
+
+                </a>
+
+
+                <div class="acoes-salvo">
+
+
+                    <a
+                        href="{% url 'candidato' favorito.candidato.id %}"
+                        class="link-perfil"
+                    >
+
+                        Ver perfil completo
+
+                    </a>
+
+
+                    <form
+                        method="post"
+                        action="{% url 'remover_favorito' favorito.id %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="botao-remover"
+                        >
+
+                            Remover
+
+                        </button>
+
+                    </form>
+
+
+                </div>
+
+
+            </article>
+
+
+        {% empty %}
+
+
+            <p>
+                Você ainda não salvou nenhum candidato.
+            </p>
+
+
+        {% endfor %}
 
 
     </div>
 
+
 </main>
+
 
 </body>
 

@@ -16,6 +16,65 @@
 }
 
 
+
+.btn-salvar,
+.btn-salvo {
+    min-width: 130px;
+    padding: 12px 22px;
+
+    border: 2px solid #0b3d2e;
+    border-radius: 25px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-salvar {
+    background-color: white;
+    color: #0b3d2e;
+}
+
+.btn-salvar:hover {
+    background-color: #0b3d2e;
+    color: white;
+}
+
+.btn-salvo {
+    background-color: #0b3d2e;
+    color: white;
+}
+
+.btn-salvo:hover {
+    background-color: white;
+    color: #0b3d2e;
+}
+.mensagens {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    padding: 14px 0;
+
+    background: transparent;
+}
+
+.mensagem {
+    background: transparent;
+
+    color: #0b3d2e;
+
+    padding: 6px 16px;
+
+    border: none;
+    box-shadow: none;
+
+    font-size: 15px;
+    font-weight: 600;
+}
 .barra-pesquisa-candidato {
     width: 100%;
     height: 72px;
@@ -254,32 +313,47 @@
 }
 
 
-.botao-salvar {
-    display: inline-flex;
-    align-items: center;
-
-    gap: 8px;
-
-    padding: 12px 25px;
-
-    border: 1px solid var(--verde);
-    border-radius: 25px;
-
-    background-color: white;
-
-    color: var(--verde);
-
-    text-decoration: none;
-
-    font-size: 14px;
-    font-weight: 600;
+.acoes-candidato {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 32px;
 }
 
+.acoes-candidato form {
+    margin: 0;
+}
+
+.botao-salvar {
+    border: 2px solid #0b3d2e;
+    border-radius: 999px;
+
+    background: transparent;
+    color: #0b3d2e;
+
+    padding: 10px 22px;
+
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
 
 .botao-salvar:hover {
-    background-color: var(--verde);
+    background: #0b3d2e;
+    color: #f3ead5;
+}
 
-    color: white;
+.botao-salvo {
+    background: #0b3d2e;
+    color: #f3ead5;
+}
+
+.botao-salvo:hover {
+    background: transparent;
+    color: #0b3d2e;
 }
 
 
@@ -336,4 +410,94 @@
         grid-template-columns: 1fr;
     }
 
+}
+.area-pesquisa-candidato {
+    width: min(1050px, calc(100% - 40px));
+    margin: 25px auto 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.barra-pesquisa-candidato {
+    flex: 1;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+
+    background: white;
+
+    border: 1px solid #dfdbcf;
+    border-radius: 999px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+}
+
+.barra-pesquisa-candidato input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+
+    border: none;
+    outline: none;
+
+    padding: 0 22px;
+
+    font-size: 15px;
+    font-family: inherit;
+
+    background: transparent;
+}
+
+.botao-pesquisa {
+    width: 60px;
+    height: 100%;
+
+    border: none;
+
+    background: transparent;
+    color: var(--verde);
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.botao-mais-candidato,
+.botao-mais-candidato:visited {
+    width: 58px;
+    height: 58px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1.5px solid var(--verde);
+    border-radius: 50%;
+
+    background: white;
+    color: var(--verde);
+
+    text-decoration: none;
+
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+
+    transition: 0.2s ease;
+}
+
+.botao-mais-candidato:hover {
+    background: var(--verde);
+    color: white;
+
+    transform: scale(1.05);
 }

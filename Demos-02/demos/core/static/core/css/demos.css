@@ -1533,3 +1533,114 @@ footer p {
 .mensagem.info {
     background: var(--bege-claro);
 }
+
+.resultados-busca-django {
+    max-height: 430px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding-right: 6px;
+}
+
+.resultados-busca-django::-webkit-scrollbar {
+    width: 6px;
+}
+
+.resultados-busca-django::-webkit-scrollbar-thumb {
+    background-color: var(--verde);
+    border-radius: 10px;
+}
+
+.resultados-busca-django::-webkit-scrollbar-track {
+    background: transparent;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.seta-resultado {
+    display: none;
+}
+.resultados-pesquisa-django,
+.resultados-candidatos,
+.resultados-busca-django {
+    max-height: 430px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    padding-right: 6px;
+}
+
+.resultados-pesquisa-django::-webkit-scrollbar,
+.resultados-candidatos::-webkit-scrollbar,
+.resultados-busca-django::-webkit-scrollbar {
+    width: 6px;
+}
+
+.resultados-pesquisa-django::-webkit-scrollbar-thumb,
+.resultados-candidatos::-webkit-scrollbar-thumb,
+.resultados-busca-django::-webkit-scrollbar-thumb {
+    background-color: var(--verde);
+    border-radius: 10px;
+}
+
+.resultados-pesquisa-django::-webkit-scrollbar-track,
+.resultados-candidatos::-webkit-scrollbar-track,
+.resultados-busca-django::-webkit-scrollbar-track {
+    background: transparent;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.seta-resultado,
+.resultado-busca-django .fa-chevron-right,
+.resultado-candidato-popup .fa-chevron-right,
+.resultado-candidato .fa-chevron-right {
+    display: none !important;
+}
+.botao-mais {
+    width: 56px;
+    height: 56px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(6, 76, 60, 0.14);
+    border-radius: 50%;
+
+    background-color: #ffffff;
+    color: var(--verde);
+
+    text-decoration: none;
+
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.10);
+
+    transition:
+        background-color 0.2s,
+        color 0.2s,
+        transform 0.2s;
+}
+
+.botao-mais:hover {
+    background-color: var(--verde);
+    color: #ffffff;
+
+    transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+    .botao-mais {
+        width: 48px;
+        height: 48px;
+
+        font-size: 27px;
+    }
+}

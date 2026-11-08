@@ -12,10 +12,28 @@ from .views import (
     CompararView,
     SalvarCandidatoView,
     ExcluirContaView,
+    RemoverFavoritoView,
+    RemoverCandidatoView,
+    CompararView,
 )
 
 
 urlpatterns = [
+    path(
+    "comparar/",
+    CompararView.as_view(),
+    name="comparar"
+),
+    path(
+    "candidato/<int:pk>/remover/",
+    RemoverCandidatoView.as_view(),
+    name="remover_candidato"
+),
+    path(
+    "salvos/remover/<int:pk>/",
+    RemoverFavoritoView.as_view(),
+    name="remover_favorito"
+),
     path(
     "logout/",
     LogoutView.as_view(next_page="/"),

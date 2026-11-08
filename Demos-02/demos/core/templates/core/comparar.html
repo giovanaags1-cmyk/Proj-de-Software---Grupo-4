@@ -1,0 +1,629 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Comparar candidatos | DEMOS</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'core/css/demos.css' %}?v=6"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'core/css/comparar.css' %}?v=2"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <a
+            href="{% url 'salvos' %}"
+            class="icone-menu"
+        >
+            <i class="fa-solid fa-bookmark"></i>
+        </a>
+
+
+        <a
+            href="{% url 'index' %}"
+            class="icone-menu"
+        >
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+    </div>
+
+
+    <a
+        href="{% url 'index' %}"
+        class="logo"
+    >
+
+        <img
+            src="{% static 'core/img/logo.png' %}"
+            alt="DEMOS"
+        >
+
+        <span>DEMOS</span>
+
+    </a>
+
+
+    {% if user.is_authenticated %}
+
+        <div class="usuario-logado">
+
+            <span class="nome-usuario">
+                {{ user.username }}
+            </span>
+
+            <form
+                method="post"
+                action="{% url 'logout' %}"
+            >
+
+                {% csrf_token %}
+
+                <button
+                    class="botao-logout"
+                    type="submit"
+                >
+                    Sair
+                </button>
+
+            </form>
+
+        </div>
+
+    {% else %}
+
+        <a
+            href="{% url 'login' %}"
+            class="icone-menu"
+        >
+            <i class="fa-solid fa-circle-user"></i>
+        </a>
+
+    {% endif %}
+
+</header>
+
+
+
+<main class="pagina-comparar">
+
+
+    <div class="cabecalho-pagina-comparacao">
+
+        <h1>
+            Comparar candidatos
+        </h1>
+
+        <p>
+            Veja as informações dos candidatos
+            lado a lado.
+        </p>
+
+    </div>
+
+
+
+    <div class="grid-comparacao">
+
+
+        {% if candidato1 %}
+
+        <article class="card-comparacao">
+
+
+            {% if candidato2 %}
+
+                <a
+                    href="{% url 'candidato' candidato2.id %}"
+                    class="remover-comparacao"
+                    aria-label="Remover da comparação"
+                >
+                    ×
+                </a>
+
+            {% else %}
+
+                <a
+                    href="{% url 'candidato' candidato1.id %}"
+                    class="remover-comparacao"
+                    aria-label="Sair da comparação"
+                >
+                    ×
+                </a>
+
+            {% endif %}
+
+
+
+            <div class="topo-candidato-comparacao">
+
+                <div class="avatar-comparacao">
+                    {{ candidato1.nome|slice:":2"|upper }}
+                </div>
+
+
+                <div class="identificacao-comparacao">
+
+                    <h2>
+                        {{ candidato1.nome }}
+                    </h2>
+
+                    {% if candidato1.apelido %}
+
+                        <p class="apelido-comparacao">
+                            {{ candidato1.apelido }}
+                        </p>
+
+                    {% endif %}
+
+                    <p>
+                        {{ candidato1.partido }}
+                        ·
+                        {{ candidato1.cargo }}
+                        ·
+                        {{ candidato1.uf }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="dados-completos-comparacao">
+
+                <h3>Perfil político</h3>
+
+
+                <div class="linha-dado">
+                    <span>Nome completo</span>
+                    <strong>
+                        {{ candidato1.nome }}
+                    </strong>
+                </div>
+
+
+                <div class="linha-dado">
+                    <span>Nome de urna</span>
+                    <strong>
+                        {{ candidato1.apelido|default:"-" }}
+                    </strong>
+                </div>
+
+
+                <div class="linha-dado">
+                    <span>Partido</span>
+                    <strong>
+                        {{ candidato1.partido }}
+                    </strong>
+                </div>
+
+
+                <div class="linha-dado">
+                    <span>Cargo</span>
+                    <strong>
+                        {{ candidato1.cargo }}
+                    </strong>
+                </div>
+
+
+                <div class="linha-dado">
+                    <span>UF</span>
+                    <strong>
+                        {{ candidato1.uf }}
+                    </strong>
+                </div>
+
+
+                <div class="linha-dado">
+                    <span>Número</span>
+                    <strong>
+                        {{ candidato1.numero|default:"-" }}
+                    </strong>
+                </div>
+
+            </div>
+
+
+
+            <div class="acoes-comparacao">
+
+
+                {% if candidato1_salvo %}
+
+                    <form
+                        method="post"
+                        action="{% url 'remover_candidato' candidato1.id %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <input
+                            type="hidden"
+                            name="next"
+                            value="{{ request.get_full_path }}"
+                        >
+
+                        <button
+                            type="submit"
+                            class="botao-salvo-comparacao"
+                        >
+                            ★ Salvo
+                        </button>
+
+                    </form>
+
+
+                {% else %}
+
+                    <form
+                        method="post"
+                        action="{% url 'salvar_candidato' candidato1.id %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <input
+                            type="hidden"
+                            name="next"
+                            value="{{ request.get_full_path }}"
+                        >
+
+                        <button
+                            type="submit"
+                            class="botao-salvar-comparacao"
+                        >
+                            ☆ Salvar
+                        </button>
+
+                    </form>
+
+                {% endif %}
+
+
+            </div>
+
+
+        </article>
+
+        {% endif %}
+
+
+
+        {% if candidato2 %}
+
+
+        <article class="card-comparacao">
+
+
+            {% if candidato1 %}
+
+                <a
+                    href="{% url 'candidato' candidato1.id %}"
+                    class="remover-comparacao"
+                    aria-label="Remover da comparação"
+                >
+                    ×
+                </a>
+
+            {% endif %}
+
+
+
+            <div class="topo-candidato-comparacao">
+
+                <div class="avatar-comparacao">
+                    {{ candidato2.nome|slice:":2"|upper }}
+                </div>
+
+
+                <div class="identificacao-comparacao">
+
+                    <h2>
+                        {{ candidato2.nome }}
+                    </h2>
+
+                    {% if candidato2.apelido %}
+
+                        <p class="apelido-comparacao">
+                            {{ candidato2.apelido }}
+                        </p>
+
+                    {% endif %}
+
+
+                    <p>
+                        {{ candidato2.partido }}
+                        ·
+                        {{ candidato2.cargo }}
+                        ·
+                        {{ candidato2.uf }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="dados-completos-comparacao">
+
+                <h3>Perfil político</h3>
+
+
+                <div class="linha-dado">
+                    <span>Nome completo</span>
+                    <strong>
+                        {{ candidato2.nome }}
+                    </strong>
+                </div>
+
+
+                <div class="linha-dado">
+                    <span>Nome de urna</span>
+                    <strong>
+                        {{ candidato2.apelido|default:"-" }}
+                    </strong>
+                </div>
+
+
+                <div class="linha-dado">
+                    <span>Partido</span>
+                    <strong>
+                        {{ candidato2.partido }}
+                    </strong>
+                </div>
+
+
+                <div class="linha-dado">
+                    <span>Cargo</span>
+                    <strong>
+                        {{ candidato2.cargo }}
+                    </strong>
+                </div>
+
+
+                <div class="linha-dado">
+                    <span>UF</span>
+                    <strong>
+                        {{ candidato2.uf }}
+                    </strong>
+                </div>
+
+
+                <div class="linha-dado">
+                    <span>Número</span>
+                    <strong>
+                        {{ candidato2.numero|default:"-" }}
+                    </strong>
+                </div>
+
+            </div>
+
+
+
+            <div class="acoes-comparacao">
+
+
+                {% if candidato2_salvo %}
+
+                    <form
+                        method="post"
+                        action="{% url 'remover_candidato' candidato2.id %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <input
+                            type="hidden"
+                            name="next"
+                            value="{{ request.get_full_path }}"
+                        >
+
+                        <button
+                            type="submit"
+                            class="botao-salvo-comparacao"
+                        >
+                            ★ Salvo
+                        </button>
+
+                    </form>
+
+
+                {% else %}
+
+                    <form
+                        method="post"
+                        action="{% url 'salvar_candidato' candidato2.id %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <input
+                            type="hidden"
+                            name="next"
+                            value="{{ request.get_full_path }}"
+                        >
+
+                        <button
+                            type="submit"
+                            class="botao-salvar-comparacao"
+                        >
+                            ☆ Salvar
+                        </button>
+
+                    </form>
+
+                {% endif %}
+
+
+            </div>
+
+
+        </article>
+
+
+
+        {% else %}
+
+
+        <article class="card-adicionar-comparacao">
+
+
+            <div class="icone-adicionar-comparacao">
+                +
+            </div>
+
+
+            <h2>
+                Adicionar candidato
+            </h2>
+
+
+            <p>
+                Pesquise por nome ou apelido.
+            </p>
+
+
+
+            <form
+                method="get"
+                action="{% url 'comparar' %}"
+                class="busca-comparar"
+            >
+
+
+                {% if candidato1 %}
+
+                    <input
+                        type="hidden"
+                        name="candidato1"
+                        value="{{ candidato1.id }}"
+                    >
+
+                {% endif %}
+
+
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ pesquisa }}"
+                    placeholder="Procure um candidato..."
+                    autocomplete="off"
+                >
+
+
+                <button type="submit">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </button>
+
+            </form>
+
+
+
+            {% if pesquisa %}
+
+
+                <div class="resultados-comparacao">
+
+
+                    {% for candidato in candidatos2 %}
+
+
+                        <a
+                            href="{% url 'comparar' %}?candidato1={{ candidato1.id }}&candidato2={{ candidato.id }}"
+                            class="resultado-comparacao"
+                        >
+
+
+                            <div class="avatar-resultado-comparacao">
+
+                                {{ candidato.nome|slice:":2"|upper }}
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    {{ candidato.nome }}
+                                </strong>
+
+                                <span>
+                                    {{ candidato.partido }}
+                                    ·
+                                    {{ candidato.cargo }}
+                                    ·
+                                    {{ candidato.uf }}
+                                </span>
+
+                            </div>
+
+
+                        </a>
+
+
+                    {% empty %}
+
+
+                        <p class="sem-resultados-comparacao">
+
+                            Nenhum candidato encontrado.
+
+                        </p>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        </article>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</main>
+
+
+</body>
+
+</html>

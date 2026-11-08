@@ -1,0 +1,390 @@
+.pagina-comparar {
+    width: min(1150px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 40px 0 70px;
+}
+
+.cabecalho-pagina-comparacao {
+    margin-bottom: 30px;
+}
+
+.cabecalho-pagina-comparacao h1 {
+    font-family: Georgia, serif;
+    color: var(--verde);
+    font-size: 32px;
+    margin-bottom: 7px;
+}
+
+.cabecalho-pagina-comparacao p {
+    color: #71837c;
+    font-size: 14px;
+}
+
+.grid-comparacao {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px;
+    align-items: start;
+}
+
+.card-comparacao,
+.card-adicionar-comparacao {
+    position: relative;
+
+    background: white;
+
+    border: 1px solid #dfdbcf;
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.05);
+}
+
+.remover-comparacao {
+    position: absolute;
+
+    top: 16px;
+    right: 18px;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: var(--verde);
+    text-decoration: none;
+
+    font-size: 28px;
+    line-height: 1;
+
+    transition: 0.2s;
+
+    z-index: 5;
+}
+
+.remover-comparacao:hover {
+    background: rgba(6, 76, 60, 0.08);
+}
+
+.topo-candidato-comparacao {
+    min-height: 145px;
+
+    padding: 28px 55px 28px 28px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    background: var(--bege);
+}
+
+.avatar-comparacao {
+    width: 78px;
+    height: 78px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--verde);
+    color: white;
+
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.identificacao-comparacao {
+    min-width: 0;
+}
+
+.identificacao-comparacao h2 {
+    color: var(--verde);
+
+    font-family: Georgia, serif;
+    font-size: 22px;
+
+    margin-bottom: 6px;
+}
+
+.identificacao-comparacao p {
+    color: #40514b;
+    font-size: 13px;
+
+    margin-top: 3px;
+}
+
+.apelido-comparacao {
+    font-weight: 600;
+}
+
+.dados-completos-comparacao {
+    padding: 26px;
+}
+
+.dados-completos-comparacao h3 {
+    color: var(--verde);
+    font-size: 16px;
+
+    margin-bottom: 18px;
+}
+
+.linha-dado {
+    min-height: 46px;
+
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border-bottom: 1px solid #eeeae0;
+}
+
+.linha-dado:last-child {
+    border-bottom: none;
+}
+
+.linha-dado span {
+    color: #71837c;
+    font-size: 12px;
+}
+
+.linha-dado strong {
+    color: #243831;
+
+    font-size: 13px;
+
+    text-align: right;
+
+    overflow-wrap: anywhere;
+}
+
+.acoes-comparacao {
+    padding: 0 26px 25px;
+}
+
+.acoes-comparacao form {
+    margin: 0;
+}
+
+.botao-salvar-comparacao,
+.botao-salvo-comparacao {
+    width: 100%;
+
+    border: 1.5px solid var(--verde);
+    border-radius: 999px;
+
+    padding: 11px 20px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.botao-salvar-comparacao {
+    background: transparent;
+    color: var(--verde);
+}
+
+.botao-salvar-comparacao:hover {
+    background: var(--verde);
+    color: var(--bege-claro);
+}
+
+.botao-salvo-comparacao {
+    background: var(--verde);
+    color: var(--bege-claro);
+}
+
+.botao-salvo-comparacao:hover {
+    background: transparent;
+    color: var(--verde);
+}
+
+.card-adicionar-comparacao {
+    min-height: 450px;
+
+    padding: 40px;
+
+    text-align: center;
+}
+
+.icone-adicionar-comparacao {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--verde);
+    color: white;
+
+    font-size: 35px;
+    font-weight: 300;
+}
+
+.card-adicionar-comparacao h2 {
+    font-family: Georgia, serif;
+
+    color: var(--verde);
+
+    font-size: 22px;
+
+    margin-bottom: 7px;
+}
+
+.card-adicionar-comparacao > p {
+    color: #71837c;
+    font-size: 13px;
+
+    margin-bottom: 25px;
+}
+
+.busca-comparar {
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+
+    border: 1px solid #dfdbcf;
+    border-radius: 999px;
+
+    background: white;
+
+    overflow: hidden;
+}
+
+.busca-comparar input {
+    flex: 1;
+    min-width: 0;
+
+    height: 100%;
+
+    padding: 0 18px;
+
+    border: none;
+    outline: none;
+
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.busca-comparar button {
+    width: 52px;
+    height: 100%;
+
+    border: none;
+
+    background: transparent;
+    color: var(--verde);
+
+    font-size: 17px;
+
+    cursor: pointer;
+}
+
+.resultados-comparacao {
+    max-height: 300px;
+
+    margin-top: 15px;
+
+    overflow-y: auto;
+
+    text-align: left;
+}
+
+.resultado-comparacao {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    color: inherit;
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.resultado-comparacao:hover {
+    background: var(--bege-claro);
+}
+
+.avatar-resultado-comparacao {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--verde);
+    color: white;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.resultado-comparacao strong {
+    display: block;
+
+    color: var(--verde);
+
+    font-size: 13px;
+
+    margin-bottom: 3px;
+}
+
+.resultado-comparacao span {
+    display: block;
+
+    color: #71837c;
+
+    font-size: 11px;
+}
+
+.sem-resultados-comparacao {
+    padding: 20px;
+
+    color: #71837c;
+
+    font-size: 13px;
+}
+
+@media (max-width: 800px) {
+
+    .grid-comparacao {
+        grid-template-columns: 1fr;
+    }
+
+    .linha-dado strong {
+        text-align: left;
+    }
+}
