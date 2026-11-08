@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
+from django.contrib import admin
 from .views import (
     IndexView,
     SalvosView,
@@ -81,4 +82,6 @@ urlpatterns = [
         ),
         name="alterar_senha_concluida"
     ),
+#Usar para povoar o banco de dados, depois deletar 
+    path("admin/", admin.site.urls),
 ]
