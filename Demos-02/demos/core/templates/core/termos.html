@@ -1,0 +1,199 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Termos e privacidade | DEMOS</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/demos.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/termos.css' %}">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <a href="{% url 'salvos' %}" class="icone-menu" aria-label="Candidatos salvos">
+            <i class="fa-solid fa-bookmark"></i>
+        </a>
+
+        <a href="{% url 'index' %}" class="icone-menu" aria-label="Início">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+    </div>
+
+    <a href="{% url 'index' %}" class="logo">
+        <img src="{% static 'core/img/logo.png' %}" alt="Logo DEMOS">
+        <span>DEMOS</span>
+    </a>
+
+    {% if user.is_authenticated %}
+
+        <div class="usuario-logado">
+
+            <a href="{% url 'minha_conta' %}" class="nome-usuario">
+                {{ user.username }}
+            </a>
+
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="botao-logout">Sair</button>
+            </form>
+
+        </div>
+
+    {% else %}
+
+        <a href="{% url 'login' %}" class="icone-menu" aria-label="Entrar na conta">
+            <i class="fa-solid fa-circle-user"></i>
+        </a>
+
+    {% endif %}
+
+</header>
+
+{% if messages %}
+    <div class="mensagens">
+        {% for message in messages %}
+            <div class="mensagem {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<main class="pagina-termos">
+
+    <div class="titulo-termos">
+        <h1>Termos de uso e política de privacidade</h1>
+        <p>Última atualização: novembro de 2026</p>
+    </div>
+
+    <nav class="indice-termos" aria-label="Índice">
+        <strong>Nesta página</strong>
+        <a href="#uso">1. Uso do site</a>
+        <a href="#dados-publicos">2. Dados dos candidatos</a>
+        <a href="#dados-usuario">3. Seus dados</a>
+        <a href="#direitos">4. Seus direitos (LGPD)</a>
+        <a href="#cookies">5. Cookies</a>
+        <a href="#contato">6. Contato</a>
+    </nav>
+
+    <article class="texto-termos">
+
+        <section id="uso">
+            <h2>1. Uso do site</h2>
+            <p>
+                O Demos é um projeto acadêmico gratuito que organiza informações públicas sobre
+                candidatos a eleições no Brasil. Ao usar o site, você concorda com estes termos.
+            </p>
+            <ul>
+                <li>O conteúdo tem caráter informativo e não substitui as fontes oficiais.</li>
+                <li>É proibido usar o site para fins ilegais ou para tentar acessar contas de outras pessoas.</li>
+                <li>Podemos atualizar estes termos; a data no topo da página indica a última versão.</li>
+            </ul>
+        </section>
+
+        <section id="dados-publicos">
+            <h2>2. Dados dos candidatos</h2>
+            <p>
+                As informações dos candidatos (nome, número, partido, cargo, estado etc.) são públicas
+                e vêm do Tribunal Superior Eleitoral (TSE). O Demos não se responsabiliza por erros
+                presentes na fonte original. Se encontrar alguma informação errada, confira no
+                <a href="https://divulgacandcontas.tse.jus.br" target="_blank" rel="noopener">DivulgaCandContas</a>.
+            </p>
+        </section>
+
+        <section id="dados-usuario">
+            <h2>3. Seus dados</h2>
+            <p>Quando você cria uma conta, guardamos apenas o necessário para o site funcionar:</p>
+
+            <table class="tabela-termos">
+                <thead>
+                    <tr>
+                        <th>Dado</th>
+                        <th>Para quê</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nome de usuário</td>
+                        <td>Identificar sua conta e fazer login</td>
+                    </tr>
+                    <tr>
+                        <td>Senha (criptografada)</td>
+                        <td>Proteger o acesso à conta; ninguém consegue ler sua senha</td>
+                    </tr>
+                    <tr>
+                        <td>Candidatos salvos</td>
+                        <td>Mostrar sua lista de salvos</td>
+                    </tr>
+                    <tr>
+                        <td>Data de cadastro e último acesso</td>
+                        <td>Segurança e funcionamento da conta</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Não vendemos, não compartilhamos seus dados com terceiros e
+                <strong>não registramos em quem você pretende votar</strong>.
+            </p>
+        </section>
+
+        <section id="direitos">
+            <h2>4. Seus direitos (LGPD)</h2>
+            <p>
+                Pela Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você pode a qualquer momento:
+            </p>
+            <ul>
+                <li>ver os dados da sua conta na página <a href="{% url 'minha_conta' %}">Minha conta</a>;</li>
+                <li>trocar sua senha em <a href="{% url 'alterar_senha' %}">Alterar senha</a>;</li>
+                <li>apagar sua conta e todos os seus salvos em <a href="{% url 'excluir_conta' %}">Excluir conta</a>.</li>
+            </ul>
+        </section>
+
+        <section id="cookies">
+            <h2>5. Cookies</h2>
+            <p>
+                Usamos apenas cookies essenciais: um para manter você logado (sessão) e outro de
+                segurança dos formulários (CSRF). Não usamos cookies de propaganda ou rastreamento.
+            </p>
+        </section>
+
+        <section id="contato">
+            <h2>6. Contato</h2>
+            <p>
+                Dúvidas sobre estes termos podem ser enviadas ao Grupo 4 de Projeto de Software
+                da PUC-Rio pelo repositório do projeto no GitHub.
+            </p>
+        </section>
+
+    </article>
+
+    <a href="#" class="voltar-topo"><i class="fa-solid fa-arrow-up"></i> Voltar ao topo</a>
+
+</main>
+
+<footer class="rodape-institucional">
+    <nav>
+        <a href="{% url 'sobre' %}">Sobre o Demos</a>
+        <a href="{% url 'termos' %}">Termos de uso e privacidade</a>
+        <a href="https://divulgacandcontas.tse.jus.br" target="_blank" rel="noopener">Dados: TSE</a>
+    </nav>
+    <p>DEMOS · Projeto de Software · PUC-Rio</p>
+</footer>
+
+</body>
+
+</html>

@@ -15,6 +15,9 @@ from .views import (
     RemoverFavoritoView,
     RemoverCandidatoView,
     CompararView,
+    MinhaContaView,
+    SobreView,
+    TermosView,
 )
 
 
@@ -99,6 +102,22 @@ urlpatterns = [
             template_name="core/alterar_senha_concluida.html",
         ),
         name="alterar_senha_concluida"
+    ),
+    # Sprint 9 (Giovana)
+    path(
+        "conta/",
+        MinhaContaView.as_view(),
+        name="minha_conta"
+    ),
+    path(
+        "sobre/",
+        SobreView.as_view(),
+        name="sobre"
+    ),
+    path(
+        "termos/",
+        TermosView.as_view(),
+        name="termos"
     ),
 #Usar para povoar o banco de dados, depois deletar 
     path("admin/", admin.site.urls),

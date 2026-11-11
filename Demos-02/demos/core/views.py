@@ -297,3 +297,35 @@ class ExcluirContaView(LoginRequiredMixin, FormView):
         usuario.delete()          # apaga a conta e os favoritos (CASCADE)
         messages.success(self.request, "Sua conta foi excluída.")
         return super().form_valid(form)
+
+
+# ---------------- Sprint 9 (Giovana) ----------------
+
+class MinhaContaView(LoginRequiredMixin, TemplateView):
+    template_name = "core/minha_conta.html"
+    login_url = "login"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        favoritos = Favorito.objects.filter(
+            usuario=self.request.user
+        ).select_related("candidato")
+
+        context["total_salvos"] = favoritos.count()
+        context["ultimos_salvos"] = favoritos.order_by("-id")[:3]
+
+        return context
+
+
+class SobreView(TemplateView):
+    template_name = "core/sobre.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_candidatos"] = Candidato.objects.count()
+        return context
+
+
+class TermosView(TemplateView):
+    template_name = "core/termos.html"
