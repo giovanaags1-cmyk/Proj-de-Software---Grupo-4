@@ -1,0 +1,285 @@
+/* Página Minha Conta - Sprint 9 (Giovana) */
+
+.pagina-conta {
+    width: min(1050px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 45px 0 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.topo-conta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.avatar-conta {
+    width: 78px;
+    height: 78px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--verde);
+    color: var(--bege);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, serif;
+    font-size: 28px;
+    font-weight: bold;
+    border: 3px solid var(--dourado);
+}
+
+.topo-conta h1 {
+    font-family: Georgia, serif;
+    color: var(--verde);
+    font-size: 32px;
+    margin-bottom: 6px;
+}
+
+.topo-conta p {
+    color: #71837c;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.grid-conta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.card-conta {
+    background: var(--branco);
+    border: 1px solid #dfdbcf;
+    border-radius: 20px;
+    padding: 26px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.04);
+}
+
+.card-conta h2 {
+    font-family: Georgia, serif;
+    color: var(--verde);
+    font-size: 20px;
+    margin-bottom: 18px;
+}
+
+.card-conta h2 i {
+    color: var(--dourado);
+    margin-right: 6px;
+}
+
+.dados-conta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dados-conta div {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--bege-claro);
+    font-size: 14px;
+}
+
+.dados-conta div:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.dados-conta dt {
+    color: #71837c;
+}
+
+.dados-conta dd {
+    color: #161616;
+    font-weight: 600;
+    text-align: right;
+    word-break: break-word;
+}
+
+.numero-destaque {
+    font-family: Georgia, serif;
+    font-size: 42px;
+    color: var(--verde);
+    margin-bottom: 14px;
+}
+
+.numero-destaque span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #71837c;
+}
+
+.lista-ultimos {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.lista-ultimos li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 0;
+    border-top: 1px solid var(--bege-claro);
+    font-size: 14px;
+}
+
+.lista-ultimos a {
+    color: var(--verde);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.lista-ultimos a:hover {
+    text-decoration: underline;
+}
+
+.lista-ultimos span {
+    color: #71837c;
+    font-size: 13px;
+}
+
+.texto-vazio {
+    color: #71837c;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.botao-conta {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: var(--verde);
+    color: var(--bege-claro);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.botao-conta:hover {
+    background: var(--verde-escuro);
+}
+
+.lista-acoes {
+    list-style: none;
+}
+
+.lista-acoes li + li {
+    border-top: 1px solid var(--bege-claro);
+}
+
+.lista-acoes a {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 15px 8px;
+    color: var(--verde);
+    text-decoration: none;
+    border-radius: 12px;
+    transition: 0.2s;
+}
+
+.lista-acoes a:hover {
+    background: var(--bege-claro);
+}
+
+.lista-acoes a > i:first-child {
+    width: 22px;
+    font-size: 18px;
+    color: var(--dourado);
+    text-align: center;
+}
+
+.lista-acoes span {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.lista-acoes strong {
+    font-size: 15px;
+}
+
+.lista-acoes small {
+    color: #71837c;
+    font-size: 13px;
+}
+
+.lista-acoes .seta {
+    color: var(--verde-claro);
+    font-size: 13px;
+}
+
+.lista-acoes .acao-perigo,
+.lista-acoes .acao-perigo > i:first-child {
+    color: #a33a2b;
+}
+
+.lista-acoes .acao-perigo:hover {
+    background: #f8e6e2;
+}
+
+@media (max-width: 720px) {
+    .grid-conta {
+        grid-template-columns: 1fr;
+    }
+
+    .topo-conta h1 {
+        font-size: 26px;
+    }
+
+    .avatar-conta {
+        width: 60px;
+        height: 60px;
+        font-size: 22px;
+    }
+}
+
+/* ---------- comum: link do usuário e rodapé ---------- */
+
+a.nome-usuario {
+    text-decoration: none;
+}
+
+a.nome-usuario:hover {
+    color: var(--branco);
+    text-decoration: underline;
+}
+
+.rodape-institucional {
+    margin-top: 40px;
+    padding: 28px 20px;
+    background: var(--verde-escuro);
+    color: var(--bege);
+    text-align: center;
+    font-size: 13px;
+}
+
+.rodape-institucional nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 22px;
+    margin-bottom: 10px;
+}
+
+.rodape-institucional a {
+    color: var(--bege-claro);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.rodape-institucional a:hover {
+    color: var(--branco);
+    text-decoration: underline;
+}
+
+.rodape-institucional p {
+    color: var(--verde-claro);
+}

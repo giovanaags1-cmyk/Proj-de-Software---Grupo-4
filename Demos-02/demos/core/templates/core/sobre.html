@@ -1,0 +1,182 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sobre | DEMOS</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/demos.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/sobre.css' %}">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <a href="{% url 'salvos' %}" class="icone-menu" aria-label="Candidatos salvos">
+            <i class="fa-solid fa-bookmark"></i>
+        </a>
+
+        <a href="{% url 'index' %}" class="icone-menu" aria-label="Início">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+    </div>
+
+    <a href="{% url 'index' %}" class="logo">
+        <img src="{% static 'core/img/logo.png' %}" alt="Logo DEMOS">
+        <span>DEMOS</span>
+    </a>
+
+    {% if user.is_authenticated %}
+
+        <div class="usuario-logado">
+
+            <a href="{% url 'minha_conta' %}" class="nome-usuario">
+                {{ user.username }}
+            </a>
+
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="botao-logout">Sair</button>
+            </form>
+
+        </div>
+
+    {% else %}
+
+        <a href="{% url 'login' %}" class="icone-menu" aria-label="Entrar na conta">
+            <i class="fa-solid fa-circle-user"></i>
+        </a>
+
+    {% endif %}
+
+</header>
+
+{% if messages %}
+    <div class="mensagens">
+        {% for message in messages %}
+            <div class="mensagem {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<main class="pagina-sobre">
+
+    <section class="hero-sobre">
+        <span class="etiqueta">Sobre o projeto</span>
+        <h1>Informação clara para um voto consciente</h1>
+        <p>
+            O Demos reúne dados públicos de candidatos e mostra tudo de forma simples,
+            lado a lado, para você comparar antes de decidir.
+        </p>
+        <a href="{% url 'comparar' %}" class="botao-sobre">Comparar candidatos</a>
+    </section>
+
+
+    <section class="bloco-sobre">
+        <h2>Nossa missão</h2>
+        <p>
+            Muita gente chega na eleição sem saber direito quem são os candidatos.
+            As informações existem, mas estão espalhadas e difíceis de ler.
+            O Demos junta esses dados num só lugar, com linguagem acessível e sem
+            tomar partido: a decisão é sempre sua.
+        </p>
+    </section>
+
+
+    <section class="bloco-sobre">
+        <h2>Como funciona</h2>
+
+        <ol class="passos-sobre">
+            <li>
+                <span class="numero-passo">1</span>
+                <h3>Busque</h3>
+                <p>Procure um candidato pelo nome, partido, cargo ou estado.</p>
+            </li>
+            <li>
+                <span class="numero-passo">2</span>
+                <h3>Compare</h3>
+                <p>Escolha dois candidatos e veja as informações lado a lado.</p>
+            </li>
+            <li>
+                <span class="numero-passo">3</span>
+                <h3>Salve</h3>
+                <p>Crie sua conta e guarde os candidatos que quer acompanhar.</p>
+            </li>
+        </ol>
+    </section>
+
+
+    <section class="grid-numeros">
+        <div class="card-numero">
+            <strong>{{ total_candidatos }}</strong>
+            <span>candidatos na base</span>
+        </div>
+        <div class="card-numero">
+            <strong>27</strong>
+            <span>unidades da federação</span>
+        </div>
+        <div class="card-numero">
+            <strong>100%</strong>
+            <span>dados públicos</span>
+        </div>
+    </section>
+
+
+    <section class="bloco-sobre">
+        <h2>De onde vêm os dados</h2>
+        <p>
+            Todas as informações sobre candidatos vêm do
+            <a href="https://divulgacandcontas.tse.jus.br" target="_blank" rel="noopener">DivulgaCandContas</a>
+            e do Portal de Dados Abertos do Tribunal Superior Eleitoral (TSE).
+            O Demos não cria nem altera esses dados, apenas organiza e apresenta.
+        </p>
+    </section>
+
+
+    <section class="bloco-sobre neutralidade">
+        <i class="fa-solid fa-scale-balanced"></i>
+        <div>
+            <h2>Neutralidade</h2>
+            <p>
+                O Demos não apoia nenhum candidato, partido ou ideologia.
+                Todos os candidatos são exibidos com o mesmo formato e as mesmas informações.
+            </p>
+        </div>
+    </section>
+
+
+    <section class="bloco-sobre">
+        <h2>Quem faz</h2>
+        <p>
+            O Demos é desenvolvido pelo Grupo 4 da disciplina de Projeto de Software
+            da PUC-Rio, como projeto acadêmico.
+        </p>
+    </section>
+
+</main>
+
+<footer class="rodape-institucional">
+    <nav>
+        <a href="{% url 'sobre' %}">Sobre o Demos</a>
+        <a href="{% url 'termos' %}">Termos de uso e privacidade</a>
+        <a href="https://divulgacandcontas.tse.jus.br" target="_blank" rel="noopener">Dados: TSE</a>
+    </nav>
+    <p>DEMOS · Projeto de Software · PUC-Rio</p>
+</footer>
+
+</body>
+
+</html>

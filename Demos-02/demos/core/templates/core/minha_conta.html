@@ -1,0 +1,198 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minha conta | DEMOS</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/demos.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/minha_conta.css' %}">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+</head>
+
+<body>
+
+<header class="cabecalho">
+
+    <div class="cabecalho-esquerda">
+
+        <a href="{% url 'salvos' %}" class="icone-menu" aria-label="Candidatos salvos">
+            <i class="fa-solid fa-bookmark"></i>
+        </a>
+
+        <a href="{% url 'index' %}" class="icone-menu" aria-label="Início">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+    </div>
+
+    <a href="{% url 'index' %}" class="logo">
+        <img src="{% static 'core/img/logo.png' %}" alt="Logo DEMOS">
+        <span>DEMOS</span>
+    </a>
+
+    {% if user.is_authenticated %}
+
+        <div class="usuario-logado">
+
+            <a href="{% url 'minha_conta' %}" class="nome-usuario">
+                {{ user.username }}
+            </a>
+
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="botao-logout">Sair</button>
+            </form>
+
+        </div>
+
+    {% else %}
+
+        <a href="{% url 'login' %}" class="icone-menu" aria-label="Entrar na conta">
+            <i class="fa-solid fa-circle-user"></i>
+        </a>
+
+    {% endif %}
+
+</header>
+
+{% if messages %}
+    <div class="mensagens">
+        {% for message in messages %}
+            <div class="mensagem {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<main class="pagina-conta">
+
+    <section class="topo-conta">
+
+        <div class="avatar-conta">
+            {{ user.username|slice:":2"|upper }}
+        </div>
+
+        <div>
+            <h1>Minha conta</h1>
+            <p>Olá, <strong>{{ user.username }}</strong>! Aqui você gerencia seus dados e seus candidatos salvos.</p>
+        </div>
+
+    </section>
+
+
+    <section class="grid-conta">
+
+        <article class="card-conta">
+            <h2><i class="fa-solid fa-id-card"></i> Meus dados</h2>
+
+            <dl class="dados-conta">
+                <div>
+                    <dt>Usuário</dt>
+                    <dd>{{ user.username }}</dd>
+                </div>
+                <div>
+                    <dt>E-mail</dt>
+                    <dd>{{ user.email|default:"Não informado" }}</dd>
+                </div>
+                <div>
+                    <dt>Membro desde</dt>
+                    <dd>{{ user.date_joined|date:"d/m/Y" }}</dd>
+                </div>
+                <div>
+                    <dt>Último acesso</dt>
+                    <dd>{{ user.last_login|date:"d/m/Y \à\s H:i"|default:"—" }}</dd>
+                </div>
+            </dl>
+        </article>
+
+
+        <article class="card-conta">
+            <h2><i class="fa-solid fa-bookmark"></i> Candidatos salvos</h2>
+
+            <p class="numero-destaque">
+                {{ total_salvos }}
+                <span>
+                    {% if total_salvos == 1 %}candidato salvo{% else %}candidatos salvos{% endif %}
+                </span>
+            </p>
+
+            {% if ultimos_salvos %}
+                <ul class="lista-ultimos">
+                    {% for favorito in ultimos_salvos %}
+                        <li>
+                            <a href="{% url 'candidato' favorito.candidato.id %}">
+                                {{ favorito.candidato.nome }}
+                            </a>
+                            <span>{{ favorito.candidato.partido }} · {{ favorito.candidato.uf }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="texto-vazio">Você ainda não salvou nenhum candidato.</p>
+            {% endif %}
+
+            <a href="{% url 'salvos' %}" class="botao-conta">Ver todos os salvos</a>
+        </article>
+
+    </section>
+
+
+    <section class="card-conta">
+        <h2><i class="fa-solid fa-gear"></i> Configurações</h2>
+
+        <ul class="lista-acoes">
+            <li>
+                <a href="{% url 'alterar_senha' %}">
+                    <i class="fa-solid fa-key"></i>
+                    <span>
+                        <strong>Alterar senha</strong>
+                        <small>Troque a senha usada para entrar no Demos</small>
+                    </span>
+                    <i class="fa-solid fa-chevron-right seta"></i>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'termos' %}">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>
+                        <strong>Termos e privacidade</strong>
+                        <small>Veja como tratamos seus dados</small>
+                    </span>
+                    <i class="fa-solid fa-chevron-right seta"></i>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'excluir_conta' %}" class="acao-perigo">
+                    <i class="fa-solid fa-trash-can"></i>
+                    <span>
+                        <strong>Excluir conta</strong>
+                        <small>Apaga sua conta e seus salvos para sempre</small>
+                    </span>
+                    <i class="fa-solid fa-chevron-right seta"></i>
+                </a>
+            </li>
+        </ul>
+    </section>
+
+</main>
+
+<footer class="rodape-institucional">
+    <nav>
+        <a href="{% url 'sobre' %}">Sobre o Demos</a>
+        <a href="{% url 'termos' %}">Termos de uso e privacidade</a>
+        <a href="https://divulgacandcontas.tse.jus.br" target="_blank" rel="noopener">Dados: TSE</a>
+    </nav>
+    <p>DEMOS · Projeto de Software · PUC-Rio</p>
+</footer>
+
+</body>
+
+</html>
