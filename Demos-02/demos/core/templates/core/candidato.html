@@ -246,9 +246,46 @@
                 Perfil político
             </h2>
 
-            <p>
-                {{ candidato.descricao }}
-            </p>
+                        <div class="dados-completos-candidato">
+
+                <div class="linha-dado">
+                    <span>Nome completo</span>
+                    <strong>{{ candidato.nome }}</strong>
+                </div>
+
+                <div class="linha-dado">
+                    <span>Nome de urna</span>
+                    <strong>{{ candidato.apelido|default:"-" }}</strong>
+                </div>
+
+                <div class="linha-dado">
+                    <span>Número na urna</span>
+                    <strong>{{ candidato.numero|default:"-" }}</strong>
+                </div>
+
+                <div class="linha-dado">
+                    <span>Partido</span>
+                    <strong>{{ candidato.partido }}</strong>
+                </div>
+
+                <div class="linha-dado">
+                    <span>Cargo</span>
+                    <strong>{{ candidato.cargo }}</strong>
+                </div>
+
+                <div class="linha-dado">
+                    <span>UF</span>
+                    <strong>{{ candidato.uf }}</strong>
+                </div>
+
+                {% if candidato.sq_candidato %}
+                <div class="linha-dado">
+                    <span>Código sequencial TSE</span>
+                    <strong>{{ candidato.sq_candidato }}</strong>
+                </div>
+                {% endif %}
+
+            </div>
 
         </div>
 

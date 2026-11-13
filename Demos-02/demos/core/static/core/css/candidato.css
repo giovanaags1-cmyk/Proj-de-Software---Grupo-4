@@ -501,3 +501,34 @@
 
     transform: scale(1.05);
 }
+/* Detalhes do candidato no perfil politico */
+.dados-completos-candidato {
+    margin-top: 10px;
+    max-width: 750px;
+}
+
+.dados-completos-candidato .linha-dado {
+    min-height: 42px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eeeae0;
+}
+
+.dados-completos-candidato .linha-dado:last-child {
+    border-bottom: none;
+}
+
+.dados-completos-candidato .linha-dado span {
+    color: #71837c;
+    font-size: 13px;
+}
+
+.dados-completos-candidato .linha-dado strong {
+    color: #243831;
+    font-size: 14px;
+    text-align: right;
+    word-break: break-word;
+}
